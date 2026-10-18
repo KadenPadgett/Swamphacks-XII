@@ -17,17 +17,19 @@ A responsive operations dashboard built for the supplied PlanIT FastAPI backend.
 
 On Windows, `start-windows.cmd` runs the same steps. On macOS, Linux, or WSL, run `bash start.sh`. Keep the terminal open while using the app. If switching between Windows and WSL, run `npm ci` again in the environment you will use.
 
-The app opens in **Demo data** mode with an illustrative Florida workday. You can change sites, inspect hazards, explore the map, create and resolve reports, add example jobsites, and preview briefings without a backend. Demo edits last only for the current page session. The example clock is intentionally fixed at the start of that workday.
+If `VITE_API_BASE_URL` is configured at build time, the app connects automatically on startup and loads saved backend data. It waits up to 90 seconds for a sleeping backend, then offers **Retry connection**. Connection errors never open demo data automatically. Without a configured URL, the app opens connection settings. Select **Explore demo** to enter the illustrative Florida workday. Demo edits last only for the current page session.
 
 ## Connect your backend
 
-Start your existing Python backend on **port 8000** using its existing deployment instructions. Then select **Connect your backend** in the dashboard and leave **Backend URL** blank. The Vite development proxy forwards `/api` to `http://127.0.0.1:8000`.
+For a hosted backend, set `VITE_API_BASE_URL` to its public origin (for example `https://your-service.onrender.com`) in the frontend build environment. Set it before `npm run build`; Vite embeds this public URL into the build. The backend must allow the frontend origin in CORS. Do not put `PLANIT_WRITE_TOKEN` or provider credentials in any `VITE_` variable.
+
+For local development, start the Python backend on **port 8000** using its existing deployment instructions. Leave **Backend URL** blank in connection settings. The Vite development proxy forwards `/api` to `http://127.0.0.1:8000`. You can also enter another full `http://` or `https://` URL manually.
 
 If your backend has `PLANIT_WRITE_TOKEN` configured, enter that value in the optional **Write token** field. The token stays in this tab's memory and is sent with write requests. It is not saved in local storage. Provider keys such as Xweather or Weather Company credentials stay in the backend's `.env`; this frontend does not need those keys.
 
-Once connected, the app replaces all sample sites and conditions with API responses. Live site/report changes are saved by your backend. Reopening the page starts in demo mode, so connect again when you want live data.
+Once connected, the app displays sites and conditions from API responses. Live site/report changes are saved by your backend. Reopening the page connects again when `VITE_API_BASE_URL` is configured.
 
-For a backend on another machine or port, enter its full reachable `http://` or `https://` URL. Its CORS configuration must allow your frontend's origin. Browser mixed-content rules still apply. For a local hackathon demo, the included proxy is the easiest setup; no hosting account is required.
+Browser mixed-content rules still apply to manually entered URLs.
 
 ## What works
 
@@ -66,7 +68,7 @@ npm run preview:single  # Regenerate PlanIT-Preview.html
 npm test               # Run model and DOM interaction checks
 ```
 
-`npm run preview` serves the compiled UI, not the development API proxy. For that mode, enter a reachable backend URL and allow its frontend origin in CORS, or add a reverse proxy before deployment. No hosted site or production deployment is included.
+`npm run preview` serves the compiled UI, not the development API proxy. Configure `VITE_API_BASE_URL` before building, enter a reachable backend URL manually, or add a reverse proxy before deployment.
 
 ## Verification and scope
 

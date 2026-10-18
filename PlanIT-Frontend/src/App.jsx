@@ -25,7 +25,8 @@ import {
   weatherModelView,
 } from "./model.mjs";
 import { seedDemo, DEMO_NOW } from "./demo.mjs";
-import { configureApi, request, post, apiUrl } from "./api.mjs";
+import { configureApi, request, post, apiUrl, connectWithRetry } from "./api.mjs";
+const configuredBaseUrl = (import.meta.env.VITE_API_BASE_URL || "").trim().replace(/\/$/, "");
 const SiteMap = lazy(() => import("./Map.jsx"));
 const NAV = [
   ["overview", "LayoutDashboard", "Overview"],
@@ -67,7 +68,7 @@ function emptyDetail(site) {
 }
 export default function App() {
   const [demo, setDemo] = useState(seedDemo),
-    [mode, setMode] = useState("demo"),
+    [mode, setMode] = useState(configuredBaseUrl ? "connecting" : "setup"),
     [liveRows, setLiveRows] = useState([]),
     [liveDetail, setLiveDetail] = useState(null),
     [selected, setSelected] = useState(1),
@@ -84,7 +85,7 @@ export default function App() {
     [connected, setConnected] = useState(false),
     [lastSync, setLastSync] = useState(null),
     [stream, setStream] = useState("idle");
-  const [baseUrl, setBaseUrl] = useState(readSetting("planit:base", "")),
+  const [baseUrl, setBaseUrl] = useState(configuredBaseUrl || readSetting("planit:base", "")),
     [token, setToken] = useState(""),
     [now, setNow] = useState(Date.now()),
     [showStops, setShowStops] = useState(false),
@@ -103,7 +104,8 @@ export default function App() {
     portfolioReq = useRef(0),
     toastTimer = useRef(null),
     streamRef = useRef(null),
-    scrollRef = useRef(null);
+    scrollRef = useRef(null),
+    startupRequest = useRef(null);
   const notify = useCallback((message, type = "success") => {
     setToast({ message, type });
     clearTimeout(toastTimer.current);
@@ -159,6 +161,34 @@ export default function App() {
   useEffect(() => {
     configureApi(baseUrl, token);
   }, [baseUrl, token]);
+  function startAutomaticConnection() {
+    const controller = new AbortController();
+    startupRequest.current = controller;
+    setMode("connecting");
+    setError("");
+    configureApi(configuredBaseUrl);
+    connectWithRetry({ signal: controller.signal }).then((result) => {
+      if (controller.signal.aborted) return;
+      setLiveRows(result.sites);
+      setSelected(result.sites[0]?.site_id ?? result.sites[0]?.site?.id ?? null);
+      setLiveDetail(null);
+      setBaseUrl(configuredBaseUrl);
+      setMode("live");
+      setConnected(true);
+      setLastSync(Date.now());
+      setError("");
+    }).catch((cause) => {
+      if (controller.signal.aborted) return;
+      setError(cause.message);
+      setMode("failed");
+    });
+    return controller;
+  }
+  useEffect(() => {
+    if (!configuredBaseUrl) return;
+    const controller = startAutomaticConnection();
+    return () => controller.abort();
+  }, []);
   const loadPortfolio = useCallback(async () => {
     const v = version.current,
       seq = ++portfolioReq.current;
@@ -305,6 +335,7 @@ export default function App() {
     if (open) navigate("site");
   }
   function backToDemo() {
+    startupRequest.current?.abort();
     version.current++;
     setMode("demo");
     setSelected(1);
@@ -316,6 +347,9 @@ export default function App() {
   }
   async function connect(e) {
     e.preventDefault();
+    startupRequest.current?.abort();
+    const previousMode = mode;
+    if (mode === "setup" || mode === "failed") setMode("connecting");
     setBusy(true);
     setError("");
     const form = new FormData(e.currentTarget),
@@ -333,10 +367,7 @@ export default function App() {
           "Use a full http:// or https:// address, or leave it blank for the local proxy.",
         );
       configureApi(url, secret);
-      await request("/api/health", { timeout: 8000 });
-      const result = await request("/api/risks");
-      if (!Array.isArray(result.sites))
-        throw new Error("This address did not return the PlanIT API contract.");
+      const result = await connectWithRetry({ timeoutMs: url ? 90000 : 10000 });
       version.current++;
       setBaseUrl(url);
       remember("planit:base", url);
@@ -355,6 +386,7 @@ export default function App() {
     } catch (e) {
       setError(e.message);
       configureApi(baseUrl, token);
+      if (previousMode === "setup" || previousMode === "failed") setMode("failed");
     } finally {
       setBusy(false);
     }
@@ -619,6 +651,42 @@ export default function App() {
         reports={detail?.active_crew_reports || []}
       />
     </Suspense>
+  );
+  if (mode === "connecting" || mode === "failed" || mode === "setup") return (
+    <div className="startup-screen">
+      <div className="startup-card">
+        <div className="startup-mark"><Icon name="Waypoints" size={28} /></div>
+        <div className="eyebrow">PLANIT CONTROL</div>
+        {mode === "connecting" ? (
+          <>
+            <Icon name="LoaderCircle" className="spin" size={32} />
+            <h1>Connecting to your backend…</h1>
+            <p>Loading saved site data. A sleeping backend may take up to 90 seconds to wake.</p>
+          </>
+        ) : (
+          <>
+            <h1>{mode === "failed" ? "Couldn’t connect to your backend" : "Connect your workspace"}</h1>
+            <p>{mode === "failed" ? "Your backend data is not available yet." : "Enter your local backend address, or explore the example workspace."}</p>
+            {error && <div className="form-error" role="alert">{error}</div>}
+            {mode === "failed" && configuredBaseUrl && (
+              <button className="button primary" onClick={startAutomaticConnection}>Retry connection</button>
+            )}
+            <form onSubmit={connect} className="startup-form">
+              <label className="field">Backend URL
+                <span>Leave blank for the local development proxy</span>
+                <input name="base" defaultValue={baseUrl} placeholder="Local proxy → localhost:8000" autoComplete="url" />
+              </label>
+              <label className="field">Write token
+                <span>Optional; kept only in this browser tab</span>
+                <input type="password" name="token" defaultValue={token} autoComplete="off" />
+              </label>
+              <button className="button primary" disabled={busy}>{busy ? "Connecting…" : "Connect backend"}</button>
+            </form>
+          </>
+        )}
+        <button className="button secondary" onClick={backToDemo}>Explore demo</button>
+      </div>
+    </div>
   );
   return (
     <div className="app-shell">

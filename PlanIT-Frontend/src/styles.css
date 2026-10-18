@@ -3831,3 +3831,27 @@ body {
 .weather-model-facts dd { margin: .2rem 0 0; overflow-wrap: anywhere; font-weight: 600; }
 .weather-model-summary small { display: block; color: #805813; }
 .model-reason { color: #805813; overflow-wrap: anywhere; }
+
+.startup-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #f5f6ef;
+}
+.startup-card {
+  width: min(100%, 480px);
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  padding: clamp(24px, 5vw, 48px);
+  background: #fff;
+  border: 1px solid #dfe6d7;
+  border-radius: 16px;
+  box-shadow: 0 18px 55px #24433315;
+}
+.startup-card h1 { margin: 0; font-size: clamp(24px, 4vw, 32px); color: #244333; }
+.startup-card p { margin: 0; line-height: 1.6; color: #647264; }
+.startup-mark { color: #426446; }
+.startup-form { display: grid; gap: 16px; width: 100%; }
+.startup-card .form-error { width: 100%; }
