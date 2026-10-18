@@ -1,3 +1,5 @@
+import { hazardIndex } from "./model.mjs";
+
 const anchor = new Date();
 anchor.setHours(6, 45, 0, 0);
 export const DEMO_NOW = anchor.getTime();
@@ -335,6 +337,7 @@ export function seedDemo() {
           highest_upcoming: hourly[5],
         },
         hazard_evidence: cards,
+        hazard_index: hazardIndex(cards),
         conditions: {
           timezone: "America/New_York",
           current: {
@@ -404,6 +407,7 @@ export function seedDemo() {
         rank: i + 1,
         rule_based_severity: sev,
         current_score: null,
+        hazard_index: d.hazard_index,
         ml_availability: "unavailable",
         active_alert_status: {
           count: alerts.length,

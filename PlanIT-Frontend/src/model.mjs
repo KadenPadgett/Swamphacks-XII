@@ -53,6 +53,32 @@ export const HAZARDS = {
 };
 export const num = (value) =>
   typeof value === "number" && Number.isFinite(value);
+const HAZARD_INDEX_LEVEL_SCORES = { low: 2.5, watch: 5, high: 7.5, severe: 10 };
+export function hazardIndex(indicators = {}, weatherModel = {}) {
+  const components = Object.values(indicators)
+    .map((item) => HAZARD_INDEX_LEVEL_SCORES[item?.level])
+    .filter(num);
+  if (
+    weatherModel?.availability === "available" &&
+    num(weatherModel.probability) &&
+    weatherModel.probability >= 0 &&
+    weatherModel.probability <= 1
+  ) {
+    components.push(Math.min(7, weatherModel.probability * 10 * 4));
+  }
+  if (!components.length) return null;
+  components.sort((a, b) => b - a);
+  return Math.min(
+    10,
+    Number(
+      (
+        components[0] +
+        (components[1] || 0) * 0.5 +
+        components.slice(2).reduce((sum, value) => sum + value, 0) * 0.15
+      ).toFixed(2),
+    ),
+  );
+}
 export const title = (str) =>
   (str || "").replaceAll("_", " ").replace(/\b\w/g, (c) => c.toUpperCase());
 export const level = (value) => (LEVELS.includes(value) ? value : "unknown");
@@ -71,6 +97,7 @@ export function normalizeRow(row) {
       ["available", "partial"].includes(row.ml_availability)
         ? row.current_score
         : null,
+    hazard_index: num(row.hazard_index) ? row.hazard_index : null,
     active_alert_status: row.active_alert_status || {
       count: 0,
       stop_work: false,

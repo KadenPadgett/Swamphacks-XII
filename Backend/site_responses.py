@@ -26,6 +26,7 @@ def detail(site, snapshot=None):
     import hefs
     snapshot = snapshot if snapshot is not None else database.load_risk(site["id"])
     model = model_for(snapshot)
+    index = risk.hazard_index((snapshot or {}).get('indicators'), (snapshot or {}).get('weather_model'))
     initial = database.initial_assessment(site['id'])
     return {
         **(snapshot or {}), "site": site, "status": "ready" if snapshot else "pending",
@@ -35,7 +36,7 @@ def detail(site, snapshot=None):
                                   "highest_upcoming": (snapshot or {}).get("highest_upcoming_risk")},
         "conditions": (snapshot or {}).get("weather"),
         "hazard_evidence": (snapshot or {}).get("indicators", {}),
-        "ml_predictions": model, "ml_assessment": model,
+        "ml_predictions": model, "ml_assessment": model, "hazard_index": index,
         "metar": (snapshot or {}).get('metar', {"availability": "pending", "reason": "assessment_pending"}),
         "weather_model": metar_model.serialize((snapshot or {}).get('weather_model')),
         "required_safety_actions": alerts.required_actions(site["id"]),
@@ -61,6 +62,7 @@ def overview(sites):
         current = (snapshot or {}).get("current_risk", {}).get("overall")
         peak = (snapshot or {}).get("highest_upcoming_risk")
         model = model_for(snapshot)
+        index = risk.hazard_index((snapshot or {}).get('indicators'), (snapshot or {}).get('weather_model'))
         age = freshness.assessment(snapshot)
         site_alerts = alerts.for_site(site["id"])
         known_level = (current or {}).get("highest_known_level", "unknown")
@@ -75,6 +77,7 @@ def overview(sites):
         rows.append({
             "site": site, "site_id": site["id"], "latitude": site["latitude"], "longitude": site["longitude"],
             "status": "ready" if snapshot else "pending", "current_score": None if unavailable else model.get("current_score"),
+            "hazard_index": index,
             "initial_assessment": initial,
             "ml_availability": "stale" if model.get("stale") else model.get("availability", "unavailable"),
             "upcoming_peak": {"rule_based": peak, "ml_prediction": None if unavailable else model.get("highest_upcoming")},
