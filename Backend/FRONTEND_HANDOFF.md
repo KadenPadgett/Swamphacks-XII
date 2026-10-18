@@ -85,8 +85,10 @@ Example creation response (times and ID illustrative):
 Use `lightning_countdown.status`: `stop_work`, `clear`, or `unknown`. Display the
 absolute deadline and count down in the browser using `server_time`; reconnect or
 poll to update it. An expired timer with unknown coverage is **not an all-clear**.
-Measured-strike coverage and thunderstorm model availability are separate. Even
-if thunderstorm conditions look quiet, the strike feed may remain unknown.
+Measured-strike coverage and thunderstorm model availability are separate. A
+fresh successful strike response with no qualifying event reports `clear` even
+when it covers less than the full 30-minute hold window. Missing, stale, or
+failed strike data remains unknown.
 
 The required-action field is a rule-based operational screen, not an ML output.
 Cached data retain their original source times; a newly generated assessment
@@ -266,7 +268,7 @@ immediately; an outstanding deadline and alert survive. An expired deadline with
 unknown coverage is still not clearance. Check availability/status, not HTTP 200
 alone: the verification endpoint returns diagnostic state even when access fails.
 For Xweather, a successful first poll has short coverage and normally returns
-`status: "unknown"` until overlapping polls cover 30 minutes. A qualifying strike
+`status: "clear"` after a fresh successful empty response; a qualifying strike
 still stops work immediately. Display `coverage_complete` independently of
 `feed_access`; an entitled endpoint is not a completed all-clear window.
 

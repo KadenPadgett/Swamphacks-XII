@@ -63,7 +63,7 @@ class XweatherLightning(unittest.IsolatedAsyncioTestCase):
         result = strike_feed.apply(self.site, feed, now=NOW)
         self.assertEqual(result['availability'], 'available')
         self.assertFalse(result['coverage_complete'])
-        self.assertEqual(result['status'], 'unknown')
+        self.assertEqual(result['status'], 'clear')
         self.assertEqual(result['provider_verification']['feed_access'], 'verified_current')
         self.assertEqual(result['provider_verification']['strike_detection'], 'not_yet_observed')
 
@@ -83,7 +83,7 @@ class XweatherLightning(unittest.IsolatedAsyncioTestCase):
         database.initialize_database()
         self.assertEqual(strike_feed.state(self.site['id'], now=NOW+timedelta(minutes=2))['deadline'], deadline)
 
-    def test_continuous_windows_survive_restart_but_a_long_outage_requires_new_warmup(self):
+    def test_continuous_windows_survive_restart_but_a_long_outage_needs_fresh_provider_data(self):
         def window(at):
             return {'provider': 'xweather', 'availability': 'available', 'events': [],
                     'coverage_start': (at-timedelta(minutes=4)).isoformat(), 'coverage_end': at.isoformat()}
@@ -96,7 +96,7 @@ class XweatherLightning(unittest.IsolatedAsyncioTestCase):
         at = NOW+timedelta(minutes=40)
         result = strike_feed.apply(self.site, window(at), now=at)
         self.assertFalse(result['coverage_complete'])
-        self.assertEqual(result['status'], 'unknown')
+        self.assertEqual(result['status'], 'clear')
         self.assertEqual(result['coverage_start'], (at-timedelta(minutes=4)).isoformat())
 
     async def test_bounded_pagination_failure_still_stops_work_but_cannot_clear(self):

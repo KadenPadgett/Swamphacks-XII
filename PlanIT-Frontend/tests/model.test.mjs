@@ -38,7 +38,7 @@ test("a genuine zero is preserved; stale/expired model output is not displayed",
   d.ml_predictions.current_availability = "stale";
   assert.equal(scoreOf(d), null);
 });
-test("elapsed lightning timer never creates an all-clear", () => {
+test("fresh empty lightning coverage reports no recent strike", () => {
   const now = Date.parse("2026-10-17T12:00:00Z");
   assert.equal(
     countdownState(
@@ -62,7 +62,7 @@ test("elapsed lightning timer never creates an all-clear", () => {
     countdownState(
       {
         status: "clear",
-        coverage_complete: true,
+        coverage_complete: false,
         availability: "available",
         last_success_at: "2026-10-17T11:59:50Z",
       },

@@ -136,11 +136,10 @@ export function countdownState(feed, clock) {
   const fresh = Number.isFinite(end) && now >= end && now - end <= 90000;
   if (
     feed.status === "clear" &&
-    feed.coverage_complete &&
     feed.availability === "available" &&
     fresh
   )
-    return { status: "clear", seconds: 0, label: "Measured window clear" };
+    return { status: "clear", seconds: 0, label: "No recent strike detected" };
   return {
     status: "unknown",
     seconds: 0,
