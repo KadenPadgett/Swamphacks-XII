@@ -60,7 +60,8 @@ async def protect_writes(request: Request, call_next):
             return JSONResponse({"detail": "A valid write token is required"}, status_code=401)
     return await call_next(request)
 
-# Allow a locally running Vite frontend to call this backend.
+# Allow the local Vite frontend, Vercel deployments, and any explicitly
+# configured frontend origins to call this backend.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=list(dict.fromkeys([
@@ -68,8 +69,10 @@ app.add_middleware(
         "http://127.0.0.1:5173",
         *[value.strip().rstrip('/') for value in os.environ.get("PLANIT_ALLOWED_ORIGINS", "").split(',') if value.strip()],
     ])),
-    allow_methods=["GET", "POST", "PUT"],
-    allow_headers=["Content-Type", "Authorization", "Last-Event-ID"],
+    allow_origin_regex=r"https://[a-zA-Z0-9-]+\.vercel\.app",
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # defines and validates the input.

@@ -3,21 +3,22 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { build } from "esbuild";
 import { JSDOM, VirtualConsole } from "jsdom";
-const bundled = await build({
+async function bundle(apiBaseUrl) { return build({
   entryPoints: ["src/main.jsx"],
   bundle: true,
   write: false,
   outfile: "test.js",
   format: "iife",
   loader: { ".png": "dataurl" },
-  define: { "process.env.NODE_ENV": '"production"' },
-});
-const js = bundled.outputFiles.find((f) => f.path.endsWith(".js")).text;
+  define: { "process.env.NODE_ENV": '"production"', "import.meta.env.VITE_API_BASE_URL": JSON.stringify(apiBaseUrl) },
+}); }
+const js = (await bundle("")).outputFiles.find((f) => f.path.endsWith(".js")).text;
+const configuredJs = (await bundle("https://planit.example")).outputFiles.find((f) => f.path.endsWith(".js")).text;
 const actual = JSON.parse(
   readFileSync("tests/fixtures/backend-dangerous.json", "utf8"),
 );
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-async function start(fixture = actual) {
+async function start(fixture = actual, { configured = false, enterDemo = true } = {}) {
   const errors = [];
   const calls = [];
   const vc = new VirtualConsole();
@@ -69,10 +70,45 @@ async function start(fixture = actual) {
     else data = {};
     return { ok: true, status: 200, json: async () => data };
   };
-  w.eval(js);
+  w.eval(configured ? configuredJs : js);
   await wait(300);
+  if (!configured && enterDemo) {
+    [...w.document.querySelectorAll("button")].find((b) => b.textContent.trim() === "Explore demo").click();
+    await wait(30);
+  }
   return { dom, w, document: w.document, errors, calls };
 }
+test("without a configured URL, startup asks for a backend or explicit demo", async () => {
+  const c = await start(actual, { enterDemo: false });
+  try {
+    assert.match(c.document.body.textContent, /Connect your workspace/);
+    assert.equal(c.document.querySelector(".demo-banner"), null);
+    assert.equal(c.calls.length, 0);
+  } finally { c.dom.window.close(); }
+});
+test("configured startup loads real backend data without a manual click", async () => {
+  const c = await start(actual, { configured: true });
+  try {
+    assert.match(c.document.body.textContent, /Backend connected/);
+    assert.match(c.document.body.textContent, new RegExp(actual.map_response.sites[0].site.name));
+    assert.equal(c.document.querySelector(".demo-banner"), null);
+    assert.ok(c.calls.some(([path]) => path === "https://planit.example/api/risks"));
+  } finally { c.dom.window.close(); }
+});
+test("failed startup keeps demo behind an explicit choice and retry loads live data", async () => {
+  const fixture = structuredClone(actual);
+  fixture.map_response = { sites: null };
+  const c = await start(fixture, { configured: true });
+  try {
+    assert.match(c.document.body.textContent, /Couldn’t connect to your backend/);
+    assert.equal(c.document.querySelector(".demo-banner"), null);
+    assert.ok([...c.document.querySelectorAll("button")].some((b) => b.textContent.trim() === "Explore demo"));
+    fixture.map_response = actual.map_response;
+    click(c, "Retry connection");
+    await wait(250);
+    assert.match(c.document.body.textContent, /Backend connected/);
+  } finally { c.dom.window.close(); }
+});
 function click(ctx, text) {
   const b = [...ctx.document.querySelectorAll("button")].find(
     (b) => b.textContent.trim() === text,

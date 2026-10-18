@@ -735,13 +735,21 @@ button.metric:hover {
 }
 .portfolio-filters select,
 .view-toolbar select,
-.selected-heading select {
+.selected-heading select,
+.site-search-select input {
   font-size: 10px;
   padding: 8px 25px 8px 10px;
   min-height: 32px;
   background: #fff;
   color: #73836f;
   max-width: 300px;
+}
+.site-search-select { display: inline-flex; min-width: 180px; }
+.site-search-select input {
+  width: 100%;
+  padding-right: 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
 }
 .portfolio-split {
   display: grid;
@@ -3824,11 +3832,35 @@ body {
 .assessment-label { font-size: .8rem; color: #805813; margin-left: .65rem; font-weight: 700; }
 .weather-model-panel { margin-bottom: 1rem; }
 .weather-model-panel .panel-heading { gap: 1rem; }
-.weather-model-panel > :not(.panel-heading) { margin-left: 1.25rem; margin-right: 1.25rem; }
-.weather-model-panel p { margin-top: .6rem; margin-bottom: .6rem; line-height: 1.5; }
+.weather-model-panel > :not(.panel-heading) { margin-inline: 22px; }
+.weather-model-panel p { margin: .6rem 0; line-height: 1.5; }
 .weather-model-probability { font-size: 1.4rem; font-weight: 750; color: #23483d; }
 .weather-model-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .7rem 1rem; margin: 1rem 0 0; }
 .weather-model-facts dt { color: #6c756c; font-size: .75rem; }
 .weather-model-facts dd { margin: .2rem 0 0; overflow-wrap: anywhere; font-weight: 600; }
 .weather-model-summary small { display: block; color: #805813; }
 .model-reason { color: #805813; overflow-wrap: anywhere; }
+
+.startup-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #f5f6ef;
+}
+.startup-card {
+  width: min(100%, 480px);
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  padding: clamp(24px, 5vw, 48px);
+  background: #fff;
+  border: 1px solid #dfe6d7;
+  border-radius: 16px;
+  box-shadow: 0 18px 55px #24433315;
+}
+.startup-card h1 { margin: 0; font-size: clamp(24px, 4vw, 32px); color: #244333; }
+.startup-card p { margin: 0; line-height: 1.6; color: #647264; }
+.startup-mark { color: #426446; }
+.startup-form { display: grid; gap: 16px; width: 100%; }
+.startup-card .form-error { width: 100%; }
