@@ -3824,7 +3824,8 @@ body {
 .assessment-label { font-size: .8rem; color: #805813; margin-left: .65rem; font-weight: 700; }
 .weather-model-panel { margin-bottom: 1rem; }
 .weather-model-panel .panel-heading { gap: 1rem; }
-.weather-model-panel p { margin: .6rem 0; line-height: 1.5; }
+.weather-model-panel > :not(.panel-heading) { margin-left: 1.25rem; margin-right: 1.25rem; }
+.weather-model-panel p { margin-top: .6rem; margin-bottom: .6rem; line-height: 1.5; }
 .weather-model-probability { font-size: 1.4rem; font-weight: 750; color: #23483d; }
 .weather-model-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .7rem 1rem; margin: 1rem 0 0; }
 .weather-model-facts dt { color: #6c756c; font-size: .75rem; }
