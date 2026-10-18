@@ -1276,7 +1276,7 @@ export default function App() {
                                 ) : (
                                   <h3>
                                     {countdown.status === "clear"
-                                      ? "Coverage confirmed"
+                                      ? "No recent strike"
                                       : "Waiting for coverage"}
                                   </h3>
                                 )}
@@ -1302,7 +1302,7 @@ export default function App() {
                               </div>
                               <div className="lightning-note">
                                 <Icon name="Info" size={13} />
-                                An elapsed timer alone does not clear work.
+                                A fresh provider response is required; missing or stale coverage remains unknown.
                               </div>
                             </section>
                           </div>

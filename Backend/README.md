@@ -57,7 +57,9 @@ alerts, using its own client, cache keys, and locks. It never waits for wildfire
 wildlife, ML inference, or the full refresh job. It **does not supply measured
 lightning strikes**: those remain explicitly unknown. Thunderstorm forecasts and
 NWS alerts alone cannot support a strike-distance countdown. The separate measured
-strike adapter implements the persistent 10-mile/30-minute rule once access is available.
+strike adapter implements the persistent 10-mile/30-minute post-strike hold once
+access is available. A fresh successful empty response reports no recent strike;
+missing or stale coverage remains unknown.
 The monitor caches NWS results for 30 seconds and model conditions for 5 minutes.
 Polling faster does not turn those modeled conditions into strike observations.
 
