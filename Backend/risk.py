@@ -15,6 +15,17 @@ from refresh_locks import lease
 METHOD_VERSION = "planning-screen-v2"
 ASSESSMENT_REVISION = 8
 LEVELS = {"unknown": -1, "info": -1, "low": 0, "watch": 1, "high": 2, "severe": 3}
+HAZARD_INDEX_CATEGORY_CAPS = {
+    "weather": 8.0,
+    "extreme_heat": 8.0,
+    "flooding": 10.0,
+    "soil_saturation": 4.0,
+    "lightning": 8.0,
+    "wildfire": 10.0,
+    "wildlife_sightings": 6.0,
+}
+HAZARD_INDEX_SEVERITY_FACTORS = {"low": 0.25, "watch": 0.50, "high": 0.75, "severe": 1.0}
+HAZARD_INDEX_COMPONENT_WEIGHTS = (0.60, 0.40, 0.20)
 ALERT_TERMS = {
     "weather": ("wind", "tornado", "hurricane", "tropical", "storm", "snow", "blizzard", "ice"),
     "extreme_heat": ("heat",), "lightning": ("thunderstorm", "lightning"),
@@ -34,6 +45,39 @@ def threshold(value, watch, high, severe):
 
 def worst(*levels):
     return max(levels, key=lambda value: LEVELS[value]) if levels else "unknown"
+
+
+def hazard_index(indicators, weather_model=None):
+    """Return the transparent placeholder 0-10 Hazard Index.
+
+    Each rule-based category starts with a 0-10 severity score and is scaled by
+    its category factor: flooding and wildfire use 1.0, wet soil .4, and
+    wildlife .6. The largest component contributes 60%, the second 40%, the
+    third 20%, and all remaining components 10%. The experimental warning
+    model is scaled 4x, then normalized to 0-10 and scaled by .7 so that its
+    maximum contribution before combination is 7 without flattening lower
+    probabilities. Unknown and informational values are omitted.
+    """
+    components = [10.0 * HAZARD_INDEX_SEVERITY_FACTORS[item.get("level")]
+                  * HAZARD_INDEX_CATEGORY_CAPS[name] / 10.0
+                  for name, item in (indicators or {}).items()
+                  if name in HAZARD_INDEX_CATEGORY_CAPS
+                  and item.get("level") in HAZARD_INDEX_SEVERITY_FACTORS]
+    probability = (weather_model or {}).get("probability")
+    if ((weather_model or {}).get("availability") == "available"
+            and numeric(probability) and 0 <= probability <= 1):
+        components.append(min(10.0, probability * 10.0 * 4.0) * 0.7)
+    if not components:
+        return None
+    components.sort(reverse=True)
+    score = components[0] * HAZARD_INDEX_COMPONENT_WEIGHTS[0]
+    if len(components) > 1:
+        score += components[1] * HAZARD_INDEX_COMPONENT_WEIGHTS[1]
+    if len(components) > 2:
+        score += components[2] * HAZARD_INDEX_COMPONENT_WEIGHTS[2]
+    if len(components) > 3:
+        score += sum(components[3:]) * 0.10
+    return round(min(10.0, score), 2)
 
 
 def coverage(*values):
@@ -297,6 +341,7 @@ async def refresh_site_locked(site, sources):
                        if os.environ.get('PLANIT_METAR_ENABLED', '1').lower() not in ('0', 'false', 'no')
                        else {"availability": "unavailable", "reason": "metar_disabled", "station": database.metar_station(site)})
     result['weather_model'] = await metar_model.predict(result, result['metar'])
+    result['hazard_index'] = hazard_index(result.get('indicators'), result.get('weather_model'))
     result['metar_ml_configuration_id'] = metar_model.configuration_id()
     result = database.save_refreshed_risk(site["id"], result)
     return {**result, "cached": False, "stale": False}

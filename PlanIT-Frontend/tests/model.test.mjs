@@ -9,6 +9,7 @@ import {
   boundText,
   initialAssessmentLabel,
   weatherModelView,
+  hazardIndex,
 } from "../src/model.mjs";
 const example = JSON.parse(
   readFileSync(new URL("fixtures/backend-dangerous.json", import.meta.url)),
@@ -38,7 +39,7 @@ test("a genuine zero is preserved; stale/expired model output is not displayed",
   d.ml_predictions.current_availability = "stale";
   assert.equal(scoreOf(d), null);
 });
-test("elapsed lightning timer never creates an all-clear", () => {
+test("fresh empty lightning coverage reports no recent strike", () => {
   const now = Date.parse("2026-10-17T12:00:00Z");
   assert.equal(
     countdownState(
@@ -62,7 +63,7 @@ test("elapsed lightning timer never creates an all-clear", () => {
     countdownState(
       {
         status: "clear",
-        coverage_complete: true,
+        coverage_complete: false,
         availability: "available",
         last_success_at: "2026-10-17T11:59:50Z",
       },
@@ -123,4 +124,20 @@ test("initial assessment states and experimental warning output stay separate fr
   assert.equal(weatherModelView({ availability: "stale", reason: "prediction_expired", probability: .8 }, {}).probability, null);
   assert.equal(weatherModelView({ availability: "available", probability: .8,
     valid_until: "2026-10-17T12:00:00Z" }, {}, Date.parse("2026-10-17T12:00:01Z")).probability, null);
+});
+test("Hazard Index applies category-specific ceilings", () => {
+  assert.equal(hazardIndex({ soil_saturation: { level: "severe" } }), 2.4);
+  assert.equal(hazardIndex({ wildlife_sightings: { level: "severe" } }), 3.6);
+  assert.equal(hazardIndex({ flooding: { level: "severe" } }), 6);
+  assert.equal(hazardIndex({}, { availability: "available", probability: 1 }), 4.2);
+  assert.equal(hazardIndex({}, { availability: "available", probability: 0.1 }), 1.68);
+});
+test("Hazard Index uses 60/40/20/10 combination weights", () => {
+  const indicators = {
+    flooding: { level: "severe" },
+    wildfire: { level: "high" },
+    wildlife_sightings: { level: "watch" },
+    soil_saturation: { level: "low" },
+  };
+  assert.equal(hazardIndex(indicators), 9.7);
 });

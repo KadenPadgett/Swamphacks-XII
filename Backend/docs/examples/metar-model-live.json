@@ -6,7 +6,7 @@
   "current_observed_at": "2026-10-17T23:53:00+00:00",
   "prior_observed_at": "2026-10-17T20:53:00+00:00",
   "model_availability": "available",
-  "model_version": "2025-geographic-hgb-sha256:44ea5e7ccd84",
+  "model_version": "2022-2024-final-hgb-sha256:cee0b9912ea",
   "target": "new_nws_severe_thunderstorm_warning_covering_site_within_next_6_hours",
   "probability": 0.001203438209917331,
   "score": 0.01203438209917331,

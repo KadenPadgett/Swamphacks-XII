@@ -66,8 +66,9 @@ weather, NWS, NASA EONET, iNaturalist, NOAA NWPS/HEFS, lightning and optional ML
 1. Build this Dockerfile, or install requirements in a managed Python service.
 2. Mount persistent storage at `/data`. Set `PLANIT_DATABASE_PATH=/data/sites.db`
    and `PLANIT_UPLOAD_DIR=/data/photos`. Ensure the process can write both paths.
-3. Set `PLANIT_ALLOWED_ORIGINS` to comma-separated frontend origins including the
-   scheme and port, e.g. `https://frontend.example`. Localhost:5173 stays allowed.
+3. Set `PLANIT_ALLOWED_ORIGINS` to comma-separated additional frontend origins
+   including the scheme and port, e.g. `https://frontend.example`. Localhost:5173
+   and the production Render frontend are allowed by default.
 4. Keep `PLANIT_BACKGROUND_REFRESH=1`. Run `python scripts/serve.py`; the host can
    set PORT. Configure restart-on-failure and health checks at `/api/health`.
 5. Enable HTTPS at the host proxy. Permit long-lived SSE responses and disable
@@ -231,11 +232,11 @@ exposure; it does not prove hydraulic connectivity or floodplain membership.
 
 # METAR model service
 
-The supplied geographic frozen model is loaded locally by default. Keep
-`PlanIT-ML/` next to `Backend/` for Ubuntu/WSL source startup. The Compose file
-mounts its geographic artifact read-only into the container. Other container
-deployments must mount the same artifact and set `PLANIT_METAR_ML_ARTIFACT` to
-its in-container path. The optional remote model boundary uses
+The supplied final 2022-2024 frozen model is loaded locally by default. Keep
+`risk_assessment/` next to `Backend/` for Ubuntu/WSL source startup. The Compose
+file mounts its final artifact read-only into the container. Other container
+deployments must include or mount the same artifact and set
+`PLANIT_METAR_ML_ARTIFACT` to its in-container path. The optional remote model boundary uses
 `PLANIT_METAR_ML_URL`, `PLANIT_METAR_ML_TOKEN`, and
 `PLANIT_METAR_ML_MODEL_VERSION` in `.env`. See
 [METAR_MODEL_HANDOFF.md](METAR_MODEL_HANDOFF.md) for the frozen-model service

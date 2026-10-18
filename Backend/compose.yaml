@@ -13,10 +13,10 @@ services:
       PLANIT_LIGHTNING_API_KEY: ${PLANIT_LIGHTNING_API_KEY:-}
       PLANIT_ML_URL: ${PLANIT_ML_URL:-}
       PLANIT_ML_TOKEN: ${PLANIT_ML_TOKEN:-}
-      PLANIT_METAR_ML_MODEL: geographic
-      PLANIT_METAR_ML_ARTIFACT: /app/models/geographic_hgb.joblib
+      PLANIT_METAR_ML_MODEL: final
+      PLANIT_METAR_ML_ARTIFACT: /app/models/metar_2022_2024_final_hgb.joblib
     volumes:
       - planit-data:/data
-      - ../PlanIT-ML/data/processed/development_300_2025/model_geographic_holdout/geographic_hgb.joblib:/app/models/geographic_hgb.joblib:ro
+      - ../risk_assessment/metar_2022_2024_final_hgb.joblib:/app/models/metar_2022_2024_final_hgb.joblib:ro
 volumes:
   planit-data:

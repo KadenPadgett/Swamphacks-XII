@@ -13,7 +13,6 @@ import {
   LABELS,
   level,
   sortRows,
-  scoreOf,
   countdownState,
   num,
   title,
@@ -1186,7 +1185,7 @@ export default function App() {
                               <th>Risk level</th>
                               <th>Active alerts</th>
                               <th>Assessment</th>
-                              <th>Generic ML score</th>
+                              <th>Hazard Index</th>
                               <th>Experimental warning · 6h</th>
                               <th />
                             </tr>
@@ -1227,8 +1226,8 @@ export default function App() {
                                     : ageLabel(r.generated_at, clock)}
                                 </td>
                                 <td>
-                                  {num(r.current_score)
-                                    ? `${r.current_score.toFixed(1)} / 10`
+                                  {num(r.hazard_index)
+                                    ? `${r.hazard_index.toFixed(1)} / 10`
                                     : "Unavailable"}
                                 </td>
                                 <td><WeatherModelSummary model={r.weather_model} metar={r.metar} /></td>
@@ -1398,7 +1397,7 @@ export default function App() {
                                 ) : (
                                   <h3>
                                     {countdown.status === "clear"
-                                      ? "Coverage confirmed"
+                                      ? "No recent strike"
                                       : "Waiting for coverage"}
                                   </h3>
                                 )}
@@ -1424,7 +1423,7 @@ export default function App() {
                               </div>
                               <div className="lightning-note">
                                 <Icon name="Info" size={13} />
-                                An elapsed timer alone does not clear work.
+                                A fresh provider response is required; missing or stale coverage remains unknown.
                               </div>
                             </section>
                           </div>
@@ -2367,7 +2366,7 @@ export function WeatherModelPanel({ detail, tz }) {
 }
 function SourcesPanel({ detail, clock, onInspect }) {
   const model = detail.ml_predictions || {},
-    score = scoreOf(detail);
+    score = num(detail.hazard_index) ? detail.hazard_index : null;
   return (
     <div className="sources-grid">
       <section className="panel">
@@ -2405,7 +2404,7 @@ function SourcesPanel({ detail, clock, onInspect }) {
       <section className="panel model-panel">
         <div className="panel-heading">
           <h3>
-            <Icon name="BrainCircuit" size={18} /> Model prediction
+            <Icon name="Gauge" size={18} /> Hazard Index
           </h3>
           <span className="tiny-status">
             {title(model.stale ? "stale" : model.availability || "unavailable")}
@@ -2417,14 +2416,14 @@ function SourcesPanel({ detail, clock, onInspect }) {
         </div>
         <p>
           {score === null
-            ? "A trained model score is not currently available."
-            : "Current output from the connected trained model."}
+            ? "The Hazard Index is unavailable until at least one hazard source is known."
+            : "Placeholder 0–10 index: category-scaled hazards weighted 60% / 40% / 20% / 10%, including the scaled experimental warning contribution."}
         </p>
         <div className="info-box">
           <Icon name="Info" size={16} />
           <p>
-            Site priority and required actions use backend rules. Missing model
-            scores remain unavailable.
+            Site priority and required actions use backend rules. This index is
+            informational and does not authorize stop-work decisions.
           </p>
         </div>
         <button className="text-button" onClick={onInspect}>

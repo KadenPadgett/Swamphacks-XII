@@ -134,7 +134,7 @@ class MetarTests(unittest.IsolatedAsyncioTestCase):
         import math
         import pandas as pd
         table = metar_model.MODEL_ROOT / 'dev300_hourly_training_2025.csv.gz'
-        artifact = metar_model.artifact_path('geographic')
+        artifact = metar_model.artifact_path('final')
         sample = pd.read_csv(table, nrows=4, low_memory=False)
         bundle = joblib.load(artifact)
         self.assertEqual(list(bundle['features']), list(metar.FEATURE_ORDER))
@@ -148,7 +148,7 @@ class MetarTests(unittest.IsolatedAsyncioTestCase):
             result = metar_model.local_prediction(request)
             self.assertAlmostEqual(result['probability'], float(expected[index]), places=12)
             self.assertEqual(result['request_id'], request['request_id'])
-            self.assertIn('geographic', result['model_version'])
+            self.assertIn('final', result['model_version'])
 
         # The supplied first January training row establishes the month phase.
         self.assertEqual(float(sample.iloc[0]['month_sin']), 0)
@@ -162,7 +162,7 @@ class MetarTests(unittest.IsolatedAsyncioTestCase):
         metar_input = {'availability': 'available', 'station': station,
                        **metar.features_for(station, metar.parse_observations(raw, 'MIA'), NOW)}
         assessment = {'site': SITE, 'generated_at': NOW.isoformat()}
-        with patch.dict(os.environ, {'PLANIT_METAR_ML_URL': '', 'PLANIT_METAR_ML_MODEL': 'geographic',
+        with patch.dict(os.environ, {'PLANIT_METAR_ML_URL': '', 'PLANIT_METAR_ML_MODEL': 'final',
                                      'PLANIT_METAR_ML_MODEL_VERSION': ''}):
             result = await metar_model.predict(assessment, metar_input)
         self.assertEqual(result['availability'], 'available')
@@ -176,12 +176,12 @@ class MetarTests(unittest.IsolatedAsyncioTestCase):
         stale_input = {**metar_input, 'availability': 'stale',
                        'reason': 'no_aligned_observation_within_180_minute_window',
                        **metar.features_for(station, [], NOW)}
-        with patch.dict(os.environ, {'PLANIT_METAR_ML_URL': '', 'PLANIT_METAR_ML_MODEL': 'geographic',
+        with patch.dict(os.environ, {'PLANIT_METAR_ML_URL': '', 'PLANIT_METAR_ML_MODEL': 'final',
                                      'PLANIT_METAR_ML_MODEL_VERSION': ''}):
             missing_result = await metar_model.predict(assessment, stale_input)
         self.assertEqual(missing_result['availability'], 'available')
         self.assertEqual(missing_result['input_availability'], 'stale')
-        with patch.dict(os.environ, {'PLANIT_METAR_ML_URL': '', 'PLANIT_METAR_ML_MODEL': 'geographic',
+        with patch.dict(os.environ, {'PLANIT_METAR_ML_URL': '', 'PLANIT_METAR_ML_MODEL': 'final',
                                      'PLANIT_METAR_ML_MODEL_VERSION': ''}), \
              patch('metar_model.local_prediction', side_effect=RuntimeError('fixture failure')):
             failed = await metar_model.predict(assessment, metar_input)
@@ -205,7 +205,7 @@ class MetarTests(unittest.IsolatedAsyncioTestCase):
             ('wildfires', {'events': []}), ('wildlife', {'total_results': 0}))}
         sources = SimpleNamespace(for_site=AsyncMock(return_value=feeds), client=None)
         with patch.dict(os.environ, {'PLANIT_METAR_ENABLED': '1', 'PLANIT_METAR_ML_URL': '',
-                                     'PLANIT_METAR_ML_MODEL': 'geographic',
+                                     'PLANIT_METAR_ML_MODEL': 'final',
                                      'PLANIT_METAR_ML_MODEL_VERSION': ''}), \
              patch('risk.utcnow', return_value=NOW), \
              patch('metar.assess', new=AsyncMock(return_value=metar_input)), \

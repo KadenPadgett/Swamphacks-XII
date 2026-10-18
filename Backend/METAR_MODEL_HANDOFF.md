@@ -1,6 +1,6 @@
 # Experimental METAR warning model handoff
 
-The target is **a new NWS Severe Thunderstorm Warning covering the site in the six hours after prediction time**. It is not overall hazard, lightning, or injury probability. The supplied frozen model package is in `../PlanIT-ML/`. Local inference uses its geographic holdout artifact by default; `PLANIT_METAR_ML_MODEL=baseline` selects the separately fitted chronological baseline. Neither model may authorize dispatch, stop-work, or lightning all-clear decisions.
+The target is **a new NWS Severe Thunderstorm Warning covering the site in the six hours after prediction time**. It is not overall hazard, lightning, or injury probability. The supplied frozen model package is in `../risk_assessment/`. Local inference uses the final 2022-2024 artifact by default. Neither model may authorize dispatch, stop-work, or lightning all-clear decisions.
 
 ## Interface and current implementation
 
@@ -27,7 +27,7 @@ Missing measurements remain JSON `null`; the local model adapter converts them t
 
 ## Frozen inference service
 
-With `PLANIT_METAR_ML_URL` empty, the backend loads the supplied frozen geographic artifact locally, checks its SHA-256 against the package manifest, verifies all 25 ordered features, and calls `predict_proba` for class 1. No training or artifact overwrite occurs. The response includes the artifact variant and checksum prefix as `model_version`. Setting `PLANIT_METAR_ML_URL` instead uses the optional remote service boundary: it receives one JSON object with `schema_version=metar-warning-v1`, request ID, site/station information, prediction/outcome times, target, feature order, and features, then returns `{ "request_id": "same hash", "model_version": "configured version", "probability": 0.42 }`. The backend rejects mismatched request IDs, versions, and nonfinite/out-of-range probabilities. It multiplies probability by ten explicitly and retains the original probability. There are no copied 48-hour predictions. `PLANIT_ML_URL` and its generic result remain separate.
+With `PLANIT_METAR_ML_URL` empty, the backend loads the supplied final artifact locally, checks its SHA-256, verifies all 25 ordered features, and calls `predict_proba` for class 1. No training or artifact overwrite occurs. The response includes the artifact variant and checksum prefix as `model_version`. Setting `PLANIT_METAR_ML_URL` instead uses the optional remote service boundary: it receives one JSON object with `schema_version=metar-warning-v1`, request ID, site/station information, prediction/outcome times, target, feature order, and features, then returns `{ "request_id": "same hash", "model_version": "configured version", "probability": 0.42 }`. The backend rejects mismatched request IDs, versions, and nonfinite/out-of-range probabilities. It multiplies probability by ten explicitly and retains the original probability. There are no copied 48-hour predictions. `PLANIT_ML_URL` and its generic result remain separate.
 
 The artifact records scikit-learn **1.9.1**. Local loading and predictions were verified with Python 3.14.4, scikit-learn 1.9.1, NumPy 2.5.4, pandas 3.0.6, and joblib 1.6.0; those versions are pinned in `requirements.txt`. The original full environment lockfile was not supplied. A model may score a row with no eligible recent observation because the training table contains such rows; the response exposes `input_availability` and `input_reason`. Provider request failures remain unavailable and do not create a fabricated feature vector.
 
@@ -49,7 +49,7 @@ set -a; source .env; set +a
 python scripts/serve.py
 ```
 
-Keep `PlanIT-ML/` next to `Backend/` so the frozen artifact is found. Existing deployment instructions describe persistent SQLite and workers. Run tests with `PLANIT_METAR_ENABLED=0 python -m unittest discover -s tests -p 'test_*.py' -q` to keep legacy mocked-provider tests offline; dedicated METAR tests also load the frozen model. With the default `PLANIT_METAR_ENABLED=1`, full/background refresh selects stations, fetches observations, and scores the local model automatically.
+Keep `risk_assessment/` next to `Backend/` for source startup. The container image includes the final artifact under `/app/models/`. Existing deployment instructions describe persistent SQLite and workers. Run tests with `PLANIT_METAR_ENABLED=0 python -m unittest discover -s tests -p 'test_*.py' -q` to keep legacy mocked-provider tests offline; dedicated METAR tests also load the frozen model. With the default `PLANIT_METAR_ENABLED=1`, full/background refresh selects stations, fetches observations, and scores the local model automatically.
 
 Example `weather_model` result: `{ "availability": "available", "target": "new_nws_severe_thunderstorm_warning_covering_site_within_next_6_hours", "probability": 0.42, "score": 4.2, "prediction_time": "2026-10-18T00:00:00+00:00", "outcome_start": "2026-10-18T00:00:00+00:00", "outcome_end": "2026-10-18T06:00:00+00:00", "outcome_hours": 6, "model_version": "example-only" }`. This is a contract illustration, not a model prediction.
 

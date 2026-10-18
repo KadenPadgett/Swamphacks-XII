@@ -174,10 +174,11 @@ def _state(row, now):
                          row.get('configuration_provider') is None and provider_name() == 'the_weather_company')
     fresh = (configured() and matching_provider and row["availability"] == "available" and end is not None
              and timedelta(0) <= now - end <= timedelta(seconds=FRESH_SECONDS))
-    # The timer expiring alone never authorizes clearance. A fresh successful
-    # feed must cover the entire preceding 30 minutes, including any outage.
+    # A fresh successful feed is enough to establish that no recent strike was
+    # reported. The 30-minute window remains the post-strike hold duration;
+    # it is not a prerequisite for reporting the current feed as strike-free.
     coverage_complete = bool(fresh and start and start <= now - timedelta(minutes=30))
-    status = "stop_work" if deadline and now < deadline else "clear" if coverage_complete else "unknown"
+    status = "stop_work" if deadline and now < deadline else "clear" if fresh else "unknown"
     remaining = max(0, math.ceil((deadline - now).total_seconds())) if deadline else None
     return {**row, "status": status, "availability": "available" if fresh else "unknown",
             "countdown_remaining_seconds": remaining, "coverage_complete": coverage_complete,

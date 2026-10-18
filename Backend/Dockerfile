@@ -7,6 +7,8 @@ RUN pip install --no-cache-dir -r requirements.txt \
     && useradd --uid 10001 --create-home planit \
     && mkdir -p /data/photos && chown -R planit:planit /data
 COPY . .
+RUN mkdir -p /app/models
+COPY models/metar_2022_2024_final_hgb.joblib /app/models/metar_2022_2024_final_hgb.joblib
 USER planit
 EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=5s CMD python -c "import os,urllib.request; urllib.request.urlopen('http://127.0.0.1:'+os.environ.get('PORT','8000')+'/api/health',timeout=3)"

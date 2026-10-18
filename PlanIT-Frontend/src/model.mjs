@@ -53,6 +53,42 @@ export const HAZARDS = {
 };
 export const num = (value) =>
   typeof value === "number" && Number.isFinite(value);
+const HAZARD_INDEX_CATEGORY_CAPS = {
+  weather: 8,
+  extreme_heat: 8,
+  flooding: 10,
+  soil_saturation: 4,
+  lightning: 8,
+  wildfire: 10,
+  wildlife_sightings: 6,
+};
+const HAZARD_INDEX_SEVERITY_FACTORS = { low: 0.25, watch: 0.5, high: 0.75, severe: 1 };
+export function hazardIndex(indicators = {}, weatherModel = {}) {
+  const components = Object.entries(indicators)
+    .map(([name, item]) => 10 * HAZARD_INDEX_SEVERITY_FACTORS[item?.level] * HAZARD_INDEX_CATEGORY_CAPS[name] / 10)
+    .filter(num);
+  if (
+    weatherModel?.availability === "available" &&
+    num(weatherModel.probability) &&
+    weatherModel.probability >= 0 &&
+    weatherModel.probability <= 1
+  ) {
+    components.push(Math.min(10, weatherModel.probability * 10 * 4) * 0.7);
+  }
+  if (!components.length) return null;
+  components.sort((a, b) => b - a);
+  return Math.min(
+    10,
+    Number(
+      (
+        components[0] * 0.6 +
+        (components[1] || 0) * 0.4 +
+        (components[2] || 0) * 0.2 +
+        components.slice(3).reduce((sum, value) => sum + value, 0) * 0.1
+      ).toFixed(2),
+    ),
+  );
+}
 export const title = (str) =>
   (str || "").replaceAll("_", " ").replace(/\b\w/g, (c) => c.toUpperCase());
 export const level = (value) => (LEVELS.includes(value) ? value : "unknown");
@@ -71,6 +107,7 @@ export function normalizeRow(row) {
       ["available", "partial"].includes(row.ml_availability)
         ? row.current_score
         : null,
+    hazard_index: num(row.hazard_index) ? row.hazard_index : null,
     active_alert_status: row.active_alert_status || {
       count: 0,
       stop_work: false,
@@ -136,11 +173,10 @@ export function countdownState(feed, clock) {
   const fresh = Number.isFinite(end) && now >= end && now - end <= 90000;
   if (
     feed.status === "clear" &&
-    feed.coverage_complete &&
     feed.availability === "available" &&
     fresh
   )
-    return { status: "clear", seconds: 0, label: "Measured window clear" };
+    return { status: "clear", seconds: 0, label: "No recent strike detected" };
   return {
     status: "unknown",
     seconds: 0,
