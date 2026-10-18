@@ -15,6 +15,7 @@ from refresh_locks import RefreshBusy, lease
 from risk_sources import RiskSources, http_client, parse_time, utcnow
 
 logger = logging.getLogger(__name__)
+_run_gate = asyncio.Semaphore(1)
 
 
 def intervals():
@@ -32,6 +33,14 @@ def enabled():
 
 
 async def run(kind="full", sites=None, trigger="manual", scheduled=False, interval=None):
+    # The five scheduler loops and API calls share one refresh slot per worker.
+    # The lease extends that limit across workers using the same SQLite volume.
+    async with _run_gate:
+        async with lease("job:global"):
+            return await _run_locked(kind, sites, trigger, scheduled, interval)
+
+
+async def _run_locked(kind, sites, trigger, scheduled, interval):
     if kind not in ("full", "lightning", "strikes", "briefings", "hefs"):
         raise ValueError("Unknown refresh job")
     async with lease("job:" + kind):
@@ -54,7 +63,7 @@ async def run(kind="full", sites=None, trigger="manual", scheduled=False, interv
                 return {"run_id": run_id, "status": status, **outcome}
             async with http_client() as client:
                 sources = RiskSources(client)
-                semaphore = asyncio.Semaphore(4)
+                semaphore = asyncio.Semaphore(2)
 
                 async def refresh(site):
                     async with semaphore:

@@ -111,12 +111,12 @@ class Site(SiteCreate):
 
 # Local machine will display whats in function if web url ends in what is in quotes
 @app.get("/api/health")
-def health():
+async def health():
     return {"status": "ok"}
 
 
 @app.get("/api/sites", response_model=list[Site])
-def get_sites():
+async def get_sites():
     return [{**site, "timezone": briefings.get_timezone(site["id"]),
              "initial_assessment": database.initial_assessment(site['id'])} for site in database.list_sites()]
 
@@ -145,7 +145,7 @@ def get_site(site_id: int):
 
 
 @app.get("/api/sites/{site_id}", response_model=Site)
-def get_site_record(site_id: int):
+async def get_site_record(site_id: int):
     return {**get_site(site_id), "timezone": briefings.get_timezone(site_id),
             "initial_assessment": database.initial_assessment(site_id)}
 # API for weather data
@@ -211,7 +211,7 @@ async def get_site_risk(site_id: int):
 
 
 @app.get("/api/sites/{site_id}/detail")
-def get_site_detail(site_id: int):
+async def get_site_detail(site_id: int):
     """Saved combined view; never waits for a provider or for the optional model."""
     return site_responses.detail(get_site(site_id))
 
@@ -251,12 +251,12 @@ def get_site_lightning(site_id: int):
 
 
 @app.get("/api/refresh/status")
-def get_refresh_status():
+async def get_refresh_status():
     return refresh_jobs.status()
 
 
 @app.get("/api/risks")
-def get_risks():
+async def get_risks():
     """Fast portfolio view of saved assessments; pending/stale data is explicit."""
     return risk.risk_overview(database.list_sites())
 

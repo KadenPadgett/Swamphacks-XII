@@ -7,7 +7,7 @@ export function configureApi(url, writeToken = "") {
 export function apiUrl(path) {
   return `${base}${path}`;
 }
-export async function request(path, options = {}) {
+async function requestOnce(path, options = {}) {
   const controller = new AbortController();
   const abort = () => controller.abort();
   options.signal?.addEventListener("abort", abort, { once: true });
@@ -27,35 +27,67 @@ export async function request(path, options = {}) {
     };
     if (token && options.method && options.method !== "GET")
       headers.Authorization = `Bearer ${token}`;
+    const { retries, timeout, ...fetchOptions } = options;
     const res = await fetch(apiUrl(path), {
-      ...options,
+      ...fetchOptions,
       headers,
       signal: controller.signal,
     });
     const data = await res.json().catch(() => null);
-    if (!res.ok)
-      throw new Error(
+    if (!res.ok) {
+      const error = new Error(
         typeof data?.detail === "string"
           ? data.detail
           : Array.isArray(data?.detail)
             ? data.detail.map((e) => e.msg).join("; ")
             : `Request failed (${res.status}).`,
       );
+      error.status = res.status;
+      throw error;
+    }
     if (data === null)
       throw new Error(
         "The server did not return JSON. Check the backend address.",
       );
     return data;
   } catch (err) {
-    if (err.name === "AbortError")
-      throw new Error(
-        "The request timed out. Your saved data has not been replaced.",
-      );
+    if (err.name === "AbortError") {
+      const failure = new Error(options.signal?.aborted
+        ? "Request cancelled."
+        : "The request timed out. Previously loaded data may be stale.");
+      failure.retryable = !options.signal?.aborted;
+      throw failure;
+    }
+    if (err instanceof TypeError) err.retryable = true;
     throw err;
   } finally {
     clearTimeout(timeout);
     options.signal?.removeEventListener("abort", abort);
   }
+}
+export async function request(path, options = {}) {
+  const attempts = options.method && options.method !== "GET" ? 1 : 1 + (options.retries || 0);
+  let failure;
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    if (options.signal?.aborted) throw new Error("Request cancelled.");
+    try {
+      return await requestOnce(path, options);
+    } catch (error) {
+      failure = error;
+      const retryable = error.retryable || [429, 502, 503, 504].includes(error.status);
+      if (!retryable || attempt === attempts - 1 || options.signal?.aborted) throw error;
+      await new Promise((resolve) => {
+        const done = () => {
+          clearTimeout(timer);
+          options.signal?.removeEventListener("abort", done);
+          resolve();
+        };
+        const timer = setTimeout(done, 500 * 2 ** attempt);
+        options.signal?.addEventListener("abort", done, { once: true });
+      });
+    }
+  }
+  throw failure;
 }
 export const post = (path, body = {}, extra = {}) =>
   request(path, { method: "POST", body: JSON.stringify(body), ...extra });
@@ -64,6 +96,7 @@ export const post = (path, body = {}, extra = {}) =>
 export async function connectWithRetry({ timeoutMs = 90000, signal } = {}) {
   const deadline = Date.now() + timeoutMs;
   let lastError;
+  let attempt = 0;
   while (!signal?.aborted && Date.now() < deadline) {
     try {
       await request("/api/health", {
@@ -88,7 +121,7 @@ export async function connectWithRetry({ timeoutMs = 90000, signal } = {}) {
           signal?.removeEventListener("abort", done);
           resolve();
         };
-        const timer = setTimeout(done, Math.min(2000, remaining));
+        const timer = setTimeout(done, Math.min(1000 * 2 ** Math.min(attempt++, 3), remaining));
         signal?.addEventListener("abort", done, { once: true });
       });
     }

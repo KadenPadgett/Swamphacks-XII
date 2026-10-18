@@ -146,6 +146,9 @@ export default function App() {
     streamRef = useRef(null),
     scrollRef = useRef(null),
     startupRequest = useRef(null);
+  const portfolioPending = useRef(false),
+    detailPending = useRef(null),
+    detailFailure = useRef(false);
   const notify = useCallback((message, type = "success") => {
     setToast({ message, type });
     clearTimeout(toastTimer.current);
@@ -211,7 +214,6 @@ export default function App() {
       if (controller.signal.aborted) return;
       setLiveRows(result.sites);
       setSelected(result.sites[0]?.site_id ?? result.sites[0]?.site?.id ?? null);
-      setLiveDetail(null);
       setBaseUrl(configuredBaseUrl);
       setMode("live");
       setConnected(true);
@@ -230,37 +232,49 @@ export default function App() {
     return () => controller.abort();
   }, []);
   const loadPortfolio = useCallback(async () => {
+    if (portfolioPending.current) return;
+    portfolioPending.current = true;
     const v = version.current,
       seq = ++portfolioReq.current;
     try {
-      const data = await request("/api/risks");
+      const data = await request("/api/risks", { timeout: 8000, retries: 2 });
       if (v !== version.current || seq !== portfolioReq.current) return;
       setLiveRows(data.sites || []);
       setConnected(true);
       setLastSync(Date.now());
-      setError("");
+      if (!detailFailure.current) setError("");
     } catch (e) {
       if (v === version.current) {
         setConnected(false);
         setError(`Backend connection interrupted. ${e.message}`);
       }
+    } finally {
+      portfolioPending.current = false;
     }
   }, []);
   const loadDetail = useCallback(async (id) => {
+    if (detailPending.current === id) return;
+    detailPending.current = id;
     const v = version.current,
       seq = ++detailReq.current;
     try {
-      const d = await request(`/api/sites/${id}/detail`);
+      const d = await request(`/api/sites/${id}/detail`, { timeout: 8000, retries: 2 });
       if (v === version.current && seq === detailReq.current) {
         setLiveDetail(d);
+        detailFailure.current = false;
+        setError("");
         const serverTime = Date.parse(d.lightning_countdown?.server_time);
         if (Number.isFinite(serverTime))
           setServerOffset(serverTime - Date.now());
         setLastSync(Date.now());
       }
     } catch (e) {
-      if (v === version.current && seq === detailReq.current)
-        setError(e.message);
+      if (v === version.current && seq === detailReq.current) {
+        detailFailure.current = true;
+        setError(`Saved site detail could not be updated. ${e.message}`);
+      }
+    } finally {
+      if (detailPending.current === id) detailPending.current = null;
     }
   }, []);
   useEffect(() => {
@@ -279,7 +293,6 @@ export default function App() {
   }, [mode, liveRows, selected, loadPortfolio, loadDetail]);
   useEffect(() => {
     if (mode !== "live" || !selected) return;
-    setLiveDetail(null);
     loadDetail(selected);
     const t = setInterval(() => loadDetail(selected), 15000);
     return () => {
@@ -416,7 +429,6 @@ export default function App() {
       setSelected(
         result.sites[0]?.site_id ?? result.sites[0]?.site?.id ?? null,
       );
-      setLiveDetail(null);
       setMode("live");
       setConnected(true);
       setLastSync(Date.now());
