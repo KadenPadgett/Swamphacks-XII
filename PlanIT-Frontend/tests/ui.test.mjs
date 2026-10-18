@@ -152,6 +152,34 @@ test("demo site creation works and begins with unknown conditions", async () => 
     c.dom.window.close();
   }
 });
+test("dropping a map pin prefills the site form and keeps coordinates editable", async () => {
+  const c = await start();
+  try {
+    await wait(300);
+    const pinButton = c.document.querySelector('[aria-label="Drop pin to add site"]');
+    assert.ok(pinButton, `Map status: ${c.document.querySelector('.map-loading')?.textContent || c.document.querySelector('.map-shell')?.textContent || 'not rendered'}; errors: ${c.errors.map(String).join('; ')}`);
+    c.document.querySelector(".leaflet-surface").dispatchEvent(
+      new c.w.MouseEvent("mousemove", { bubbles: true, clientX: 120, clientY: 120 }),
+    );
+    await wait(30);
+    assert.match(c.document.querySelector(".map-coordinates").textContent, /^-?\d+\.\d{5}, -?\d+\.\d{5}$/);
+    pinButton.click();
+    await wait(30);
+    assert.equal(pinButton.getAttribute("aria-pressed"), "true");
+    c.document.querySelector(".leaflet-surface").dispatchEvent(
+      new c.w.MouseEvent("click", { bubbles: true, clientX: 120, clientY: 120 }),
+    );
+    await wait(30);
+    assert.match(c.document.querySelector('[role="dialog"]').textContent, /Pin placed on the map/);
+    assert.ok(Number.isFinite(Number(c.document.querySelector('[name="lat"]').value)));
+    assert.ok(Number.isFinite(Number(c.document.querySelector('[name="lon"]').value)));
+    assert.notEqual(c.document.querySelector('[name="lat"]').value, "");
+    assert.notEqual(c.document.querySelector('[name="lon"]').value, "");
+    assert.equal(c.errors.length, 0, c.errors.map(String).join("\n"));
+  } finally {
+    c.dom.window.close();
+  }
+});
 test("crew reporting, resolution and resolved-history filter work in demo", async () => {
   const c = await start();
   try {

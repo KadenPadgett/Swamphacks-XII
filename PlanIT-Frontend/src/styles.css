@@ -821,6 +821,33 @@ button.metric:hover {
 .map-tools button:hover {
   background: #ebf1e7;
 }
+.map-tools button.active {
+  background: #e4eee1;
+  color: #3c694b;
+}
+.map-shell.placing-pin .leaflet-surface {
+  cursor: crosshair;
+}
+.map-pin-instruction,
+.map-coordinates {
+  position: absolute;
+  z-index: 450;
+  right: 17px;
+  background: #fffffff0;
+  border: 1px solid #e0e7dc;
+  border-radius: 5px;
+  padding: 7px 9px;
+  color: #58725c;
+  font-size: 10px;
+  pointer-events: none;
+}
+.map-pin-instruction {
+  top: 57px;
+}
+.map-coordinates {
+  bottom: 86px;
+  font-variant-numeric: tabular-nums;
+}
 .map-tools > span {
   height: 1px;
   background: #e5e9e1;

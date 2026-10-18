@@ -20,6 +20,7 @@ export default function SiteMap({
   rows,
   selected,
   onSelect,
+  onDropPin,
   reports = [],
   large = false,
 }) {
@@ -29,13 +30,17 @@ export default function SiteMap({
     circles = useRef(null),
     tiles = useRef(null),
     rowsRef = useRef(rows),
-    callback = useRef(onSelect);
+    callback = useRef(onSelect),
+    dropPinCallback = useRef(onDropPin);
   const [layerMenu, setLayerMenu] = useState(false),
     [range, setRange] = useState(false),
     [basemap, setBasemap] = useState(true),
-    [tilesReady, setTilesReady] = useState(false);
+    [tilesReady, setTilesReady] = useState(false),
+    [placingPin, setPlacingPin] = useState(false),
+    [cursorCoordinates, setCursorCoordinates] = useState(null);
   rowsRef.current = rows;
   callback.current = onSelect;
+  dropPinCallback.current = onDropPin;
   useEffect(() => {
     const m = L.map(element.current, {
       zoomControl: false,
@@ -86,6 +91,26 @@ export default function SiteMap({
   useEffect(() => {
     const m = map.current;
     if (!m) return;
+    const showCoordinates = (event) =>
+      setCursorCoordinates({ latitude: event.latlng.lat, longitude: event.latlng.lng });
+    const clearCoordinates = () => setCursorCoordinates(null);
+    const placePin = (event) => {
+      if (!placingPin) return;
+      setPlacingPin(false);
+      dropPinCallback.current?.({ latitude: event.latlng.lat, longitude: event.latlng.lng });
+    };
+    m.on("mousemove", showCoordinates);
+    m.on("mouseout", clearCoordinates);
+    m.on("click", placePin);
+    return () => {
+      m.off("mousemove", showCoordinates);
+      m.off("mouseout", clearCoordinates);
+      m.off("click", placePin);
+    };
+  }, [placingPin]);
+  useEffect(() => {
+    const m = map.current;
+    if (!m) return;
     const good = rows.filter(
       (r) =>
         Number.isFinite(r.site?.latitude) && Number.isFinite(r.site?.longitude),
@@ -114,6 +139,7 @@ export default function SiteMap({
       const marker = L.marker([s.latitude, s.longitude], {
         icon,
         keyboard: true,
+        bubblingMouseEvents: false,
         title: s.name,
         zIndexOffset: active ? 500 : 0,
       }).addTo(markers.current);
@@ -166,7 +192,7 @@ export default function SiteMap({
       );
   };
   return (
-    <div className={`map-shell ${large ? "large" : ""}`}>
+    <div className={`map-shell ${large ? "large" : ""} ${placingPin ? "placing-pin" : ""}`}>
       <div
         ref={element}
         className="leaflet-surface"
@@ -187,6 +213,26 @@ export default function SiteMap({
         <button aria-label="Fit all sites" onClick={recenter}>
           <LocateFixed size={17} />
         </button>
+        {onDropPin && (
+          <>
+            <span />
+            <button
+              aria-label={placingPin ? "Cancel pin placement" : "Drop pin to add site"}
+              aria-pressed={placingPin}
+              title={placingPin ? "Cancel pin placement" : "Drop pin to add site"}
+              className={placingPin ? "active" : ""}
+              onClick={() => setPlacingPin((value) => !value)}
+            >
+              <MapPin size={17} />
+            </button>
+          </>
+        )}
+      </div>
+      {placingPin && <div className="map-pin-instruction">Click the map to place a new site</div>}
+      <div className="map-coordinates" aria-live="off">
+        {cursorCoordinates
+          ? `${cursorCoordinates.latitude.toFixed(5)}, ${cursorCoordinates.longitude.toFixed(5)}`
+          : "Move over map for coordinates"}
       </div>
       <div className="map-layer">
         <button
