@@ -279,7 +279,8 @@ async def refresh_site_locked(site, sources):
     if snapshot_is_fresh(snapshot, site) and not freshness.assessment(snapshot, now=utcnow())['refresh_due']:
         alerts.evaluate(snapshot, include_lightning=False)
         return {**snapshot, "cached": True, "stale": False}
-    result = assess(site, await sources.for_site(site))
+    feeds = await sources.for_site(site)
+    result = assess(site, feeds)
     zone = (result.get("weather") or {}).get("timezone")
     if zone:
         briefings.set_timezone(site["id"], zone, source="weather")

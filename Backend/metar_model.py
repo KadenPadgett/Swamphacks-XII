@@ -15,6 +15,7 @@ import freshness
 from risk_sources import parse_time, utcnow
 
 TARGET = "new_nws_severe_thunderstorm_warning_covering_site_within_next_6_hours"
+_model_gate = asyncio.Semaphore(1)
 MODEL_ROOT = Path(__file__).resolve().parent.parent / 'PlanIT-ML' / 'data' / 'processed' / 'development_300_2025'
 ARTIFACTS = {
     'geographic': ('model_geographic_holdout/geographic_hgb.joblib',
@@ -68,7 +69,11 @@ def local_prediction(request):
     classes = list(bundle['model'].classes_)
     if 1 not in classes:
         raise ValueError('Frozen model has no positive warning class')
-    probability = float(bundle['model'].predict_proba(row)[0, classes.index(1)])
+    # Histogram gradient boosting may start an OpenMP team for every call.
+    # Bound native model threads even when the host exports a larger default.
+    from threadpoolctl import threadpool_limits
+    with threadpool_limits(limits=1):
+        probability = float(bundle['model'].predict_proba(row)[0, classes.index(1)])
     if not np.isfinite(probability):
         raise ValueError('Frozen model returned a nonfinite probability')
     return {'request_id': request['request_id'], 'model_source': 'local_frozen_artifact',
@@ -153,7 +158,11 @@ async def predict(assessment, metar):
     request = request_for(assessment, metar)
     if not endpoint:
         try:
-            payload = await asyncio.to_thread(local_prediction, request)
+            # Keep local inference single-file and single-flight.  The frozen
+            # artifact is small and this avoids creating an unbounded native
+            # thread team per overlapping refresh.
+            async with _model_gate:
+                payload = local_prediction(request)
             return parse_output(payload, request)
         except (ImportError, ModuleNotFoundError):
             return unavailable('model_dependencies_missing', metar, assessment['generated_at'])

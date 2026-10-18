@@ -10,6 +10,7 @@ from risk_sources import utcnow
 
 logger = logging.getLogger(__name__)
 _tasks = set()
+_assessment_slots = asyncio.Semaphore(2)
 
 
 def queue(site_id):
@@ -20,6 +21,11 @@ def queue(site_id):
 
 
 async def run(site_id):
+    async with _assessment_slots:
+        return await _run(site_id)
+
+
+async def _run(site_id):
     started_at = utcnow().isoformat()
     if not database.claim_initial_assessment(site_id, started_at):
         return False

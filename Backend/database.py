@@ -24,7 +24,11 @@ SITE_METADATA = {
 @contextmanager
 def connect():
     # Each operation gets its own connection, safe for FastAPI's worker threads.
-    connection = sqlite3.connect(DATABASE_PATH, timeout=10)
+    # A busy writer must not pin the ASGI event loop for ten seconds. WAL also
+    # lets saved-data readers continue while a refresh commits a snapshot.
+    # Never let a transient writer lock hold an ASGI request or scheduler loop.
+    # Callers that need to retry do so at the job/HTTP layer.
+    connection = sqlite3.connect(DATABASE_PATH, timeout=0.05)
     connection.row_factory = sqlite3.Row
     try:
         with connection:
@@ -35,6 +39,8 @@ def connect():
 # Creates the sites table if needed. Adds demo site without overwritting
 def initialize_database():
     DATABASE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with sqlite3.connect(DATABASE_PATH, timeout=2) as connection:
+        connection.execute("PRAGMA journal_mode=WAL")
     with connect() as connection:
         connection.execute(
             """
@@ -275,12 +281,17 @@ def save_metar_station(site, station):
 
 
 def claim_lease(name, owner, now, ttl):
-    with connect() as connection:
-        cursor = connection.execute(
-            """INSERT INTO refresh_leases VALUES (?, ?, ?)
-            ON CONFLICT(name) DO UPDATE SET owner=excluded.owner, expires_at=excluded.expires_at
-            WHERE refresh_leases.expires_at <= ?""", (name, owner, now + ttl, now))
-        return cursor.rowcount == 1
+    try:
+        with connect() as connection:
+            cursor = connection.execute(
+                """INSERT INTO refresh_leases VALUES (?, ?, ?)
+                ON CONFLICT(name) DO UPDATE SET owner=excluded.owner, expires_at=excluded.expires_at
+                WHERE refresh_leases.expires_at <= ?""", (name, owner, now + ttl, now))
+            return cursor.rowcount == 1
+    except sqlite3.OperationalError as error:
+        if "locked" in str(error).lower():
+            return False
+        raise
 
 
 def renew_lease(name, owner, now, ttl):
