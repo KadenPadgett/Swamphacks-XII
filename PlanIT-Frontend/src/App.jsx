@@ -116,6 +116,7 @@ export default function App() {
   const [query, setQuery] = useState(""),
     [severity, setSeverity] = useState("all"),
     [modal, setModal] = useState(null),
+    [droppedCoordinates, setDroppedCoordinates] = useState(null),
     [mobile, setMobile] = useState(false),
     [busy, setBusy] = useState(false),
     [loading, setLoading] = useState(false),
@@ -659,7 +660,13 @@ export default function App() {
   }
   function openModal(m) {
     setError("");
+    if (m === "add-site") setDroppedCoordinates(null);
     setModal(m);
+  }
+  function addSiteFromMap(coordinates) {
+    setError("");
+    setDroppedCoordinates(coordinates);
+    setModal("add-site");
   }
   const siteSelector = (
     <SiteSearchSelect
@@ -681,6 +688,7 @@ export default function App() {
         rows={visibleRows}
         selected={selected}
         onSelect={(id) => select(id)}
+        onDropPin={addSiteFromMap}
         reports={detail?.active_crew_reports || []}
       />
     </Suspense>
@@ -1961,6 +1969,11 @@ export default function App() {
           )}
           {modal === "add-site" && (
             <form onSubmit={addSite}>
+              {droppedCoordinates && (
+                <p className="form-hint">
+                  Pin placed on the map. Confirm the details below; you can adjust the coordinates.
+                </p>
+              )}
               <label className="field">
                 Site name
                 <input
@@ -1980,6 +1993,7 @@ export default function App() {
                     min="-90"
                     max="90"
                     required
+                    defaultValue={droppedCoordinates?.latitude ?? ""}
                     placeholder="25.7500"
                   />
                 </label>
@@ -1992,6 +2006,7 @@ export default function App() {
                     min="-180"
                     max="180"
                     required
+                    defaultValue={droppedCoordinates?.longitude ?? ""}
                     placeholder="-80.7000"
                   />
                 </label>
