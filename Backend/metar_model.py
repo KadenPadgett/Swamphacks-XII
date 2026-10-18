@@ -15,12 +15,15 @@ import freshness
 from risk_sources import parse_time, utcnow
 
 TARGET = "new_nws_severe_thunderstorm_warning_covering_site_within_next_6_hours"
-MODEL_ROOT = Path(__file__).resolve().parent.parent / 'PlanIT-ML' / 'data' / 'processed' / 'development_300_2025'
+MODEL_ROOT = Path(__file__).resolve().parent / 'models'
+SOURCE_MODEL_ROOT = Path(__file__).resolve().parent.parent / 'risk_assessment'
+FINAL_ARTIFACT = 'metar_2022_2024_final_hgb.joblib'
+FINAL_ARTIFACT_SHA256 = 'cee0b9912ea7a706cee3154d26e2fecee4428800a20d2a687a194296c33e57a2'
 ARTIFACTS = {
-    'geographic': ('model_geographic_holdout/geographic_hgb.joblib',
-                   '44ea5e7ccd840e4476f22f48347fb1ee44d5d24913358f411bb67d6728648654'),
-    'baseline': ('model_baseline/baseline_hgb.joblib',
-                 'd789c0af61492a49ad84b0fd1ba07ffe3bb3e7d2f5d60bee48db472ccff22406'),
+    # Keep geographic as the compatibility name used by existing Render and
+    # Compose settings, but point it at the final 2022-2024 handoff artifact.
+    'geographic': (FINAL_ARTIFACT, FINAL_ARTIFACT_SHA256),
+    'final': (FINAL_ARTIFACT, FINAL_ARTIFACT_SHA256),
 }
 
 
@@ -32,7 +35,14 @@ def artifact_path(choice=None):
     choice = choice or model_choice()
     if choice not in ARTIFACTS:
         raise ValueError('Unknown frozen METAR model selection')
-    return Path(os.environ.get('PLANIT_METAR_ML_ARTIFACT', MODEL_ROOT / ARTIFACTS[choice][0]))
+    configured = os.environ.get('PLANIT_METAR_ML_ARTIFACT')
+    if configured:
+        return Path(configured)
+    filename = ARTIFACTS[choice][0]
+    deployed = MODEL_ROOT / filename
+    if deployed.is_file():
+        return deployed
+    return SOURCE_MODEL_ROOT / filename
 
 
 @lru_cache(maxsize=4)
@@ -72,7 +82,7 @@ def local_prediction(request):
     if not np.isfinite(probability):
         raise ValueError('Frozen model returned a nonfinite probability')
     return {'request_id': request['request_id'], 'model_source': 'local_frozen_artifact',
-            'model_version': f'2025-{choice}-hgb-sha256:{ARTIFACTS[choice][1][:12]}',
+            'model_version': f'2022-2024-final-hgb-sha256:{ARTIFACTS[choice][1][:12]}',
             'probability': probability}
 
 

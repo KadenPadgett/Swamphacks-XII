@@ -231,11 +231,11 @@ exposure; it does not prove hydraulic connectivity or floodplain membership.
 
 # METAR model service
 
-The supplied geographic frozen model is loaded locally by default. Keep
-`PlanIT-ML/` next to `Backend/` for Ubuntu/WSL source startup. The Compose file
-mounts its geographic artifact read-only into the container. Other container
-deployments must mount the same artifact and set `PLANIT_METAR_ML_ARTIFACT` to
-its in-container path. The optional remote model boundary uses
+The supplied final 2022-2024 frozen model is loaded locally by default. Keep
+`risk_assessment/` next to `Backend/` for Ubuntu/WSL source startup. The Compose
+file mounts its final artifact read-only into the container. Other container
+deployments must include or mount the same artifact and set
+`PLANIT_METAR_ML_ARTIFACT` to its in-container path. The optional remote model boundary uses
 `PLANIT_METAR_ML_URL`, `PLANIT_METAR_ML_TOKEN`, and
 `PLANIT_METAR_ML_MODEL_VERSION` in `.env`. See
 [METAR_MODEL_HANDOFF.md](METAR_MODEL_HANDOFF.md) for the frozen-model service
