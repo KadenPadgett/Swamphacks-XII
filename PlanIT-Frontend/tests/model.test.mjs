@@ -9,6 +9,7 @@ import {
   boundText,
   initialAssessmentLabel,
   weatherModelView,
+  hazardIndex,
 } from "../src/model.mjs";
 const example = JSON.parse(
   readFileSync(new URL("fixtures/backend-dangerous.json", import.meta.url)),
@@ -123,4 +124,10 @@ test("initial assessment states and experimental warning output stay separate fr
   assert.equal(weatherModelView({ availability: "stale", reason: "prediction_expired", probability: .8 }, {}).probability, null);
   assert.equal(weatherModelView({ availability: "available", probability: .8,
     valid_until: "2026-10-17T12:00:00Z" }, {}, Date.parse("2026-10-17T12:00:01Z")).probability, null);
+});
+test("Hazard Index applies category-specific ceilings", () => {
+  assert.equal(hazardIndex({ soil_saturation: { level: "severe" } }), 4);
+  assert.equal(hazardIndex({ wildlife_sightings: { level: "severe" } }), 6);
+  assert.equal(hazardIndex({ flooding: { level: "severe" } }), 10);
+  assert.equal(hazardIndex({}, { availability: "available", probability: 1 }), 7);
 });

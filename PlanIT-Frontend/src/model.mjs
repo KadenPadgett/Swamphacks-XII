@@ -53,10 +53,19 @@ export const HAZARDS = {
 };
 export const num = (value) =>
   typeof value === "number" && Number.isFinite(value);
-const HAZARD_INDEX_LEVEL_SCORES = { low: 2.5, watch: 5, high: 7.5, severe: 10 };
+const HAZARD_INDEX_CATEGORY_CAPS = {
+  weather: 8,
+  extreme_heat: 8,
+  flooding: 10,
+  soil_saturation: 4,
+  lightning: 8,
+  wildfire: 10,
+  wildlife_sightings: 6,
+};
+const HAZARD_INDEX_SEVERITY_FACTORS = { low: 0.25, watch: 0.5, high: 0.75, severe: 1 };
 export function hazardIndex(indicators = {}, weatherModel = {}) {
-  const components = Object.values(indicators)
-    .map((item) => HAZARD_INDEX_LEVEL_SCORES[item?.level])
+  const components = Object.entries(indicators)
+    .map(([name, item]) => HAZARD_INDEX_CATEGORY_CAPS[name] * HAZARD_INDEX_SEVERITY_FACTORS[item?.level])
     .filter(num);
   if (
     weatherModel?.availability === "available" &&

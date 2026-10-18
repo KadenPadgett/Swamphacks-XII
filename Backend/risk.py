@@ -15,7 +15,16 @@ from refresh_locks import lease
 METHOD_VERSION = "planning-screen-v2"
 ASSESSMENT_REVISION = 8
 LEVELS = {"unknown": -1, "info": -1, "low": 0, "watch": 1, "high": 2, "severe": 3}
-HAZARD_INDEX_LEVEL_SCORES = {"low": 2.5, "watch": 5.0, "high": 7.5, "severe": 10.0}
+HAZARD_INDEX_CATEGORY_CAPS = {
+    "weather": 8.0,
+    "extreme_heat": 8.0,
+    "flooding": 10.0,
+    "soil_saturation": 4.0,
+    "lightning": 8.0,
+    "wildfire": 10.0,
+    "wildlife_sightings": 6.0,
+}
+HAZARD_INDEX_SEVERITY_FACTORS = {"low": 0.25, "watch": 0.50, "high": 0.75, "severe": 1.0}
 ALERT_TERMS = {
     "weather": ("wind", "tornado", "hurricane", "tropical", "storm", "snow", "blizzard", "ice"),
     "extreme_heat": ("heat",), "lightning": ("thunderstorm", "lightning"),
@@ -40,15 +49,17 @@ def worst(*levels):
 def hazard_index(indicators, weather_model=None):
     """Return the transparent placeholder 0-10 Hazard Index.
 
-    Known rule-based hazard levels contribute as 2.5/5/7.5/10. The largest
-    component contributes fully, the second contributes 50%, and all remaining
-    components contribute 15%. The experimental warning model is scaled 4x,
-    capped at 7 on its own, and treated as another component. Unknown and
-    informational values are omitted rather than converted into zero evidence.
+    Each rule-based category has its own maximum and its severity selects a
+    fraction of that maximum. Flooding and wildfire can reach 10; soil wetness
+    tops out at 4 and wildlife at 6. The largest component contributes fully,
+    the second contributes 50%, and all remaining components contribute 15%.
+    The experimental warning model is scaled 4x, capped at 7 on its own, and
+    treated as another component. Unknown and informational values are omitted.
     """
-    components = [HAZARD_INDEX_LEVEL_SCORES[item.get("level")]
-                  for item in (indicators or {}).values()
-                  if item.get("level") in HAZARD_INDEX_LEVEL_SCORES]
+    components = [HAZARD_INDEX_CATEGORY_CAPS[name] * HAZARD_INDEX_SEVERITY_FACTORS[item.get("level")]
+                  for name, item in (indicators or {}).items()
+                  if name in HAZARD_INDEX_CATEGORY_CAPS
+                  and item.get("level") in HAZARD_INDEX_SEVERITY_FACTORS]
     probability = (weather_model or {}).get("probability")
     if ((weather_model or {}).get("availability") == "available"
             and numeric(probability) and 0 <= probability <= 1):
