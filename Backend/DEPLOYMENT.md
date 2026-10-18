@@ -66,8 +66,9 @@ weather, NWS, NASA EONET, iNaturalist, NOAA NWPS/HEFS, lightning and optional ML
 1. Build this Dockerfile, or install requirements in a managed Python service.
 2. Mount persistent storage at `/data`. Set `PLANIT_DATABASE_PATH=/data/sites.db`
    and `PLANIT_UPLOAD_DIR=/data/photos`. Ensure the process can write both paths.
-3. Set `PLANIT_ALLOWED_ORIGINS` to comma-separated frontend origins including the
-   scheme and port, e.g. `https://frontend.example`. Localhost:5173 stays allowed.
+3. Set `PLANIT_ALLOWED_ORIGINS` to comma-separated additional frontend origins
+   including the scheme and port, e.g. `https://frontend.example`. Localhost:5173
+   and the production Render frontend are allowed by default.
 4. Keep `PLANIT_BACKGROUND_REFRESH=1`. Run `python scripts/serve.py`; the host can
    set PORT. Configure restart-on-failure and health checks at `/api/health`.
 5. Enable HTTPS at the host proxy. Permit long-lived SSE responses and disable

@@ -62,11 +62,15 @@ async def protect_writes(request: Request, call_next):
 
 # Allow the local Vite frontend, Vercel deployments, and any explicitly
 # configured frontend origins to call this backend.
+DEFAULT_ALLOWED_ORIGINS = (
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://swamphacks-xii-1.onrender.com",
+)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=list(dict.fromkeys([
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
+        *DEFAULT_ALLOWED_ORIGINS,
         *[value.strip().rstrip('/') for value in os.environ.get("PLANIT_ALLOWED_ORIGINS", "").split(',') if value.strip()],
     ])),
     allow_origin_regex=r"https://[a-zA-Z0-9-]+\.vercel\.app",

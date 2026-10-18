@@ -2538,9 +2538,16 @@ button.metric:hover {
   border-color: #b07865;
 }
 .spin {
-  animation: spin 1s linear infinite;
+  display: inline-block;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: planit-spin 1s linear infinite;
 }
-@keyframes spin {
+
+@keyframes planit-spin {
+  from {
+    transform: rotate(0deg);
+  }
   to {
     transform: rotate(360deg);
   }
