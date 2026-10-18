@@ -65,7 +65,7 @@ const HAZARD_INDEX_CATEGORY_CAPS = {
 const HAZARD_INDEX_SEVERITY_FACTORS = { low: 0.25, watch: 0.5, high: 0.75, severe: 1 };
 export function hazardIndex(indicators = {}, weatherModel = {}) {
   const components = Object.entries(indicators)
-    .map(([name, item]) => HAZARD_INDEX_CATEGORY_CAPS[name] * HAZARD_INDEX_SEVERITY_FACTORS[item?.level])
+    .map(([name, item]) => 10 * HAZARD_INDEX_SEVERITY_FACTORS[item?.level] * HAZARD_INDEX_CATEGORY_CAPS[name] / 10)
     .filter(num);
   if (
     weatherModel?.availability === "available" &&
@@ -73,7 +73,7 @@ export function hazardIndex(indicators = {}, weatherModel = {}) {
     weatherModel.probability >= 0 &&
     weatherModel.probability <= 1
   ) {
-    components.push(Math.min(7, weatherModel.probability * 10 * 4));
+    components.push(Math.min(10, weatherModel.probability * 10 * 4) * 0.7);
   }
   if (!components.length) return null;
   components.sort((a, b) => b - a);
@@ -81,9 +81,10 @@ export function hazardIndex(indicators = {}, weatherModel = {}) {
     10,
     Number(
       (
-        components[0] +
-        (components[1] || 0) * 0.5 +
-        components.slice(2).reduce((sum, value) => sum + value, 0) * 0.15
+        components[0] * 0.6 +
+        (components[1] || 0) * 0.4 +
+        (components[2] || 0) * 0.2 +
+        components.slice(3).reduce((sum, value) => sum + value, 0) * 0.1
       ).toFixed(2),
     ),
   );

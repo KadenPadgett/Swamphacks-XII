@@ -126,8 +126,18 @@ test("initial assessment states and experimental warning output stay separate fr
     valid_until: "2026-10-17T12:00:00Z" }, {}, Date.parse("2026-10-17T12:00:01Z")).probability, null);
 });
 test("Hazard Index applies category-specific ceilings", () => {
-  assert.equal(hazardIndex({ soil_saturation: { level: "severe" } }), 4);
-  assert.equal(hazardIndex({ wildlife_sightings: { level: "severe" } }), 6);
-  assert.equal(hazardIndex({ flooding: { level: "severe" } }), 10);
-  assert.equal(hazardIndex({}, { availability: "available", probability: 1 }), 7);
+  assert.equal(hazardIndex({ soil_saturation: { level: "severe" } }), 2.4);
+  assert.equal(hazardIndex({ wildlife_sightings: { level: "severe" } }), 3.6);
+  assert.equal(hazardIndex({ flooding: { level: "severe" } }), 6);
+  assert.equal(hazardIndex({}, { availability: "available", probability: 1 }), 4.2);
+  assert.equal(hazardIndex({}, { availability: "available", probability: 0.1 }), 1.68);
+});
+test("Hazard Index uses 60/40/20/10 combination weights", () => {
+  const indicators = {
+    flooding: { level: "severe" },
+    wildfire: { level: "high" },
+    wildlife_sightings: { level: "watch" },
+    soil_saturation: { level: "low" },
+  };
+  assert.equal(hazardIndex(indicators), 9.7);
 });

@@ -25,6 +25,7 @@ HAZARD_INDEX_CATEGORY_CAPS = {
     "wildlife_sightings": 6.0,
 }
 HAZARD_INDEX_SEVERITY_FACTORS = {"low": 0.25, "watch": 0.50, "high": 0.75, "severe": 1.0}
+HAZARD_INDEX_COMPONENT_WEIGHTS = (0.60, 0.40, 0.20)
 ALERT_TERMS = {
     "weather": ("wind", "tornado", "hurricane", "tropical", "storm", "snow", "blizzard", "ice"),
     "extreme_heat": ("heat",), "lightning": ("thunderstorm", "lightning"),
@@ -49,29 +50,33 @@ def worst(*levels):
 def hazard_index(indicators, weather_model=None):
     """Return the transparent placeholder 0-10 Hazard Index.
 
-    Each rule-based category has its own maximum and its severity selects a
-    fraction of that maximum. Flooding and wildfire can reach 10; soil wetness
-    tops out at 4 and wildlife at 6. The largest component contributes fully,
-    the second contributes 50%, and all remaining components contribute 15%.
-    The experimental warning model is scaled 4x, capped at 7 on its own, and
-    treated as another component. Unknown and informational values are omitted.
+    Each rule-based category starts with a 0-10 severity score and is scaled by
+    its category factor: flooding and wildfire use 1.0, wet soil .4, and
+    wildlife .6. The largest component contributes 60%, the second 40%, the
+    third 20%, and all remaining components 10%. The experimental warning
+    model is scaled 4x, then normalized to 0-10 and scaled by .7 so that its
+    maximum contribution before combination is 7 without flattening lower
+    probabilities. Unknown and informational values are omitted.
     """
-    components = [HAZARD_INDEX_CATEGORY_CAPS[name] * HAZARD_INDEX_SEVERITY_FACTORS[item.get("level")]
+    components = [10.0 * HAZARD_INDEX_SEVERITY_FACTORS[item.get("level")]
+                  * HAZARD_INDEX_CATEGORY_CAPS[name] / 10.0
                   for name, item in (indicators or {}).items()
                   if name in HAZARD_INDEX_CATEGORY_CAPS
                   and item.get("level") in HAZARD_INDEX_SEVERITY_FACTORS]
     probability = (weather_model or {}).get("probability")
     if ((weather_model or {}).get("availability") == "available"
             and numeric(probability) and 0 <= probability <= 1):
-        components.append(min(7.0, probability * 10.0 * 4.0))
+        components.append(min(10.0, probability * 10.0 * 4.0) * 0.7)
     if not components:
         return None
     components.sort(reverse=True)
-    score = components[0]
+    score = components[0] * HAZARD_INDEX_COMPONENT_WEIGHTS[0]
     if len(components) > 1:
-        score += components[1] * 0.50
+        score += components[1] * HAZARD_INDEX_COMPONENT_WEIGHTS[1]
     if len(components) > 2:
-        score += sum(components[2:]) * 0.15
+        score += components[2] * HAZARD_INDEX_COMPONENT_WEIGHTS[2]
+    if len(components) > 3:
+        score += sum(components[3:]) * 0.10
     return round(min(10.0, score), 2)
 
 

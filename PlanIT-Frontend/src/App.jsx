@@ -2405,7 +2405,7 @@ function SourcesPanel({ detail, clock, onInspect }) {
         <p>
           {score === null
             ? "The Hazard Index is unavailable until at least one hazard source is known."
-            : "Placeholder 0–10 index: highest hazard + 50% second-highest + 15% of remaining hazards, including the capped experimental warning contribution."}
+            : "Placeholder 0–10 index: category-scaled hazards weighted 60% / 40% / 20% / 10%, including the scaled experimental warning contribution."}
         </p>
         <div className="info-box">
           <Icon name="Info" size={16} />
