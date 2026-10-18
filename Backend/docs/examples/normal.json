@@ -1,0 +1,1319 @@
+{
+  "example_only": true,
+  "scenario": "normal",
+  "description": "Synthetic test fixture; never inserted into the application database.",
+  "map_response": {
+    "count": 1,
+    "ranking": {
+      "type": "rule_based",
+      "version": "stop-work-then-coverage-v2",
+      "description": "Stop-work first; then known severe/high/watch hazards; then incomplete, missing or stale assessments; then complete low. Site ID breaks ties.",
+      "ml_scores_used": false,
+      "missing_ml": "Scores remain null and do not affect ordering"
+    },
+    "sites": [
+      {
+        "site": {
+          "id": 1,
+          "name": "Demo Job Site",
+          "latitude": 25.75,
+          "longitude": -80.7,
+          "eia_plant_id": null,
+          "utility": null,
+          "county": null,
+          "state": null,
+          "plant_type": null,
+          "source": null,
+          "source_url": null,
+          "source_period": null
+        },
+        "site_id": 1,
+        "latitude": 25.75,
+        "longitude": -80.7,
+        "status": "ready",
+        "current_score": null,
+        "ml_availability": "unavailable",
+        "upcoming_peak": {
+          "rule_based": {
+            "assessment_type": "rule_based",
+            "time_scope": "upcoming",
+            "time": "2026-08-12T23:00:00+00:00",
+            "overall": {
+              "assessment_type": "rule_based",
+              "level": "unknown",
+              "highest_known_level": "low",
+              "method": "Maximum rule-based indicator level; wildlife is informational",
+              "drivers": [],
+              "coverage_complete": false,
+              "coverage_gaps": [
+                "lightning"
+              ]
+            },
+            "indicators": {
+              "weather": {
+                "time": "2026-08-12T23:00:00+00:00",
+                "level": "low",
+                "basis": "Wind and preceding-hour precipitation at this time",
+                "evidence": {
+                  "gust_mph": 5,
+                  "preceding_hour_precipitation_in": 0,
+                  "gust_thresholds_mph": [
+                    30,
+                    45,
+                    65
+                  ],
+                  "rain_thresholds_in": [
+                    0.3,
+                    0.75,
+                    1.0
+                  ],
+                  "alerts": []
+                },
+                "sources": [
+                  "weather",
+                  "alerts"
+                ],
+                "coverage": "available"
+              },
+              "extreme_heat": {
+                "time": "2026-08-12T23:00:00+00:00",
+                "level": "low",
+                "basis": "Apparent-temperature rule at this time",
+                "evidence": {
+                  "apparent_temperature_f": 80,
+                  "thresholds_f": [
+                    90,
+                    100,
+                    110
+                  ],
+                  "alerts": []
+                },
+                "sources": [
+                  "weather",
+                  "alerts"
+                ],
+                "coverage": "available"
+              },
+              "flooding": {
+                "time": "2026-08-12T23:00:00+00:00",
+                "level": "low",
+                "basis": "Applicable NWS alerts and preceding 24-hour precipitation; no inundation model",
+                "evidence": {
+                  "preceding_24h_precipitation_in": 0,
+                  "rain_thresholds_in": [
+                    1,
+                    2,
+                    4
+                  ],
+                  "alerts": []
+                },
+                "sources": [
+                  "weather",
+                  "alerts"
+                ],
+                "coverage": "available"
+              },
+              "soil_saturation": {
+                "time": "2026-08-12T23:00:00+00:00",
+                "level": "low",
+                "basis": "Modeled soil wetness at this time; saturation needs soil-specific porosity",
+                "evidence": {
+                  "volumetric_water_content": 0.2,
+                  "unit": "m\u00b3/m\u00b3",
+                  "depth_cm": [
+                    3,
+                    9
+                  ],
+                  "thresholds": [
+                    0.3,
+                    0.4,
+                    0.5
+                  ],
+                  "saturation_percent": null
+                },
+                "sources": [
+                  "weather"
+                ],
+                "coverage": "available"
+              },
+              "lightning": {
+                "time": "2026-08-12T23:00:00+00:00",
+                "level": "unknown",
+                "basis": "Thunderstorm model indicator is separate from unknown measured lightning",
+                "evidence": {
+                  "weather_code": 0,
+                  "alerts": []
+                },
+                "sources": [
+                  "weather",
+                  "alerts"
+                ],
+                "coverage": "partial",
+                "thunderstorm_forecast": {
+                  "availability": "available",
+                  "level": "low",
+                  "weather_code": 0,
+                  "time_scope": "predicted"
+                },
+                "measured_lightning_strikes": {
+                  "availability": "unknown",
+                  "level": "unknown",
+                  "count": null,
+                  "reason": "No measured lightning-strike feed is connected"
+                }
+              }
+            },
+            "forecast_data_complete": true,
+            "unavailable_predictions": [
+              "wildfire_spread",
+              "wildlife_sightings",
+              "measured_lightning_strikes"
+            ]
+          },
+          "ml_prediction": null
+        },
+        "current_risk": {
+          "assessment_type": "rule_based",
+          "level": "unknown",
+          "highest_known_level": "low",
+          "method": "Maximum rule-based indicator level; wildlife is informational",
+          "drivers": [],
+          "coverage_complete": false,
+          "coverage_gaps": [
+            "lightning"
+          ]
+        },
+        "overall": {
+          "assessment_type": "rule_based",
+          "level": "unknown",
+          "highest_known_level": "low",
+          "method": "Maximum rule-based indicator level; wildlife is informational",
+          "drivers": [],
+          "coverage_complete": false,
+          "coverage_gaps": [
+            "lightning"
+          ]
+        },
+        "highest_upcoming_risk": {
+          "time": "2026-08-12T23:00:00+00:00",
+          "assessment_type": "rule_based",
+          "level": "unknown",
+          "highest_known_level": "low",
+          "method": "Maximum rule-based indicator level; wildlife is informational",
+          "drivers": [],
+          "coverage_complete": false,
+          "coverage_gaps": [
+            "lightning"
+          ]
+        },
+        "ml_assessment": {
+          "assessment_type": "trained_ml",
+          "availability": "unavailable",
+          "reason": "trained_model_not_configured",
+          "model_id": null,
+          "model_version": null,
+          "score_range": [
+            0,
+            10
+          ],
+          "current_score": null,
+          "current": null,
+          "highest_upcoming": null,
+          "stale": false,
+          "current_availability": "unavailable",
+          "serialized_at": "2026-08-12T22:00:00+00:00",
+          "retained_predictions": {
+            "assessment_type": "trained_ml",
+            "availability": "unavailable",
+            "reason": "trained_model_not_configured",
+            "model_id": null,
+            "model_version": null,
+            "score_range": [
+              0,
+              10
+            ],
+            "current_score": null,
+            "current": null,
+            "hourly_scores": [],
+            "highest_upcoming": null
+          },
+          "input_generated_at": "2026-08-12T22:00:00+00:00"
+        },
+        "active_alert_status": {
+          "count": 0,
+          "stop_work": false,
+          "highest_severity": "unknown"
+        },
+        "rule_based_severity": "unknown",
+        "ranking_basis": "rule_based",
+        "coverage_status": "incomplete",
+        "assessment_status": "current",
+        "ranking_reason": "assessment_uncertain",
+        "required_safety_actions": [],
+        "stale": false,
+        "generated_at": "2026-08-12T22:00:00+00:00",
+        "sources": {
+          "weather": {
+            "status": "available",
+            "retrieved_at": "2026-08-12T22:00:00+00:00"
+          },
+          "alerts": {
+            "status": "available",
+            "retrieved_at": "2026-08-12T22:00:00+00:00"
+          },
+          "wildfires": {
+            "status": "available",
+            "retrieved_at": "2026-08-12T22:00:00+00:00"
+          },
+          "wildlife": {
+            "status": "available",
+            "retrieved_at": "2026-08-12T22:00:00+00:00"
+          }
+        },
+        "lightning_countdown": {
+          "site_id": 1,
+          "availability": "unknown",
+          "latest_strike_at": null,
+          "deadline": null,
+          "last_success_at": null,
+          "coverage_start": null,
+          "status": "unknown",
+          "countdown_remaining_seconds": null,
+          "coverage_complete": false,
+          "measured_strike_feed_configured": false,
+          "simulated": false,
+          "provider_verification": {
+            "provider": "the_weather_company",
+            "credentials_configured": false,
+            "feed_access": "not_configured",
+            "last_successful_coverage_at": null,
+            "strike_detection": "not_yet_observed",
+            "last_error": null,
+            "verification_url": "/api/sites/1/lightning/verify"
+          },
+          "server_time": "2026-10-17T21:24:56.353820+00:00",
+          "reason": "measured_lightning_not_configured"
+        },
+        "lightning_monitor": {
+          "site_id": 1,
+          "status": "pending",
+          "stale": true,
+          "measured_strike_feed_configured": false,
+          "countdown": {
+            "site_id": 1,
+            "availability": "unknown",
+            "latest_strike_at": null,
+            "deadline": null,
+            "last_success_at": null,
+            "coverage_start": null,
+            "status": "unknown",
+            "countdown_remaining_seconds": null,
+            "coverage_complete": false,
+            "measured_strike_feed_configured": false,
+            "simulated": false,
+            "provider_verification": {
+              "provider": "the_weather_company",
+              "credentials_configured": false,
+              "feed_access": "not_configured",
+              "last_successful_coverage_at": null,
+              "strike_detection": "not_yet_observed",
+              "last_error": null,
+              "verification_url": "/api/sites/1/lightning/verify"
+            },
+            "server_time": "2026-10-17T21:24:56.355064+00:00",
+            "reason": "measured_lightning_not_configured"
+          }
+        },
+        "risk_url": "/api/sites/1/risk",
+        "freshness": {
+          "stale": false,
+          "reason": null,
+          "assessment_generated_at": "2026-08-12T22:00:00+00:00",
+          "weather_observed_at": "2026-08-12T22:00:00+00:00",
+          "expires_at": "2026-08-12T22:15:00+00:00",
+          "max_age_seconds": 900,
+          "refresh_after_seconds": 300.0,
+          "refresh_due_at": "2026-08-12T22:05:00+00:00",
+          "refresh_due": false,
+          "coverage_complete": false,
+          "sources": {
+            "weather": {
+              "status": "available",
+              "retrieved_at": "2026-08-12T22:00:00+00:00",
+              "stale": false,
+              "age_seconds": 0
+            },
+            "alerts": {
+              "status": "available",
+              "retrieved_at": "2026-08-12T22:00:00+00:00",
+              "stale": false,
+              "age_seconds": 0
+            },
+            "wildfires": {
+              "status": "available",
+              "retrieved_at": "2026-08-12T22:00:00+00:00",
+              "stale": false,
+              "age_seconds": 0
+            },
+            "wildlife": {
+              "status": "available",
+              "retrieved_at": "2026-08-12T22:00:00+00:00",
+              "stale": false,
+              "age_seconds": 0
+            }
+          }
+        },
+        "river_forecast": {
+          "site_id": 1,
+          "source": "NOAA HEFS (experimental)",
+          "association": null,
+          "applicability": "context_only",
+          "site_relevance": {
+            "status": "unconfirmed",
+            "site_relevance_verified": false,
+            "reason": "documented_exposure_review_required"
+          },
+          "availability": "unavailable",
+          "reason": "forecast_location_not_associated",
+          "probability": null,
+          "probability_scale": "0-1",
+          "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+          "individual_times": [],
+          "period_maxima": [],
+          "sources": {},
+          "stale": false
+        },
+        "river_exposure": {
+          "status": "unconfirmed",
+          "site_relevance_verified": false,
+          "reason": "documented_exposure_review_required",
+          "review": null,
+          "site_inundation_probability": null,
+          "limitation": "Verified river relevance does not establish jobsite inundation or a safe river-stage threshold"
+        },
+        "rank": 1
+      }
+    ]
+  },
+  "detail_response": {
+    "site": {
+      "id": 1,
+      "name": "Demo Job Site",
+      "latitude": 25.75,
+      "longitude": -80.7,
+      "eia_plant_id": null,
+      "utility": null,
+      "county": null,
+      "state": null,
+      "plant_type": null,
+      "source": null,
+      "source_url": null,
+      "source_period": null
+    },
+    "generated_at": "2026-08-12T22:00:00+00:00",
+    "method_version": "planning-screen-v2",
+    "assessment_revision": 5,
+    "assessment_type": "rule_based",
+    "forecast_hours": 48,
+    "ml_configuration_id": "cbe5cfdf7c2118a9",
+    "status": "ready",
+    "rule_based_assessment": {
+      "assessment_type": "rule_based",
+      "current": {
+        "time": "2026-08-12T22:00:00+00:00",
+        "assessment_type": "rule_based",
+        "time_scope": "current",
+        "overall": {
+          "assessment_type": "rule_based",
+          "level": "unknown",
+          "highest_known_level": "low",
+          "method": "Maximum rule-based indicator level; wildlife is informational",
+          "drivers": [],
+          "coverage_complete": false,
+          "coverage_gaps": [
+            "lightning"
+          ]
+        },
+        "indicators": {
+          "weather": {
+            "level": "low",
+            "basis": "Wind and preceding-hour precipitation at this time",
+            "evidence": {
+              "gust_mph": 5,
+              "preceding_hour_precipitation_in": 0,
+              "gust_thresholds_mph": [
+                30,
+                45,
+                65
+              ],
+              "rain_thresholds_in": [
+                0.3,
+                0.75,
+                1.0
+              ],
+              "alerts": []
+            },
+            "sources": [
+              "weather",
+              "alerts"
+            ],
+            "coverage": "available"
+          },
+          "extreme_heat": {
+            "level": "low",
+            "basis": "Apparent-temperature rule at this time",
+            "evidence": {
+              "apparent_temperature_f": 80,
+              "thresholds_f": [
+                90,
+                100,
+                110
+              ],
+              "alerts": []
+            },
+            "sources": [
+              "weather",
+              "alerts"
+            ],
+            "coverage": "available"
+          },
+          "flooding": {
+            "level": "low",
+            "basis": "Applicable NWS alerts and preceding 24-hour precipitation; no inundation model",
+            "evidence": {
+              "preceding_24h_precipitation_in": 0,
+              "rain_thresholds_in": [
+                1,
+                2,
+                4
+              ],
+              "alerts": []
+            },
+            "sources": [
+              "weather",
+              "alerts"
+            ],
+            "coverage": "available"
+          },
+          "soil_saturation": {
+            "level": "low",
+            "basis": "Modeled soil wetness at this time; saturation needs soil-specific porosity",
+            "evidence": {
+              "volumetric_water_content": 0.2,
+              "unit": "m\u00b3/m\u00b3",
+              "depth_cm": [
+                3,
+                9
+              ],
+              "thresholds": [
+                0.3,
+                0.4,
+                0.5
+              ],
+              "saturation_percent": null
+            },
+            "sources": [
+              "weather"
+            ],
+            "coverage": "available"
+          },
+          "lightning": {
+            "level": "unknown",
+            "basis": "Thunderstorm model indicator is separate from unknown measured lightning",
+            "evidence": {
+              "weather_code": 0,
+              "alerts": []
+            },
+            "sources": [
+              "weather",
+              "alerts"
+            ],
+            "coverage": "partial",
+            "thunderstorm_forecast": {
+              "availability": "available",
+              "level": "low",
+              "weather_code": 0,
+              "time_scope": "current_model_estimate"
+            },
+            "measured_lightning_strikes": {
+              "availability": "unknown",
+              "level": "unknown",
+              "count": null,
+              "reason": "No measured lightning-strike feed is connected"
+            }
+          },
+          "wildfire": {
+            "level": "low",
+            "basis": "Currently reported wildfire points and applicable NWS fire alerts; not fire perimeters",
+            "evidence": {
+              "nearby_events": [],
+              "search_radius_km": 50,
+              "high_within_km": 10,
+              "watch_within_km": 25,
+              "lookback_days": 14,
+              "alerts": []
+            },
+            "sources": [
+              "wildfires",
+              "alerts"
+            ],
+            "coverage": "available"
+          },
+          "wildlife_sightings": {
+            "level": "info",
+            "basis": "Recent sightings provide ecological context, not a danger rating",
+            "evidence": {
+              "total_results": 0
+            },
+            "sources": [
+              "wildlife"
+            ],
+            "coverage": "available"
+          }
+        },
+        "weather_observed_at": "2026-08-12T22:00:00+00:00",
+        "alerts_evaluated_at": "2026-08-12T22:00:00+00:00",
+        "rainfall_as_of": "2026-08-12T22:00:00+00:00"
+      },
+      "hourly": [
+        {
+          "time": "2026-08-12T23:00:00+00:00",
+          "assessment_type": "rule_based",
+          "time_scope": "predicted",
+          "overall": {
+            "assessment_type": "rule_based",
+            "level": "unknown",
+            "highest_known_level": "low",
+            "method": "Maximum rule-based indicator level; wildlife is informational",
+            "drivers": [],
+            "coverage_complete": false,
+            "coverage_gaps": [
+              "lightning"
+            ]
+          },
+          "indicators": {
+            "weather": {
+              "level": "low",
+              "basis": "Wind and preceding-hour precipitation at this time",
+              "evidence": {
+                "gust_mph": 5,
+                "preceding_hour_precipitation_in": 0,
+                "gust_thresholds_mph": [
+                  30,
+                  45,
+                  65
+                ],
+                "rain_thresholds_in": [
+                  0.3,
+                  0.75,
+                  1.0
+                ],
+                "alerts": []
+              },
+              "sources": [
+                "weather",
+                "alerts"
+              ],
+              "coverage": "available"
+            },
+            "extreme_heat": {
+              "level": "low",
+              "basis": "Apparent-temperature rule at this time",
+              "evidence": {
+                "apparent_temperature_f": 80,
+                "thresholds_f": [
+                  90,
+                  100,
+                  110
+                ],
+                "alerts": []
+              },
+              "sources": [
+                "weather",
+                "alerts"
+              ],
+              "coverage": "available"
+            },
+            "flooding": {
+              "level": "low",
+              "basis": "Applicable NWS alerts and preceding 24-hour precipitation; no inundation model",
+              "evidence": {
+                "preceding_24h_precipitation_in": 0,
+                "rain_thresholds_in": [
+                  1,
+                  2,
+                  4
+                ],
+                "alerts": []
+              },
+              "sources": [
+                "weather",
+                "alerts"
+              ],
+              "coverage": "available"
+            },
+            "soil_saturation": {
+              "level": "low",
+              "basis": "Modeled soil wetness at this time; saturation needs soil-specific porosity",
+              "evidence": {
+                "volumetric_water_content": 0.2,
+                "unit": "m\u00b3/m\u00b3",
+                "depth_cm": [
+                  3,
+                  9
+                ],
+                "thresholds": [
+                  0.3,
+                  0.4,
+                  0.5
+                ],
+                "saturation_percent": null
+              },
+              "sources": [
+                "weather"
+              ],
+              "coverage": "available"
+            },
+            "lightning": {
+              "level": "unknown",
+              "basis": "Thunderstorm model indicator is separate from unknown measured lightning",
+              "evidence": {
+                "weather_code": 0,
+                "alerts": []
+              },
+              "sources": [
+                "weather",
+                "alerts"
+              ],
+              "coverage": "partial",
+              "thunderstorm_forecast": {
+                "availability": "available",
+                "level": "low",
+                "weather_code": 0,
+                "time_scope": "predicted"
+              },
+              "measured_lightning_strikes": {
+                "availability": "unknown",
+                "level": "unknown",
+                "count": null,
+                "reason": "No measured lightning-strike feed is connected"
+              }
+            }
+          }
+        },
+        {
+          "time": "2026-08-13T00:00:00+00:00",
+          "assessment_type": "rule_based",
+          "time_scope": "predicted",
+          "overall": {
+            "assessment_type": "rule_based",
+            "level": "unknown",
+            "highest_known_level": "low",
+            "method": "Maximum rule-based indicator level; wildlife is informational",
+            "drivers": [],
+            "coverage_complete": false,
+            "coverage_gaps": [
+              "lightning"
+            ]
+          },
+          "indicators": {
+            "weather": {
+              "level": "low",
+              "basis": "Wind and preceding-hour precipitation at this time",
+              "evidence": {
+                "gust_mph": 5,
+                "preceding_hour_precipitation_in": 0,
+                "gust_thresholds_mph": [
+                  30,
+                  45,
+                  65
+                ],
+                "rain_thresholds_in": [
+                  0.3,
+                  0.75,
+                  1.0
+                ],
+                "alerts": []
+              },
+              "sources": [
+                "weather",
+                "alerts"
+              ],
+              "coverage": "available"
+            },
+            "extreme_heat": {
+              "level": "low",
+              "basis": "Apparent-temperature rule at this time",
+              "evidence": {
+                "apparent_temperature_f": 80,
+                "thresholds_f": [
+                  90,
+                  100,
+                  110
+                ],
+                "alerts": []
+              },
+              "sources": [
+                "weather",
+                "alerts"
+              ],
+              "coverage": "available"
+            },
+            "flooding": {
+              "level": "low",
+              "basis": "Applicable NWS alerts and preceding 24-hour precipitation; no inundation model",
+              "evidence": {
+                "preceding_24h_precipitation_in": 0,
+                "rain_thresholds_in": [
+                  1,
+                  2,
+                  4
+                ],
+                "alerts": []
+              },
+              "sources": [
+                "weather",
+                "alerts"
+              ],
+              "coverage": "available"
+            },
+            "soil_saturation": {
+              "level": "low",
+              "basis": "Modeled soil wetness at this time; saturation needs soil-specific porosity",
+              "evidence": {
+                "volumetric_water_content": 0.2,
+                "unit": "m\u00b3/m\u00b3",
+                "depth_cm": [
+                  3,
+                  9
+                ],
+                "thresholds": [
+                  0.3,
+                  0.4,
+                  0.5
+                ],
+                "saturation_percent": null
+              },
+              "sources": [
+                "weather"
+              ],
+              "coverage": "available"
+            },
+            "lightning": {
+              "level": "unknown",
+              "basis": "Thunderstorm model indicator is separate from unknown measured lightning",
+              "evidence": {
+                "weather_code": 0,
+                "alerts": []
+              },
+              "sources": [
+                "weather",
+                "alerts"
+              ],
+              "coverage": "partial",
+              "thunderstorm_forecast": {
+                "availability": "available",
+                "level": "low",
+                "weather_code": 0,
+                "time_scope": "predicted"
+              },
+              "measured_lightning_strikes": {
+                "availability": "unknown",
+                "level": "unknown",
+                "count": null,
+                "reason": "No measured lightning-strike feed is connected"
+              }
+            }
+          }
+        }
+      ],
+      "highest_upcoming": {
+        "assessment_type": "rule_based",
+        "time_scope": "upcoming",
+        "time": "2026-08-12T23:00:00+00:00",
+        "overall": {
+          "assessment_type": "rule_based",
+          "level": "unknown",
+          "highest_known_level": "low",
+          "method": "Maximum rule-based indicator level; wildlife is informational",
+          "drivers": [],
+          "coverage_complete": false,
+          "coverage_gaps": [
+            "lightning"
+          ]
+        },
+        "indicators": {
+          "weather": {
+            "time": "2026-08-12T23:00:00+00:00",
+            "level": "low",
+            "basis": "Wind and preceding-hour precipitation at this time",
+            "evidence": {
+              "gust_mph": 5,
+              "preceding_hour_precipitation_in": 0,
+              "gust_thresholds_mph": [
+                30,
+                45,
+                65
+              ],
+              "rain_thresholds_in": [
+                0.3,
+                0.75,
+                1.0
+              ],
+              "alerts": []
+            },
+            "sources": [
+              "weather",
+              "alerts"
+            ],
+            "coverage": "available"
+          },
+          "extreme_heat": {
+            "time": "2026-08-12T23:00:00+00:00",
+            "level": "low",
+            "basis": "Apparent-temperature rule at this time",
+            "evidence": {
+              "apparent_temperature_f": 80,
+              "thresholds_f": [
+                90,
+                100,
+                110
+              ],
+              "alerts": []
+            },
+            "sources": [
+              "weather",
+              "alerts"
+            ],
+            "coverage": "available"
+          },
+          "flooding": {
+            "time": "2026-08-12T23:00:00+00:00",
+            "level": "low",
+            "basis": "Applicable NWS alerts and preceding 24-hour precipitation; no inundation model",
+            "evidence": {
+              "preceding_24h_precipitation_in": 0,
+              "rain_thresholds_in": [
+                1,
+                2,
+                4
+              ],
+              "alerts": []
+            },
+            "sources": [
+              "weather",
+              "alerts"
+            ],
+            "coverage": "available"
+          },
+          "soil_saturation": {
+            "time": "2026-08-12T23:00:00+00:00",
+            "level": "low",
+            "basis": "Modeled soil wetness at this time; saturation needs soil-specific porosity",
+            "evidence": {
+              "volumetric_water_content": 0.2,
+              "unit": "m\u00b3/m\u00b3",
+              "depth_cm": [
+                3,
+                9
+              ],
+              "thresholds": [
+                0.3,
+                0.4,
+                0.5
+              ],
+              "saturation_percent": null
+            },
+            "sources": [
+              "weather"
+            ],
+            "coverage": "available"
+          },
+          "lightning": {
+            "time": "2026-08-12T23:00:00+00:00",
+            "level": "unknown",
+            "basis": "Thunderstorm model indicator is separate from unknown measured lightning",
+            "evidence": {
+              "weather_code": 0,
+              "alerts": []
+            },
+            "sources": [
+              "weather",
+              "alerts"
+            ],
+            "coverage": "partial",
+            "thunderstorm_forecast": {
+              "availability": "available",
+              "level": "low",
+              "weather_code": 0,
+              "time_scope": "predicted"
+            },
+            "measured_lightning_strikes": {
+              "availability": "unknown",
+              "level": "unknown",
+              "count": null,
+              "reason": "No measured lightning-strike feed is connected"
+            }
+          }
+        },
+        "forecast_data_complete": true,
+        "unavailable_predictions": [
+          "wildfire_spread",
+          "wildlife_sightings",
+          "measured_lightning_strikes"
+        ]
+      }
+    },
+    "conditions": {
+      "timezone": "America/New_York",
+      "utc_offset_seconds": 0,
+      "current": {
+        "time": "2026-08-12T22:00:00+00:00",
+        "weather_code": 0,
+        "apparent_temperature": 80,
+        "wind_gusts_10m": 5,
+        "soil_moisture_3_to_9cm": 0.2
+      },
+      "recent_hourly": {
+        "time": [
+          "2026-08-10T00:00:00+00:00",
+          "2026-08-10T01:00:00+00:00"
+        ],
+        "precipitation": [
+          0,
+          0
+        ]
+      },
+      "hourly": {
+        "time": [
+          "2026-08-12T23:00:00+00:00",
+          "2026-08-13T00:00:00+00:00"
+        ],
+        "precipitation": [
+          0,
+          0
+        ],
+        "apparent_temperature": [
+          80,
+          80
+        ],
+        "weather_code": [
+          0,
+          0
+        ],
+        "wind_gusts_10m": [
+          5,
+          5
+        ],
+        "soil_moisture_3_to_9cm": [
+          0.2,
+          0.2
+        ]
+      }
+    },
+    "hazard_evidence": {
+      "weather": {
+        "level": "low",
+        "basis": "Wind and preceding-hour precipitation at this time",
+        "evidence": {
+          "gust_mph": 5,
+          "preceding_hour_precipitation_in": 0,
+          "gust_thresholds_mph": [
+            30,
+            45,
+            65
+          ],
+          "rain_thresholds_in": [
+            0.3,
+            0.75,
+            1.0
+          ],
+          "alerts": []
+        },
+        "sources": [
+          "weather",
+          "alerts"
+        ],
+        "coverage": "available"
+      },
+      "extreme_heat": {
+        "level": "low",
+        "basis": "Apparent-temperature rule at this time",
+        "evidence": {
+          "apparent_temperature_f": 80,
+          "thresholds_f": [
+            90,
+            100,
+            110
+          ],
+          "alerts": []
+        },
+        "sources": [
+          "weather",
+          "alerts"
+        ],
+        "coverage": "available"
+      },
+      "flooding": {
+        "level": "low",
+        "basis": "Applicable NWS alerts and preceding 24-hour precipitation; no inundation model",
+        "evidence": {
+          "preceding_24h_precipitation_in": 0,
+          "rain_thresholds_in": [
+            1,
+            2,
+            4
+          ],
+          "alerts": []
+        },
+        "sources": [
+          "weather",
+          "alerts"
+        ],
+        "coverage": "available"
+      },
+      "soil_saturation": {
+        "level": "low",
+        "basis": "Modeled soil wetness at this time; saturation needs soil-specific porosity",
+        "evidence": {
+          "volumetric_water_content": 0.2,
+          "unit": "m\u00b3/m\u00b3",
+          "depth_cm": [
+            3,
+            9
+          ],
+          "thresholds": [
+            0.3,
+            0.4,
+            0.5
+          ],
+          "saturation_percent": null
+        },
+        "sources": [
+          "weather"
+        ],
+        "coverage": "available"
+      },
+      "lightning": {
+        "level": "unknown",
+        "basis": "Thunderstorm model indicator is separate from unknown measured lightning",
+        "evidence": {
+          "weather_code": 0,
+          "alerts": []
+        },
+        "sources": [
+          "weather",
+          "alerts"
+        ],
+        "coverage": "partial",
+        "thunderstorm_forecast": {
+          "availability": "available",
+          "level": "low",
+          "weather_code": 0,
+          "time_scope": "current_model_estimate"
+        },
+        "measured_lightning_strikes": {
+          "availability": "unknown",
+          "level": "unknown",
+          "count": null,
+          "reason": "No measured lightning-strike feed is connected"
+        }
+      },
+      "wildfire": {
+        "level": "low",
+        "basis": "Currently reported wildfire points and applicable NWS fire alerts; not fire perimeters",
+        "evidence": {
+          "nearby_events": [],
+          "search_radius_km": 50,
+          "high_within_km": 10,
+          "watch_within_km": 25,
+          "lookback_days": 14,
+          "alerts": []
+        },
+        "sources": [
+          "wildfires",
+          "alerts"
+        ],
+        "coverage": "available"
+      },
+      "wildlife_sightings": {
+        "level": "info",
+        "basis": "Recent sightings provide ecological context, not a danger rating",
+        "evidence": {
+          "total_results": 0
+        },
+        "sources": [
+          "wildlife"
+        ],
+        "coverage": "available"
+      }
+    },
+    "ml_predictions": {
+      "assessment_type": "trained_ml",
+      "availability": "unavailable",
+      "reason": "trained_model_not_configured",
+      "model_id": null,
+      "model_version": null,
+      "score_range": [
+        0,
+        10
+      ],
+      "current_score": null,
+      "current": null,
+      "hourly_scores": [],
+      "highest_upcoming": null,
+      "stale": false,
+      "current_availability": "unavailable",
+      "serialized_at": "2026-08-12T22:00:00+00:00",
+      "retained_predictions": {
+        "assessment_type": "trained_ml",
+        "availability": "unavailable",
+        "reason": "trained_model_not_configured",
+        "model_id": null,
+        "model_version": null,
+        "score_range": [
+          0,
+          10
+        ],
+        "current_score": null,
+        "current": null,
+        "hourly_scores": [],
+        "highest_upcoming": null
+      },
+      "input_generated_at": "2026-08-12T22:00:00+00:00"
+    },
+    "required_safety_actions": [],
+    "alerts": [],
+    "active_crew_reports": [],
+    "timezone": {
+      "site_id": 1,
+      "availability": "unknown",
+      "timezone": null,
+      "source": null,
+      "updated_at": null,
+      "reason": "Timezone not yet configured or discovered from weather data"
+    },
+    "lightning_monitor": {
+      "site_id": 1,
+      "status": "pending",
+      "stale": true,
+      "measured_strike_feed_configured": false,
+      "countdown": {
+        "site_id": 1,
+        "availability": "unknown",
+        "latest_strike_at": null,
+        "deadline": null,
+        "last_success_at": null,
+        "coverage_start": null,
+        "status": "unknown",
+        "countdown_remaining_seconds": null,
+        "coverage_complete": false,
+        "measured_strike_feed_configured": false,
+        "simulated": false,
+        "provider_verification": {
+          "provider": "the_weather_company",
+          "credentials_configured": false,
+          "feed_access": "not_configured",
+          "last_successful_coverage_at": null,
+          "strike_detection": "not_yet_observed",
+          "last_error": null,
+          "verification_url": "/api/sites/1/lightning/verify"
+        },
+        "server_time": "2026-10-17T21:24:56.361891+00:00",
+        "reason": "measured_lightning_not_configured"
+      }
+    },
+    "lightning_countdown": {
+      "site_id": 1,
+      "availability": "unknown",
+      "latest_strike_at": null,
+      "deadline": null,
+      "last_success_at": null,
+      "coverage_start": null,
+      "status": "unknown",
+      "countdown_remaining_seconds": null,
+      "coverage_complete": false,
+      "measured_strike_feed_configured": false,
+      "simulated": false,
+      "provider_verification": {
+        "provider": "the_weather_company",
+        "credentials_configured": false,
+        "feed_access": "not_configured",
+        "last_successful_coverage_at": null,
+        "strike_detection": "not_yet_observed",
+        "last_error": null,
+        "verification_url": "/api/sites/1/lightning/verify"
+      },
+      "server_time": "2026-10-17T21:24:56.362582+00:00",
+      "reason": "measured_lightning_not_configured"
+    },
+    "freshness": {
+      "stale": false,
+      "reason": null,
+      "assessment_generated_at": "2026-08-12T22:00:00+00:00",
+      "weather_observed_at": "2026-08-12T22:00:00+00:00",
+      "expires_at": "2026-08-12T22:15:00+00:00",
+      "max_age_seconds": 900,
+      "refresh_after_seconds": 300.0,
+      "refresh_due_at": "2026-08-12T22:05:00+00:00",
+      "refresh_due": false,
+      "coverage_complete": false,
+      "sources": {
+        "weather": {
+          "status": "available",
+          "retrieved_at": "2026-08-12T22:00:00+00:00",
+          "stale": false,
+          "age_seconds": 0
+        },
+        "alerts": {
+          "status": "available",
+          "retrieved_at": "2026-08-12T22:00:00+00:00",
+          "stale": false,
+          "age_seconds": 0
+        },
+        "wildfires": {
+          "status": "available",
+          "retrieved_at": "2026-08-12T22:00:00+00:00",
+          "stale": false,
+          "age_seconds": 0
+        },
+        "wildlife": {
+          "status": "available",
+          "retrieved_at": "2026-08-12T22:00:00+00:00",
+          "stale": false,
+          "age_seconds": 0
+        }
+      }
+    },
+    "river_forecast": {
+      "site_id": 1,
+      "source": "NOAA HEFS (experimental)",
+      "association": null,
+      "applicability": "context_only",
+      "site_relevance": {
+        "status": "unconfirmed",
+        "site_relevance_verified": false,
+        "reason": "documented_exposure_review_required"
+      },
+      "availability": "unavailable",
+      "reason": "forecast_location_not_associated",
+      "probability": null,
+      "probability_scale": "0-1",
+      "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+      "individual_times": [],
+      "period_maxima": [],
+      "sources": {},
+      "stale": false
+    },
+    "river_exposure": {
+      "status": "unconfirmed",
+      "site_relevance_verified": false,
+      "reason": "documented_exposure_review_required",
+      "review": null,
+      "site_inundation_probability": null,
+      "limitation": "Verified river relevance does not establish jobsite inundation or a safe river-stage threshold"
+    },
+    "notifications_url": "/api/sites/1/events"
+  },
+  "excerpt_notes": "Legacy duplicate fields omitted; hourly arrays show the first two entries for readability."
+}

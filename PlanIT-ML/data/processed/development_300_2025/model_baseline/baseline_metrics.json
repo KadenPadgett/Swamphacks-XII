@@ -1,0 +1,73 @@
+{
+  "definition": "NEW severe thunderstorm polygon warning within next 6h",
+  "train_random_subsample_fraction": 0.35,
+  "features": [
+    "distance_km",
+    "precip_trace_reported",
+    "tmpf",
+    "dwpf",
+    "relh",
+    "drct",
+    "sknt",
+    "gust",
+    "p01i",
+    "alti",
+    "mslp",
+    "vsby",
+    "has_station_report",
+    "observation_age_minutes",
+    "gust_reported",
+    "mslp_reported",
+    "alti_reported",
+    "mslp_change_3h",
+    "tmpf_change_3h",
+    "relh_change_3h",
+    "sknt_change_3h",
+    "hour_sin",
+    "hour_cos",
+    "month_sin",
+    "month_cos"
+  ],
+  "train_prevalence_sample": 0.0034014328535895747,
+  "splits": {
+    "validation": {
+      "rows": 437400,
+      "positive_site_hours": 398,
+      "site_hour_prevalence": 0.0009099222679469593,
+      "brier": 0.0009068450764014987,
+      "baseline_brier_using_train_prevalence": 0.0009153019344116228,
+      "mean_predicted_probability": 0.0017230908474452535,
+      "average_precision": 0.011510732878380508,
+      "no_skill_average_precision": 0.0009099222679469593,
+      "roc_auc": 0.9118522225867944,
+      "at_validation_threshold": {
+        "tp_site_hours": 47,
+        "fp_site_hours": 1859,
+        "fn_site_hours": 351,
+        "precision": 0.02465897166841553,
+        "recall": 0.11809045226130653,
+        "alerts_per_1000_site_hours": 4.357567443987197
+      }
+    },
+    "test": {
+      "rows": 437400,
+      "positive_site_hours": 260,
+      "site_hour_prevalence": 0.000594421582075903,
+      "brier": 0.0005891397783762436,
+      "baseline_brier_using_train_prevalence": 0.0006019475573370704,
+      "mean_predicted_probability": 0.0005508445492483364,
+      "average_precision": 0.016702094602380115,
+      "no_skill_average_precision": 0.000594421582075903,
+      "roc_auc": 0.9318581399727601,
+      "at_validation_threshold": {
+        "tp_site_hours": 15,
+        "fp_site_hours": 496,
+        "fn_site_hours": 245,
+        "precision": 0.029354207436399216,
+        "recall": 0.057692307692307696,
+        "alerts_per_1000_site_hours": 1.1682670324645634
+      }
+    }
+  },
+  "validation_f1_selected_threshold": 0.026494361631076192
+}

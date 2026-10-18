@@ -1,0 +1,33 @@
+PlanIT | baseline diagnostics (NOT operational)
+Fixed threshold from validation: 0.02649436
+No new model fit, no test-set threshold tuning.
+Distinct issuance at one plant is a site-warning event, not a distinct storm.
+Event detected = >=1 positive model flag in the preceding 6-hour prediction window.
+Alert episode = model-positive site-hours no more than 6 hours apart.
+
+VALIDATION:
+  Site-hours: 437,400; positives: 398
+  Average precision: 0.011511
+  Plants with >=1 positive label: 54
+  Distinct site-warning issuance events reachable in split: 83
+  Site-warning issuance events detected: 25/83 (30.1%)
+  Predicted alert episodes: 712
+  Episodes containing >=1 labeled-positive hour: 19
+
+TEST:
+  Site-hours: 437,400; positives: 260
+  Average precision: 0.016702
+  Plants with >=1 positive label: 37
+  Distinct site-warning issuance events reachable in split: 49
+  Site-warning issuance events detected: 13/49 (26.5%)
+  Predicted alert episodes: 199
+  Episodes containing >=1 labeled-positive hour: 11
+
+LIMITATIONS:
+- This quantifies plant-warning issuance opportunities, not unique meteorological storms.
+- Episodes are heuristic and may merge multiple meteorological events.
+- Missing archived warnings can bias labels and calculated false-positive rates.
+- Repeated site-hours are correlated; this is not independent-event statistical validation.
+- Temporal splits still share power plants and stations; geographic holdout needed.
+- Archive METAR availability is based on an assumed 60-minute delay, not actual publication timestamps.
+- No results here authorize or determine crew dispatch/stop-work decisions.

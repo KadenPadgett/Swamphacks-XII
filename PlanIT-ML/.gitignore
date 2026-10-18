@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.idea/
+.vscode/
+.pytest_cache/
+.ipynb_checkpoints/
+*.log
+*.sqlite
+*.sqlite3
+*.db
+.env
+.env.*
+!requirements.txt
+prediction_preview.csv
+.DS_Store
+Thumbs.db
+# Raw historical source caches are intentionally excluded from this portable package.
+data/raw/

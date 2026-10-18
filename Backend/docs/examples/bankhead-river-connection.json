@@ -1,0 +1,48 @@
+{
+  "example_only": true,
+  "scenario": "documented-bankhead-connection",
+  "provenance": "Actual EIA plant and cited operator/USACE/NOAA evidence; generated in a temporary database. No weather, flood probabilities or live strikes are simulated.",
+  "site": {
+    "id": 3,
+    "name": "Bankhead Dam",
+    "latitude": 33.458665,
+    "longitude": -87.35682,
+    "eia_plant_id": 2,
+    "utility": "Alabama Power Co",
+    "county": "Tuscaloosa",
+    "state": "AL",
+    "plant_type": "Conventional Hydroelectric",
+    "source": "EIA-860M",
+    "source_url": "https://www.eia.gov/electricity/data/eia860m/xls/august_generator2026.xlsx",
+    "source_period": "August 2026"
+  },
+  "river_exposure": {
+    "status": "verified",
+    "site_relevance_verified": true,
+    "reason": null,
+    "review": {
+      "decision": "confirmed",
+      "river_name": "Black Warrior River",
+      "evidence_type": "official_facility_connection",
+      "evidence": "Alabama Power identifies its Bankhead hydroelectric plant as located on the Black Warrior River. Its Shorelines project page identifies the generating plant at Bankhead Lock and Dam. USACE independently identifies the river monitoring location at the same lock and dam. NOAA's live NWPS BLDA1 metadata, checked 2026-10-17, identifies Black Warrior River at Bankhead Lock and Dam. This establishes facility-to-river relevance, rather than relying on proximity. It does not establish a work-area floodplain boundary, inundation probability, stage-to-site damage threshold, or access-route safety.",
+      "source_urls": [
+        "https://www.alabamapower.com/company/about-us/generating-plants.html",
+        "https://apcshorelines.com/lake/bankhead/",
+        "https://water.sam.usace.army.mil/bankhead.htm",
+        "https://api.water.noaa.gov/nwps/v1/gauges/BLDA1"
+      ],
+      "reviewed_by": "PlanIT official-source document review, 2026-10-17",
+      "record_id": "eia-2-bankhead-black-warrior-v1",
+      "source_checked_date": "2026-10-17",
+      "hefs_limitation": "BLDA1 supplies QINE forecasts but direct flow thresholds were absent in the verified response; usable HEFS threshold probabilities remain unavailable.",
+      "id": 1,
+      "reviewed_at": "2026-10-17T21:00:00+00:00",
+      "site_latitude": 33.458665,
+      "site_longitude": -87.35682,
+      "gauge_id": "BLDA1"
+    },
+    "site_inundation_probability": null,
+    "limitation": "Verified river relevance does not establish jobsite inundation or a safe river-stage threshold"
+  },
+  "hefs_limitation": "BLDA1 direct flow thresholds missing; this documents river connection only, not an available HEFS probability."
+}

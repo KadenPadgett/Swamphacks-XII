@@ -1,0 +1,614 @@
+{
+  "source": "EIA-860M",
+  "source_url": "https://www.eia.gov/electricity/data/eia860m/xls/august_generator2026.xlsx",
+  "source_page": "https://www.eia.gov/electricity/data/eia860m/",
+  "source_period": "August 2026",
+  "sheet": "Operating",
+  "retrieved_at": "2026-10-17T05:49:40.111527+00:00",
+  "workbook_sha256": "b4b70abb4c217e8e2658c3bde7608a3d530e86a81279ccc572ced82a200e9f1c",
+  "selection": "Round-robin state/territory, ascending EIA plant ID within each state",
+  "distinct_eligible_plants": 14699,
+  "count": 60,
+  "plants": [
+    {
+      "eia_plant_id": 1,
+      "name": "Sand Point",
+      "latitude": 55.339722,
+      "longitude": -160.4972,
+      "utility": "Sand Point Generating, LLC",
+      "county": "Aleutians East",
+      "state": "AK",
+      "plant_type": "Onshore Wind Turbine; Petroleum Liquids"
+    },
+    {
+      "eia_plant_id": 2,
+      "name": "Bankhead Dam",
+      "latitude": 33.458665,
+      "longitude": -87.35682,
+      "utility": "Alabama Power Co",
+      "county": "Tuscaloosa",
+      "state": "AL",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 166,
+      "name": "Carpenter",
+      "latitude": 34.4425,
+      "longitude": -93.0262,
+      "utility": "Entergy Arkansas LLC",
+      "county": "Garland",
+      "state": "AR",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 100,
+      "name": "South Consolidated",
+      "latitude": 33.466477,
+      "longitude": -111.7811,
+      "utility": "Salt River Project",
+      "county": "Maricopa",
+      "state": "AZ",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 34,
+      "name": "Rollins",
+      "latitude": 39.134259,
+      "longitude": -120.9533,
+      "utility": "Nevada Irrigation District",
+      "county": "Placer",
+      "state": "CA",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 464,
+      "name": "Alamosa",
+      "latitude": 37.4594,
+      "longitude": -105.8947,
+      "utility": "Public Service Co of Colorado",
+      "county": "Alamosa",
+      "state": "CO",
+      "plant_type": "Natural Gas Fired Combustion Turbine"
+    },
+    {
+      "eia_plant_id": 539,
+      "name": "Rocky River (CT)",
+      "latitude": 41.5826,
+      "longitude": -73.4349,
+      "utility": "FirstLight Power Resources Services LLC",
+      "county": "Litchfield",
+      "state": "CT",
+      "plant_type": "Hydroelectric Pumped Storage"
+    },
+    {
+      "eia_plant_id": 57788,
+      "name": "US GSA Heating and Transmission",
+      "latitude": 38.885709,
+      "longitude": -77.02837,
+      "utility": "US GSA Heating and Transmission",
+      "county": "District of Columbia",
+      "state": "DC",
+      "plant_type": "Natural Gas Fired Combustion Turbine"
+    },
+    {
+      "eia_plant_id": 591,
+      "name": "Christiana",
+      "latitude": 39.7302,
+      "longitude": -75.5371,
+      "utility": "Calpine Mid-Atlantic Generation LLC",
+      "county": "New Castle",
+      "state": "DE",
+      "plant_type": "Petroleum Liquids"
+    },
+    {
+      "eia_plant_id": 136,
+      "name": "Seminole (FL)",
+      "latitude": 29.733056,
+      "longitude": -81.63278,
+      "utility": "Seminole Electric Cooperative Inc",
+      "county": "Putnam",
+      "state": "FL",
+      "plant_type": "Conventional Steam Coal; Natural Gas Fired Combined Cycle"
+    },
+    {
+      "eia_plant_id": 649,
+      "name": "Vogtle",
+      "latitude": 33.1427,
+      "longitude": -81.7625,
+      "utility": "Georgia Power Co",
+      "county": "Burke",
+      "state": "GA",
+      "plant_type": "Nuclear"
+    },
+    {
+      "eia_plant_id": 765,
+      "name": "Kahe",
+      "latitude": 21.356395,
+      "longitude": -158.1289,
+      "utility": "Hawaiian Electric Co Inc",
+      "county": "Honolulu",
+      "state": "HI",
+      "plant_type": "Petroleum Liquids"
+    },
+    {
+      "eia_plant_id": 1067,
+      "name": "Iowa Hydro LLC",
+      "latitude": 42.069987,
+      "longitude": -90.69766,
+      "utility": "Zero6 Energy Hydro",
+      "county": "Jackson",
+      "state": "IA",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 790,
+      "name": "Gem State",
+      "latitude": 43.420221,
+      "longitude": -112.1019,
+      "utility": "City of Idaho Falls - (ID)",
+      "county": "Bonneville",
+      "state": "ID",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 204,
+      "name": "Clinton Power Station",
+      "latitude": 40.1719,
+      "longitude": -88.8339,
+      "utility": "Constellation Nuclear",
+      "county": "DeWitt",
+      "state": "IL",
+      "plant_type": "Nuclear"
+    },
+    {
+      "eia_plant_id": 983,
+      "name": "Clifty Creek",
+      "latitude": 38.7378,
+      "longitude": -85.4206,
+      "utility": "Indiana-Kentucky Electric Corp",
+      "county": "Jefferson",
+      "state": "IN",
+      "plant_type": "Conventional Steam Coal"
+    },
+    {
+      "eia_plant_id": 108,
+      "name": "Holcomb",
+      "latitude": 37.9308,
+      "longitude": -100.9725,
+      "utility": "Sunflower Electric Power Corp",
+      "county": "Finney",
+      "state": "KS",
+      "plant_type": "Conventional Steam Coal"
+    },
+    {
+      "eia_plant_id": 54,
+      "name": "J K Smith",
+      "latitude": 37.8833,
+      "longitude": -84.1017,
+      "utility": "East Kentucky Power Coop, Inc",
+      "county": "Clark",
+      "state": "KY",
+      "plant_type": "Natural Gas Fired Combustion Turbine"
+    },
+    {
+      "eia_plant_id": 1391,
+      "name": "Louisiana 1",
+      "latitude": 30.4922,
+      "longitude": -91.1864,
+      "utility": "Entergy Louisiana LLC",
+      "county": "East Baton Rouge",
+      "state": "LA",
+      "plant_type": "Natural Gas Fired Combustion Turbine; Other Gases"
+    },
+    {
+      "eia_plant_id": 547,
+      "name": "Northfield Mountain",
+      "latitude": 42.610683,
+      "longitude": -72.47164,
+      "utility": "FirstLight Power Resources, Inc. - MA",
+      "county": "Franklin",
+      "state": "MA",
+      "plant_type": "Hydroelectric Pumped Storage"
+    },
+    {
+      "eia_plant_id": 602,
+      "name": "Brandon Shores",
+      "latitude": 39.182073,
+      "longitude": -76.53715,
+      "utility": "Brandon Shores LLC",
+      "county": "Anne Arundel",
+      "state": "MD",
+      "plant_type": "Conventional Steam Coal"
+    },
+    {
+      "eia_plant_id": 805,
+      "name": "Charles E Monty",
+      "latitude": 44.099461,
+      "longitude": -70.22085,
+      "utility": "Brookfield White Pine Hydro LLC",
+      "county": "Androscoggin",
+      "state": "ME",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 1693,
+      "name": "Alcona",
+      "latitude": 44.561961,
+      "longitude": -83.80451,
+      "utility": "Consumers Energy Co - (MI)",
+      "county": "Alcona",
+      "state": "MI",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 30,
+      "name": "Madelia",
+      "latitude": 44.0501,
+      "longitude": -94.4178,
+      "utility": "City of Madelia - (MN)",
+      "county": "WATONWAN",
+      "state": "MN",
+      "plant_type": "Petroleum Liquids"
+    },
+    {
+      "eia_plant_id": 698,
+      "name": "Trenton North",
+      "latitude": 40.0786,
+      "longitude": -93.635,
+      "utility": "Trenton Municipal Utilities - (MO)",
+      "county": "Grundy",
+      "state": "MO",
+      "plant_type": "Petroleum Liquids"
+    },
+    {
+      "eia_plant_id": 2047,
+      "name": "Chevron Oil",
+      "latitude": 30.34,
+      "longitude": -88.4919,
+      "utility": "Mississippi Power Co",
+      "county": "Jackson",
+      "state": "MS",
+      "plant_type": "Natural Gas Fired Combustion Turbine"
+    },
+    {
+      "eia_plant_id": 2176,
+      "name": "Glendive GT",
+      "latitude": 47.0539,
+      "longitude": -104.74,
+      "utility": "Montana-Dakota Utilities Co",
+      "county": "Dawson",
+      "state": "MT",
+      "plant_type": "Natural Gas Fired Combustion Turbine"
+    },
+    {
+      "eia_plant_id": 1016,
+      "name": "Butler-Warner Generation Plant",
+      "latitude": 35.0986,
+      "longitude": -78.8294,
+      "utility": "Fayetteville Public Works Commission",
+      "county": "Cumberland",
+      "state": "NC",
+      "plant_type": "Batteries; Natural Gas Fired Combined Cycle; Natural Gas Fired Combustion Turbine; Solar Photovoltaic"
+    },
+    {
+      "eia_plant_id": 2790,
+      "name": "R M Heskett",
+      "latitude": 46.8669,
+      "longitude": -100.8836,
+      "utility": "Montana-Dakota Utilities Co",
+      "county": "Morton",
+      "state": "ND",
+      "plant_type": "Natural Gas Fired Combustion Turbine; Natural Gas Internal Combustion Engine"
+    },
+    {
+      "eia_plant_id": 59,
+      "name": "Platte",
+      "latitude": 40.854765,
+      "longitude": -98.34822,
+      "utility": "City of Grand Island - (NE)",
+      "county": "Hall",
+      "state": "NE",
+      "plant_type": "Conventional Steam Coal"
+    },
+    {
+      "eia_plant_id": 2349,
+      "name": "Comerford",
+      "latitude": 44.325053,
+      "longitude": -72.00098,
+      "utility": "Great River Hydro, LLC",
+      "county": "Grafton",
+      "state": "NH",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 2390,
+      "name": "Sayreville",
+      "latitude": 40.476525,
+      "longitude": -74.35234,
+      "utility": "Sayreville Power, LLC",
+      "county": "Middlesex",
+      "state": "NJ",
+      "plant_type": "Natural Gas Fired Combustion Turbine"
+    },
+    {
+      "eia_plant_id": 584,
+      "name": "Navajo Dam",
+      "latitude": 36.8061,
+      "longitude": -107.6131,
+      "utility": "City of Farmington - (NM)",
+      "county": "San Juan",
+      "state": "NM",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 154,
+      "name": "Hoover Dam (NV)",
+      "latitude": 36.01551,
+      "longitude": -114.738,
+      "utility": "U S Bureau of Reclamation",
+      "county": "Clark",
+      "state": "NV",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 88,
+      "name": "Ashokan",
+      "latitude": 41.949,
+      "longitude": -74.2063,
+      "utility": "New York Power Authority",
+      "county": "Ulster",
+      "state": "NY",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 2828,
+      "name": "Cardinal",
+      "latitude": 40.2522,
+      "longitude": -80.6486,
+      "utility": "Cardinal Operating Company",
+      "county": "Jefferson",
+      "state": "OH",
+      "plant_type": "Conventional Steam Coal"
+    },
+    {
+      "eia_plant_id": 165,
+      "name": "GREC",
+      "latitude": 36.190278,
+      "longitude": -95.2894,
+      "utility": "Grand River Dam Authority",
+      "county": "Mayes",
+      "state": "OK",
+      "plant_type": "Conventional Steam Coal; Natural Gas Fired Combined Cycle"
+    },
+    {
+      "eia_plant_id": 3013,
+      "name": "Hells Canyon",
+      "latitude": 45.2439,
+      "longitude": -116.7008,
+      "utility": "Idaho Power Co",
+      "county": "Wallowa",
+      "state": "OR",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 3096,
+      "name": "Brunot Island",
+      "latitude": 40.464851,
+      "longitude": -80.04376,
+      "utility": "Brunot Island Power, LLC",
+      "county": "Allegheny",
+      "state": "PA",
+      "plant_type": "Natural Gas Fired Combined Cycle; Petroleum Liquids"
+    },
+    {
+      "eia_plant_id": 3236,
+      "name": "Manchester Street",
+      "latitude": 41.8167,
+      "longitude": -71.4042,
+      "utility": "Manchester Street, LLC.",
+      "county": "Providence",
+      "state": "RI",
+      "plant_type": "Natural Gas Fired Combined Cycle"
+    },
+    {
+      "eia_plant_id": 130,
+      "name": "Cross",
+      "latitude": 33.371506,
+      "longitude": -80.11324,
+      "utility": "South Carolina Public Service Authority",
+      "county": "Berkeley",
+      "state": "SC",
+      "plant_type": "Conventional Steam Coal"
+    },
+    {
+      "eia_plant_id": 3325,
+      "name": "Ben French",
+      "latitude": 44.087235,
+      "longitude": -103.261,
+      "utility": "Black Hills Power, Inc.",
+      "county": "Pennington",
+      "state": "SD",
+      "plant_type": "Natural Gas Fired Combustion Turbine; Petroleum Liquids"
+    },
+    {
+      "eia_plant_id": 3393,
+      "name": "Allen",
+      "latitude": 35.074087,
+      "longitude": -90.14868,
+      "utility": "Tennessee Valley Authority",
+      "county": "Shelby",
+      "state": "TN",
+      "plant_type": "Natural Gas Fired Combined Cycle; Petroleum Liquids"
+    },
+    {
+      "eia_plant_id": 9,
+      "name": "Copper",
+      "latitude": 31.7569,
+      "longitude": -106.375,
+      "utility": "El Paso Electric Co",
+      "county": "El Paso",
+      "state": "TX",
+      "plant_type": "Natural Gas Fired Combustion Turbine"
+    },
+    {
+      "eia_plant_id": 159,
+      "name": "Lake Creek Dam",
+      "latitude": 40.493631,
+      "longitude": -111.3125,
+      "utility": "Heber Light & Power Company",
+      "county": "Wasatch",
+      "state": "UT",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 3772,
+      "name": "Buck Hydro",
+      "latitude": 36.808229,
+      "longitude": -80.93871,
+      "utility": "Appalachian Power Co",
+      "county": "Carroll",
+      "state": "VA",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 589,
+      "name": "J C McNeil",
+      "latitude": 44.4917,
+      "longitude": -73.20806,
+      "utility": "City of Burlington Electric - (VT)",
+      "county": "Chittenden",
+      "state": "VT",
+      "plant_type": "Wood/Wood Waste Biomass"
+    },
+    {
+      "eia_plant_id": 99,
+      "name": "Frederickson",
+      "latitude": 47.079722,
+      "longitude": -122.365,
+      "utility": "Puget Sound Energy Inc",
+      "county": "Pierce",
+      "state": "WA",
+      "plant_type": "Natural Gas Fired Combustion Turbine"
+    },
+    {
+      "eia_plant_id": 1756,
+      "name": "Saxon Falls",
+      "latitude": 46.5392,
+      "longitude": -90.3742,
+      "utility": "Northern States Power Co - Minnesota",
+      "county": "Iron",
+      "state": "WI",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 3935,
+      "name": "John E Amos",
+      "latitude": 38.4731,
+      "longitude": -81.8233,
+      "utility": "Appalachian Power Co",
+      "county": "Putnam",
+      "state": "WV",
+      "plant_type": "Conventional Steam Coal"
+    },
+    {
+      "eia_plant_id": 505,
+      "name": "Boysen",
+      "latitude": 43.417872,
+      "longitude": -108.1775,
+      "utility": "U S Bureau of Reclamation",
+      "county": "Fremont",
+      "state": "WY",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 62,
+      "name": "Annex Creek",
+      "latitude": 58.3176,
+      "longitude": -134.101,
+      "utility": "Alaska Electric Light & Power Co.",
+      "county": "Juneau",
+      "state": "AK",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 3,
+      "name": "Barry",
+      "latitude": 31.0069,
+      "longitude": -88.0103,
+      "utility": "Alabama Power Co",
+      "county": "Mobile",
+      "state": "AL",
+      "plant_type": "Conventional Steam Coal; Natural Gas Fired Combined Cycle; Natural Gas Steam Turbine"
+    },
+    {
+      "eia_plant_id": 170,
+      "name": "Lake Catherine",
+      "latitude": 34.4341,
+      "longitude": -92.9049,
+      "utility": "Entergy Arkansas LLC",
+      "county": "Hot Spring",
+      "state": "AR",
+      "plant_type": "Natural Gas Steam Turbine"
+    },
+    {
+      "eia_plant_id": 114,
+      "name": "Douglas",
+      "latitude": 31.364122,
+      "longitude": -109.5538,
+      "utility": "Arizona Public Service Co",
+      "county": "Cochise",
+      "state": "AZ",
+      "plant_type": "Petroleum Liquids"
+    },
+    {
+      "eia_plant_id": 72,
+      "name": "Venice Hydro",
+      "latitude": 34.01135,
+      "longitude": -118.4168,
+      "utility": "Metropolitan Water District of S CA",
+      "county": "Los Angeles",
+      "state": "CA",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 466,
+      "name": "Boulder Canyon Hydro",
+      "latitude": 40.004725,
+      "longitude": -105.3325,
+      "utility": "Boulder, City of - (CO)",
+      "county": "Boulder",
+      "state": "CO",
+      "plant_type": "Conventional Hydroelectric"
+    },
+    {
+      "eia_plant_id": 540,
+      "name": "Branford",
+      "latitude": 41.2925,
+      "longitude": -72.7942,
+      "utility": "Connecticut Jet Power LLC",
+      "county": "New Haven",
+      "state": "CT",
+      "plant_type": "Petroleum Liquids"
+    },
+    {
+      "eia_plant_id": 59012,
+      "name": "Walt Bailey Bioenergy Facility",
+      "latitude": 38.820556,
+      "longitude": -77.01833,
+      "utility": "DC Water",
+      "county": "District of Columbia",
+      "state": "DC",
+      "plant_type": "Other Waste Biomass"
+    },
+    {
+      "eia_plant_id": 592,
+      "name": "Delaware City 10",
+      "latitude": 39.600408,
+      "longitude": -75.62681,
+      "utility": "Calpine Mid-Atlantic Generation LLC",
+      "county": "New Castle",
+      "state": "DE",
+      "plant_type": "Petroleum Liquids"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "recorded_live_check": "2026-10-18T01:42:06Z",
+  "research_only": true,
+  "metar_availability": "available",
+  "station_id": "TMB",
+  "current_observed_at": "2026-10-17T23:53:00+00:00",
+  "prior_observed_at": "2026-10-17T20:53:00+00:00",
+  "model_availability": "available",
+  "model_version": "2025-geographic-hgb-sha256:44ea5e7ccd84",
+  "target": "new_nws_severe_thunderstorm_warning_covering_site_within_next_6_hours",
+  "probability": 0.001203438209917331,
+  "score": 0.01203438209917331,
+  "outcome_end": "2026-10-18T07:42:06.075969+00:00"
+}

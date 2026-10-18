@@ -1,0 +1,28 @@
+{
+  "schema_version": "documented-river-connections-v1",
+  "records": [
+    {
+      "record_id": "eia-2-bankhead-black-warrior-v1",
+      "eia_plant_id": 2,
+      "name": "Bankhead Dam",
+      "utility": "Alabama Power Co",
+      "latitude": 33.458665,
+      "longitude": -87.35682,
+      "gauge_id": "BLDA1",
+      "decision": "confirmed",
+      "river_name": "Black Warrior River",
+      "evidence_type": "official_facility_connection",
+      "evidence": "Alabama Power identifies its Bankhead hydroelectric plant as located on the Black Warrior River. Its Shorelines project page identifies the generating plant at Bankhead Lock and Dam. USACE independently identifies the river monitoring location at the same lock and dam. NOAA's live NWPS BLDA1 metadata, checked 2026-10-17, identifies Black Warrior River at Bankhead Lock and Dam. This establishes facility-to-river relevance, rather than relying on proximity. It does not establish a work-area floodplain boundary, inundation probability, stage-to-site damage threshold, or access-route safety.",
+      "source_urls": [
+        "https://www.alabamapower.com/company/about-us/generating-plants.html",
+        "https://apcshorelines.com/lake/bankhead/",
+        "https://water.sam.usace.army.mil/bankhead.htm",
+        "https://api.water.noaa.gov/nwps/v1/gauges/BLDA1"
+      ],
+      "reviewed_by": "PlanIT official-source document review, 2026-10-17",
+      "source_checked_date": "2026-10-17",
+      "hefs_parameter": "QINE",
+      "hefs_limitation": "BLDA1 supplies QINE forecasts but direct flow thresholds were absent in the verified response; usable HEFS threshold probabilities remain unavailable."
+    }
+  ]
+}

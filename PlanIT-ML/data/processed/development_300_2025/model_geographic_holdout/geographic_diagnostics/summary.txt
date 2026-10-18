@@ -1,0 +1,60 @@
+PlanIT | Geographic diagnostic (RESEARCH ONLY)
+Original Sep-Oct development-site validation threshold: 0.03569470
+No model retraining; all additional thresholds derived from Sep-Oct development-site validation SCORES only.
+Validation budget = number of flagged site-hours per 1,000 validation site-hours (ties may exceed budget).
+Threshold sensitivity is descriptive; NO threshold here has been approved for safety decisions.
+
+VALIDATION:
+  Plants=209, site-hours=304,722, positive site-hours=266
+  AP=0.015349; ROC-AUC=0.908302; prevalence=0.000873
+  Positive scores: median=0.0051562, p90=0.0312896, max=0.0668769
+  Negative scores: median=0.0004018, p99=0.0161801, max=0.1094297
+  At original threshold: flagged=443, TP=24, FP=419, FN=242, recall=9.02%
+  Fixed-threshold alert episodes=215, containing a positive labeled site-hour=11
+  Validation-derived site-hour workload sensitivity (thresholds NOT selected on test):
+    0.5/1k validation budget: threshold=0.0491759, flags=152 (0.50/1k), TP=4, FP=148, recall=1.5%, precision=2.63%
+    1/1k validation budget: threshold=0.0401715, flags=304 (1.00/1k), TP=14, FP=290, recall=5.3%, precision=4.61%
+    2/1k validation budget: threshold=0.0318408, flags=609 (2.00/1k), TP=26, FP=583, recall=9.8%, precision=4.27%
+    5/1k validation budget: threshold=0.0222576, flags=1,523 (5.00/1k), TP=46, FP=1477, recall=17.3%, precision=3.02%
+    10/1k validation budget: threshold=0.0163657, flags=3,047 (10.00/1k), TP=61, FP=2986, recall=22.9%, precision=2.00%
+  Reachable warning issuance opportunities=55; detected at original threshold=15
+
+KNOWN_SITE_TEST:
+  Plants=209, site-hours=304,722, positive site-hours=174
+  AP=0.021859; ROC-AUC=0.938607; prevalence=0.000571
+  Positive scores: median=0.0032130, p90=0.0167869, max=0.0478681
+  Negative scores: median=0.0000796, p99=0.0043926, max=0.0805037
+  At original threshold: flagged=38, TP=3, FP=35, FN=171, recall=1.72%
+  Fixed-threshold alert episodes=19, containing a positive labeled site-hour=3
+  Validation-derived site-hour workload sensitivity (thresholds NOT selected on test):
+    0.5/1k validation budget: threshold=0.0491759, flags=14 (0.05/1k), TP=0, FP=14, recall=0.0%, precision=0.00%
+    1/1k validation budget: threshold=0.0401715, flags=23 (0.08/1k), TP=3, FP=20, recall=1.7%, precision=13.04%
+    2/1k validation budget: threshold=0.0318408, flags=54 (0.18/1k), TP=4, FP=50, recall=2.3%, precision=7.41%
+    5/1k validation budget: threshold=0.0222576, flags=133 (0.44/1k), TP=6, FP=127, recall=3.4%, precision=4.51%
+    10/1k validation budget: threshold=0.0163657, flags=362 (1.19/1k), TP=19, FP=343, recall=10.9%, precision=5.25%
+  Reachable warning issuance opportunities=33; detected at original threshold=3
+
+UNSEEN_SITE_TEST:
+  Plants=91, site-hours=132,678, positive site-hours=86
+  AP=0.008924; ROC-AUC=0.915374; prevalence=0.000648
+  Positive scores: median=0.0030152, p90=0.0177384, max=0.0226002
+  Negative scores: median=0.0001067, p99=0.0119622, max=0.0832333
+  At original threshold: flagged=20, TP=0, FP=20, FN=86, recall=0.00%
+  Fixed-threshold alert episodes=15, containing a positive labeled site-hour=0
+  Validation-derived site-hour workload sensitivity (thresholds NOT selected on test):
+    0.5/1k validation budget: threshold=0.0491759, flags=4 (0.03/1k), TP=0, FP=4, recall=0.0%, precision=0.00%
+    1/1k validation budget: threshold=0.0401715, flags=14 (0.11/1k), TP=0, FP=14, recall=0.0%, precision=0.00%
+    2/1k validation budget: threshold=0.0318408, flags=36 (0.27/1k), TP=0, FP=36, recall=0.0%, precision=0.00%
+    5/1k validation budget: threshold=0.0222576, flags=202 (1.52/1k), TP=1, FP=201, recall=1.2%, precision=0.50%
+    10/1k validation budget: threshold=0.0163657, flags=625 (4.71/1k), TP=10, FP=615, recall=11.6%, precision=1.60%
+  Reachable warning issuance opportunities=16; detected at original threshold=0
+
+INTERPRETATION LIMITS:
+- Test positive/negative labels are used only to EVALUATE strategies chosen from development validation.
+- Lower-threshold comparisons are a sensitivity exercise, not a tuning or implementation recommendation.
+- Counts here are correlated site-hours and plant-warning issuances, NOT independent storms.
+- Episode counting is a heuristic; matching a positive label is not verified useful lead time.
+- Geographic holdout uses 5-degree cells/shared-station grouping; cross-boundary weather correlation remains.
+- The feature timestamps assumed a 60-minute observation reporting delay, not actual archived receipt times.
+- Archived warnings can be incomplete, and target is NWS warning issuance, NOT lightning or all work hazards.
+- Never use model predictions to override authoritative alerts, field observations, site policy or stop-work rules.

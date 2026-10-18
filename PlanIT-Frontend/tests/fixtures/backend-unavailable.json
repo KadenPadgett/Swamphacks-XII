@@ -1,0 +1,357 @@
+{
+  "example_only": true,
+  "scenario": "unavailable",
+  "description": "Synthetic test fixture; never inserted into the application database.",
+  "map_response": {
+    "count": 1,
+    "ranking": {
+      "type": "rule_based",
+      "version": "stop-work-then-coverage-v2",
+      "description": "Stop-work first; then known severe/high/watch hazards; then incomplete, missing or stale assessments; then complete low. Site ID breaks ties.",
+      "ml_scores_used": false,
+      "missing_ml": "Scores remain null and do not affect ordering"
+    },
+    "sites": [
+      {
+        "site": {
+          "id": 1,
+          "name": "Demo Job Site",
+          "latitude": 25.75,
+          "longitude": -80.7,
+          "eia_plant_id": null,
+          "utility": null,
+          "county": null,
+          "state": null,
+          "plant_type": null,
+          "source": null,
+          "source_url": null,
+          "source_period": null
+        },
+        "site_id": 1,
+        "latitude": 25.75,
+        "longitude": -80.7,
+        "status": "pending",
+        "current_score": null,
+        "ml_availability": "unavailable",
+        "upcoming_peak": {
+          "rule_based": null,
+          "ml_prediction": null
+        },
+        "current_risk": null,
+        "overall": null,
+        "highest_upcoming_risk": null,
+        "ml_assessment": {
+          "assessment_type": "trained_ml",
+          "availability": "unavailable",
+          "reason": "assessment_or_model_unavailable",
+          "model_id": null,
+          "model_version": null,
+          "score_range": [
+            0,
+            10
+          ],
+          "current_score": null,
+          "current": null,
+          "highest_upcoming": null,
+          "stale": false,
+          "current_availability": "unavailable",
+          "serialized_at": "2026-08-12T22:00:00+00:00",
+          "retained_predictions": {
+            "assessment_type": "trained_ml",
+            "availability": "unavailable",
+            "reason": "assessment_or_model_unavailable",
+            "model_id": null,
+            "model_version": null,
+            "score_range": [
+              0,
+              10
+            ],
+            "current_score": null,
+            "current": null,
+            "hourly_scores": [],
+            "highest_upcoming": null
+          },
+          "input_generated_at": null
+        },
+        "active_alert_status": {
+          "count": 0,
+          "stop_work": false,
+          "highest_severity": "unknown"
+        },
+        "rule_based_severity": "unknown",
+        "ranking_basis": "rule_based",
+        "coverage_status": "incomplete",
+        "assessment_status": "missing",
+        "ranking_reason": "assessment_uncertain",
+        "required_safety_actions": [],
+        "stale": true,
+        "generated_at": null,
+        "sources": {},
+        "lightning_countdown": {
+          "site_id": 1,
+          "availability": "unknown",
+          "latest_strike_at": null,
+          "deadline": null,
+          "last_success_at": null,
+          "coverage_start": null,
+          "status": "unknown",
+          "countdown_remaining_seconds": null,
+          "coverage_complete": false,
+          "measured_strike_feed_configured": false,
+          "simulated": false,
+          "provider_verification": {
+            "provider": "the_weather_company",
+            "credentials_configured": false,
+            "feed_access": "not_configured",
+            "last_successful_coverage_at": null,
+            "strike_detection": "not_yet_observed",
+            "last_error": null,
+            "verification_url": "/api/sites/1/lightning/verify"
+          },
+          "server_time": "2026-10-17T21:24:56.709123+00:00",
+          "reason": "measured_lightning_not_configured"
+        },
+        "lightning_monitor": {
+          "site_id": 1,
+          "status": "pending",
+          "stale": true,
+          "measured_strike_feed_configured": false,
+          "countdown": {
+            "site_id": 1,
+            "availability": "unknown",
+            "latest_strike_at": null,
+            "deadline": null,
+            "last_success_at": null,
+            "coverage_start": null,
+            "status": "unknown",
+            "countdown_remaining_seconds": null,
+            "coverage_complete": false,
+            "measured_strike_feed_configured": false,
+            "simulated": false,
+            "provider_verification": {
+              "provider": "the_weather_company",
+              "credentials_configured": false,
+              "feed_access": "not_configured",
+              "last_successful_coverage_at": null,
+              "strike_detection": "not_yet_observed",
+              "last_error": null,
+              "verification_url": "/api/sites/1/lightning/verify"
+            },
+            "server_time": "2026-10-17T21:24:56.710320+00:00",
+            "reason": "measured_lightning_not_configured"
+          }
+        },
+        "risk_url": "/api/sites/1/risk",
+        "freshness": {
+          "stale": true,
+          "reason": "assessment_missing_or_expired",
+          "assessment_generated_at": null,
+          "weather_observed_at": null,
+          "expires_at": null,
+          "max_age_seconds": 900,
+          "refresh_after_seconds": 300.0,
+          "refresh_due_at": null,
+          "refresh_due": true,
+          "coverage_complete": false,
+          "sources": {}
+        },
+        "river_forecast": {
+          "site_id": 1,
+          "source": "NOAA HEFS (experimental)",
+          "association": null,
+          "applicability": "context_only",
+          "site_relevance": {
+            "status": "unconfirmed",
+            "site_relevance_verified": false,
+            "reason": "documented_exposure_review_required"
+          },
+          "availability": "unavailable",
+          "reason": "forecast_location_not_associated",
+          "probability": null,
+          "probability_scale": "0-1",
+          "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+          "individual_times": [],
+          "period_maxima": [],
+          "sources": {},
+          "stale": false
+        },
+        "river_exposure": {
+          "status": "unconfirmed",
+          "site_relevance_verified": false,
+          "reason": "documented_exposure_review_required",
+          "review": null,
+          "site_inundation_probability": null,
+          "limitation": "Verified river relevance does not establish jobsite inundation or a safe river-stage threshold"
+        },
+        "rank": 1
+      }
+    ]
+  },
+  "detail_response": {
+    "site": {
+      "id": 1,
+      "name": "Demo Job Site",
+      "latitude": 25.75,
+      "longitude": -80.7,
+      "eia_plant_id": null,
+      "utility": null,
+      "county": null,
+      "state": null,
+      "plant_type": null,
+      "source": null,
+      "source_url": null,
+      "source_period": null
+    },
+    "status": "pending",
+    "rule_based_assessment": {
+      "assessment_type": "rule_based",
+      "current": null,
+      "hourly": [],
+      "highest_upcoming": null
+    },
+    "conditions": null,
+    "hazard_evidence": {},
+    "ml_predictions": {
+      "assessment_type": "trained_ml",
+      "availability": "unavailable",
+      "reason": "assessment_or_model_unavailable",
+      "model_id": null,
+      "model_version": null,
+      "score_range": [
+        0,
+        10
+      ],
+      "current_score": null,
+      "current": null,
+      "hourly_scores": [],
+      "highest_upcoming": null,
+      "stale": false,
+      "current_availability": "unavailable",
+      "serialized_at": "2026-08-12T22:00:00+00:00",
+      "retained_predictions": {
+        "assessment_type": "trained_ml",
+        "availability": "unavailable",
+        "reason": "assessment_or_model_unavailable",
+        "model_id": null,
+        "model_version": null,
+        "score_range": [
+          0,
+          10
+        ],
+        "current_score": null,
+        "current": null,
+        "hourly_scores": [],
+        "highest_upcoming": null
+      },
+      "input_generated_at": null
+    },
+    "required_safety_actions": [],
+    "alerts": [],
+    "active_crew_reports": [],
+    "timezone": {
+      "site_id": 1,
+      "availability": "unknown",
+      "timezone": null,
+      "source": null,
+      "updated_at": null,
+      "reason": "Timezone not yet configured or discovered from weather data"
+    },
+    "lightning_monitor": {
+      "site_id": 1,
+      "status": "pending",
+      "stale": true,
+      "measured_strike_feed_configured": false,
+      "countdown": {
+        "site_id": 1,
+        "availability": "unknown",
+        "latest_strike_at": null,
+        "deadline": null,
+        "last_success_at": null,
+        "coverage_start": null,
+        "status": "unknown",
+        "countdown_remaining_seconds": null,
+        "coverage_complete": false,
+        "measured_strike_feed_configured": false,
+        "simulated": false,
+        "provider_verification": {
+          "provider": "the_weather_company",
+          "credentials_configured": false,
+          "feed_access": "not_configured",
+          "last_successful_coverage_at": null,
+          "strike_detection": "not_yet_observed",
+          "last_error": null,
+          "verification_url": "/api/sites/1/lightning/verify"
+        },
+        "server_time": "2026-10-17T21:24:56.715800+00:00",
+        "reason": "measured_lightning_not_configured"
+      }
+    },
+    "lightning_countdown": {
+      "site_id": 1,
+      "availability": "unknown",
+      "latest_strike_at": null,
+      "deadline": null,
+      "last_success_at": null,
+      "coverage_start": null,
+      "status": "unknown",
+      "countdown_remaining_seconds": null,
+      "coverage_complete": false,
+      "measured_strike_feed_configured": false,
+      "simulated": false,
+      "provider_verification": {
+        "provider": "the_weather_company",
+        "credentials_configured": false,
+        "feed_access": "not_configured",
+        "last_successful_coverage_at": null,
+        "strike_detection": "not_yet_observed",
+        "last_error": null,
+        "verification_url": "/api/sites/1/lightning/verify"
+      },
+      "server_time": "2026-10-17T21:24:56.716396+00:00",
+      "reason": "measured_lightning_not_configured"
+    },
+    "freshness": {
+      "stale": true,
+      "reason": "assessment_missing_or_expired",
+      "assessment_generated_at": null,
+      "weather_observed_at": null,
+      "expires_at": null,
+      "max_age_seconds": 900,
+      "refresh_after_seconds": 300.0,
+      "refresh_due_at": null,
+      "refresh_due": true,
+      "coverage_complete": false,
+      "sources": {}
+    },
+    "river_forecast": {
+      "site_id": 1,
+      "source": "NOAA HEFS (experimental)",
+      "association": null,
+      "applicability": "context_only",
+      "site_relevance": {
+        "status": "unconfirmed",
+        "site_relevance_verified": false,
+        "reason": "documented_exposure_review_required"
+      },
+      "availability": "unavailable",
+      "reason": "forecast_location_not_associated",
+      "probability": null,
+      "probability_scale": "0-1",
+      "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+      "individual_times": [],
+      "period_maxima": [],
+      "sources": {},
+      "stale": false
+    },
+    "river_exposure": {
+      "status": "unconfirmed",
+      "site_relevance_verified": false,
+      "reason": "documented_exposure_review_required",
+      "review": null,
+      "site_inundation_probability": null,
+      "limitation": "Verified river relevance does not establish jobsite inundation or a safe river-stage threshold"
+    },
+    "notifications_url": "/api/sites/1/events"
+  },
+  "excerpt_notes": "Legacy duplicate fields omitted; hourly arrays show the first two entries for readability."
+}

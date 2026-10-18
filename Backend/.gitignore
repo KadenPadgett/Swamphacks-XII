@@ -1,0 +1,11 @@
+__pycache__/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+.cache/
+.venv
+.env
+.venv-wsl/
+data/uploads/
+data/runtime/

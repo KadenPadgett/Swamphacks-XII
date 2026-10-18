@@ -1,0 +1,103 @@
+{
+  "research_only": true,
+  "target": "new severe thunderstorm warning covering site within next 6h",
+  "seed": 42,
+  "grid_degrees": 5.0,
+  "requested_geographic_holdout_fraction": 0.3,
+  "development_plants": 209,
+  "unseen_geographic_test_plants": 91,
+  "geographic_groups": 73,
+  "train_keep": 0.35,
+  "features": [
+    "distance_km",
+    "precip_trace_reported",
+    "tmpf",
+    "dwpf",
+    "relh",
+    "drct",
+    "sknt",
+    "gust",
+    "p01i",
+    "alti",
+    "mslp",
+    "vsby",
+    "has_station_report",
+    "observation_age_minutes",
+    "gust_reported",
+    "mslp_reported",
+    "alti_reported",
+    "mslp_change_3h",
+    "tmpf_change_3h",
+    "relh_change_3h",
+    "sknt_change_3h",
+    "hour_sin",
+    "hour_cos",
+    "month_sin",
+    "month_cos"
+  ],
+  "threshold_selected_from_development_validation_only": 0.035694699226329125,
+  "splits": {
+    "validation": {
+      "rows": 304722,
+      "positive_site_hours": 266,
+      "positive_prevalence": 0.0008729267988527247,
+      "mean_predicted_probability": 0.0013704692834652287,
+      "brier": 0.0008661517590607153,
+      "average_precision": 0.015349394996720946,
+      "roc_auc": 0.9083016502156145,
+      "no_skill_average_precision": 0.0008729267988527247,
+      "at_validation_threshold": {
+        "tp_site_hours": 24,
+        "fp_site_hours": 419,
+        "fn_site_hours": 242,
+        "precision": 0.05417607223476298,
+        "recall": 0.09022556390977443,
+        "flags_per_1000_site_hours": 1.4537841048562297
+      }
+    },
+    "known_site_test": {
+      "rows": 304722,
+      "positive_site_hours": 174,
+      "positive_prevalence": 0.0005710122669186997,
+      "mean_predicted_probability": 0.0004240335204099213,
+      "brier": 0.0005657785533165218,
+      "average_precision": 0.021858940900269155,
+      "roc_auc": 0.9386068315448906,
+      "no_skill_average_precision": 0.0005710122669186997,
+      "at_validation_threshold": {
+        "tp_site_hours": 3,
+        "fp_site_hours": 35,
+        "fn_site_hours": 171,
+        "precision": 0.07894736842105263,
+        "recall": 0.017241379310344827,
+        "flags_per_1000_site_hours": 0.12470382840753211
+      }
+    },
+    "unseen_site_test": {
+      "rows": 132678,
+      "positive_site_hours": 86,
+      "positive_prevalence": 0.0006481858333710186,
+      "mean_predicted_probability": 0.0006693807912876232,
+      "brier": 0.0006452214198435848,
+      "average_precision": 0.008924405580849365,
+      "roc_auc": 0.9153737659292644,
+      "no_skill_average_precision": 0.0006481858333710186,
+      "at_validation_threshold": {
+        "tp_site_hours": 0,
+        "fp_site_hours": 20,
+        "fn_site_hours": 86,
+        "precision": 0.0,
+        "recall": 0.0,
+        "flags_per_1000_site_hours": 0.15074089148163222
+      }
+    }
+  },
+  "notes": [
+    "Geographic partitions are outcome-blind and keep shared stations and 5-degree grid cells together.",
+    "Validation Sep-Oct on development plants; both test groups Nov-Dec.",
+    "Six-hour chronological embargo is applied at temporal boundaries.",
+    "Cross-border/cross-grid storms can still make locations spatially correlated.",
+    "Neither station representativeness nor warning archive completeness is established.",
+    "No predictions should determine dispatch or crew stop-work decisions."
+  ]
+}

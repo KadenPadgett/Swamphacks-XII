@@ -1,0 +1,55 @@
+{
+  "definition": "NEW severe thunderstorm polygon warning within next 6h",
+  "model_description": "Calendar-only supervised baseline (hour/month sine/cosine)",
+  "train_random_subsample_fraction": 0.35,
+  "seed": 42,
+  "max_iter": 120,
+  "features": [
+    "hour_sin",
+    "hour_cos",
+    "month_sin",
+    "month_cos"
+  ],
+  "train_prevalence_sample": 0.0034014328535895747,
+  "splits": {
+    "validation": {
+      "rows": 437400,
+      "positive_site_hours": 398,
+      "site_hour_prevalence": 0.0009099222679469593,
+      "brier": 0.0009129285199666779,
+      "baseline_brier_using_train_prevalence": 0.0009153019344116228,
+      "mean_predicted_probability": 0.0024682947652918427,
+      "average_precision": 0.0014544698447661688,
+      "no_skill_average_precision": 0.0009099222679469593,
+      "roc_auc": 0.6436854502856477,
+      "at_validation_threshold": {
+        "tp_site_hours": 19,
+        "fp_site_hours": 8981,
+        "fn_site_hours": 379,
+        "precision": 0.002111111111111111,
+        "recall": 0.04773869346733668,
+        "alerts_per_1000_site_hours": 20.5761316872428
+      }
+    },
+    "test": {
+      "rows": 437400,
+      "positive_site_hours": 260,
+      "site_hour_prevalence": 0.000594421582075903,
+      "brier": 0.0005972884686657825,
+      "baseline_brier_using_train_prevalence": 0.0006019475573370704,
+      "mean_predicted_probability": 0.0013144002607210182,
+      "average_precision": 0.0004655744042036998,
+      "no_skill_average_precision": 0.000594421582075903,
+      "roc_auc": 0.3281267046994274,
+      "at_validation_threshold": {
+        "tp_site_hours": 0,
+        "fp_site_hours": 0,
+        "fn_site_hours": 260,
+        "precision": 0.0,
+        "recall": 0.0,
+        "alerts_per_1000_site_hours": 0.0
+      }
+    }
+  },
+  "validation_f1_selected_threshold": 0.006783600290897221
+}

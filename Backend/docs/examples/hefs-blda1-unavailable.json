@@ -1,0 +1,1349 @@
+{
+  "example_only": true,
+  "scenario": "hefs-blda1-unavailable",
+  "serialized_at": "2026-10-17T21:00:00+00:00",
+  "provenance": "Recorded public NOAA response; no confirmed jobsite exposure; historical example, not a live forecast",
+  "timestamp_note": "BIFM5 time is probe capture time with application TTL; exact BLDA1 retrieval time was not recorded and remains null. Issuance, thresholds and targets are recorded NOAA values.",
+  "excerpt_notes": "First four future threshold rows shown; all recorded map periods retained.",
+  "response": {
+    "site_id": null,
+    "source": "NOAA HEFS (experimental)",
+    "association": {
+      "location_id": "BLDA1",
+      "parameter_id": "QINE",
+      "exposure_confirmed": false,
+      "evidence": "Recorded provider example; no jobsite association claimed"
+    },
+    "applicability": "context_only",
+    "site_relevance": {
+      "status": "unconfirmed",
+      "site_relevance_verified": false,
+      "reason": "documented_exposure_review_required"
+    },
+    "availability": "unavailable",
+    "reason": "no_usable_threshold_probabilities",
+    "probability": null,
+    "probability_scale": "0-1",
+    "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+    "individual_times": [
+      {
+        "time_semantics": "individual_forecast_time",
+        "target_time": "2026-10-18T00:00:00+00:00",
+        "product": "hydrograph-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/hydrograph-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "major",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 198.0,
+            "calculated_flow": null
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.05,
+          0.1,
+          0.25,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.75,
+          0.9,
+          0.95
+        ],
+        "quantile_values": [
+          340.229,
+          237.945,
+          145.776,
+          145.582,
+          145.035,
+          142.945,
+          142.945,
+          142.945,
+          142.945,
+          142.945,
+          142.945
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "individual_forecast_time",
+        "target_time": "2026-10-18T00:00:00+00:00",
+        "product": "hydrograph-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/hydrograph-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "moderate",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 196.5,
+            "calculated_flow": null
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.05,
+          0.1,
+          0.25,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.75,
+          0.9,
+          0.95
+        ],
+        "quantile_values": [
+          340.229,
+          237.945,
+          145.776,
+          145.582,
+          145.035,
+          142.945,
+          142.945,
+          142.945,
+          142.945,
+          142.945,
+          142.945
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "individual_forecast_time",
+        "target_time": "2026-10-18T00:00:00+00:00",
+        "product": "hydrograph-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/hydrograph-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "minor",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 189.0,
+            "calculated_flow": 109988.0
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.05,
+          0.1,
+          0.25,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.75,
+          0.9,
+          0.95
+        ],
+        "quantile_values": [
+          340.229,
+          237.945,
+          145.776,
+          145.582,
+          145.035,
+          142.945,
+          142.945,
+          142.945,
+          142.945,
+          142.945,
+          142.945
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "individual_forecast_time",
+        "target_time": "2026-10-18T00:00:00+00:00",
+        "product": "hydrograph-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/hydrograph-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "action",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 188.0,
+            "calculated_flow": 66992.0
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.05,
+          0.1,
+          0.25,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.75,
+          0.9,
+          0.95
+        ],
+        "quantile_values": [
+          340.229,
+          237.945,
+          145.776,
+          145.582,
+          145.035,
+          142.945,
+          142.945,
+          142.945,
+          142.945,
+          142.945,
+          142.945
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      }
+    ],
+    "period_maxima": [
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-10-21T12:00:00+00:00",
+        "forecast_length_days": 5,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "major",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 198.0,
+            "calculated_flow": null
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          689.5058840000004,
+          432.10641499999997,
+          398.41966,
+          360.0528,
+          336.92974000000004,
+          336.2753,
+          336.2753
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-10-21T12:00:00+00:00",
+        "forecast_length_days": 5,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "moderate",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 196.5,
+            "calculated_flow": null
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          689.5058840000004,
+          432.10641499999997,
+          398.41966,
+          360.0528,
+          336.92974000000004,
+          336.2753,
+          336.2753
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-10-21T12:00:00+00:00",
+        "forecast_length_days": 5,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "minor",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 189.0,
+            "calculated_flow": 109988.0
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          689.5058840000004,
+          432.10641499999997,
+          398.41966,
+          360.0528,
+          336.92974000000004,
+          336.2753,
+          336.2753
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-10-21T12:00:00+00:00",
+        "forecast_length_days": 5,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "action",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 188.0,
+            "calculated_flow": 66992.0
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          689.5058840000004,
+          432.10641499999997,
+          398.41966,
+          360.0528,
+          336.92974000000004,
+          336.2753,
+          336.2753
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-10-26T12:00:00+00:00",
+        "forecast_length_days": 10,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "major",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 198.0,
+            "calculated_flow": null
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          1456.3634400000005,
+          1050.32615,
+          768.4828599999998,
+          475.3235,
+          352.60416599999996,
+          340.494735,
+          336.2753
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-10-26T12:00:00+00:00",
+        "forecast_length_days": 10,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "moderate",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 196.5,
+            "calculated_flow": null
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          1456.3634400000005,
+          1050.32615,
+          768.4828599999998,
+          475.3235,
+          352.60416599999996,
+          340.494735,
+          336.2753
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-10-26T12:00:00+00:00",
+        "forecast_length_days": 10,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "minor",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 189.0,
+            "calculated_flow": 109988.0
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          1456.3634400000005,
+          1050.32615,
+          768.4828599999998,
+          475.3235,
+          352.60416599999996,
+          340.494735,
+          336.2753
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-10-26T12:00:00+00:00",
+        "forecast_length_days": 10,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "action",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 188.0,
+            "calculated_flow": 66992.0
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          1456.3634400000005,
+          1050.32615,
+          768.4828599999998,
+          475.3235,
+          352.60416599999996,
+          340.494735,
+          336.2753
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-10-31T12:00:00+00:00",
+        "forecast_length_days": 15,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "major",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 198.0,
+            "calculated_flow": null
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          3084.0302800000036,
+          2035.9020999999998,
+          1679.03428,
+          1029.977,
+          536.0212200000001,
+          503.62181499999997,
+          336.2753
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-10-31T12:00:00+00:00",
+        "forecast_length_days": 15,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "moderate",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 196.5,
+            "calculated_flow": null
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          3084.0302800000036,
+          2035.9020999999998,
+          1679.03428,
+          1029.977,
+          536.0212200000001,
+          503.62181499999997,
+          336.2753
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-10-31T12:00:00+00:00",
+        "forecast_length_days": 15,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "minor",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 189.0,
+            "calculated_flow": 109988.0
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          3084.0302800000036,
+          2035.9020999999998,
+          1679.03428,
+          1029.977,
+          536.0212200000001,
+          503.62181499999997,
+          336.2753
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-10-31T12:00:00+00:00",
+        "forecast_length_days": 15,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "action",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 188.0,
+            "calculated_flow": 66992.0
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          3084.0302800000036,
+          2035.9020999999998,
+          1679.03428,
+          1029.977,
+          536.0212200000001,
+          503.62181499999997,
+          336.2753
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-11-05T12:00:00+00:00",
+        "forecast_length_days": 20,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "major",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 198.0,
+            "calculated_flow": null
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          7086.269340000001,
+          3229.6249,
+          2330.97856,
+          1403.2802,
+          890.3518799999999,
+          727.790965,
+          496.782428
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-11-05T12:00:00+00:00",
+        "forecast_length_days": 20,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "moderate",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 196.5,
+            "calculated_flow": null
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          7086.269340000001,
+          3229.6249,
+          2330.97856,
+          1403.2802,
+          890.3518799999999,
+          727.790965,
+          496.782428
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-11-05T12:00:00+00:00",
+        "forecast_length_days": 20,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "minor",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 189.0,
+            "calculated_flow": 109988.0
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          7086.269340000001,
+          3229.6249,
+          2330.97856,
+          1403.2802,
+          890.3518799999999,
+          727.790965,
+          496.782428
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-11-05T12:00:00+00:00",
+        "forecast_length_days": 20,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "action",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 188.0,
+            "calculated_flow": 66992.0
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          7086.269340000001,
+          3229.6249,
+          2330.97856,
+          1403.2802,
+          890.3518799999999,
+          727.790965,
+          496.782428
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-11-15T12:00:00+00:00",
+        "forecast_length_days": 30,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "major",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 198.0,
+            "calculated_flow": null
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          23366.133600000023,
+          7695.65185,
+          6737.630579999999,
+          2264.7373,
+          1239.39102,
+          1192.3668,
+          712.9152879999999
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-11-15T12:00:00+00:00",
+        "forecast_length_days": 30,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "moderate",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 196.5,
+            "calculated_flow": null
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          23366.133600000023,
+          7695.65185,
+          6737.630579999999,
+          2264.7373,
+          1239.39102,
+          1192.3668,
+          712.9152879999999
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-11-15T12:00:00+00:00",
+        "forecast_length_days": 30,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "minor",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 189.0,
+            "calculated_flow": 109988.0
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          23366.133600000023,
+          7695.65185,
+          6737.630579999999,
+          2264.7373,
+          1239.39102,
+          1192.3668,
+          712.9152879999999
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-16T12:00:00+00:00",
+        "period_end": "2026-11-15T12:00:00+00:00",
+        "forecast_length_days": 30,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BLDA1",
+        "parameter_id": "QINE",
+        "issued_at": "2026-10-16T12:00:00+00:00",
+        "units": "CFS",
+        "flood_category": "action",
+        "threshold": {
+          "value": null,
+          "units": "CFS",
+          "source_field": "flow",
+          "raw": {
+            "flow": null,
+            "stage": 188.0,
+            "calculated_flow": 66992.0
+          }
+        },
+        "probability": null,
+        "probability_bounds": null,
+        "availability": "unavailable",
+        "reason": "threshold_missing_or_units_unsupported",
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          23366.133600000023,
+          7695.65185,
+          6737.630579999999,
+          2264.7373,
+          1239.39102,
+          1192.3668,
+          712.9152879999999
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": true,
+        "freshness": {
+          "issued_at": "2026-10-16T12:00:00+00:00",
+          "retrieved_at": null,
+          "expires_at": null,
+          "stale": true
+        }
+      }
+    ],
+    "sources": {
+      "map-quantiles": {
+        "status": "available",
+        "http_status": 200,
+        "retrieved_at": null,
+        "expires_at": null,
+        "stale": true,
+        "age_seconds": null
+      },
+      "hydrograph-quantiles": {
+        "status": "available",
+        "http_status": 200,
+        "retrieved_at": null,
+        "expires_at": null,
+        "stale": true,
+        "age_seconds": null
+      }
+    },
+    "stale": false,
+    "serialized_at": "2026-10-17T21:00:00+00:00"
+  }
+}

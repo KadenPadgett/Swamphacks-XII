@@ -1,0 +1,32 @@
+{
+  "example_only": true,
+  "metar": {
+    "availability": "available",
+    "provider": "Iowa Environmental Mesonet",
+    "station": {
+      "station_id": "MIA",
+      "station_latitude": 25.7954,
+      "station_longitude": -80.2906,
+      "distance_km": 42.0,
+      "provenance": "IEM AZOS online US state ASOS network; provisional eligibility",
+      "selected_at": "2026-10-18T00:00:00+00:00"
+    },
+    "current_observed_at": "2026-10-17T23:00:00+00:00",
+    "prior_observed_at": "2026-10-17T20:00:00+00:00",
+    "retrieved_at": "2026-10-18T00:00:05+00:00",
+    "alignment_status": "methodology_aligned_raw_builder_unavailable",
+    "availability_assumption": "observed_at plus 60 minutes; receipt time unverified"
+  },
+  "weather_model": {
+    "availability": "unavailable",
+    "reason": "frozen_model_artifact_missing",
+    "target": "new_nws_severe_thunderstorm_warning_covering_site_within_next_6_hours",
+    "model_version": null,
+    "probability": null,
+    "score": null,
+    "prediction_time": "2026-10-18T00:00:00+00:00",
+    "outcome_start": "2026-10-18T00:00:00+00:00",
+    "outcome_end": "2026-10-18T06:00:00+00:00",
+    "outcome_hours": 6
+  }
+}

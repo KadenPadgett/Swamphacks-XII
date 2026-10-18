@@ -1,0 +1,7 @@
+PlanIT geographic holdout · research only
+Groups: 73, development plants: 209, unseen plants: 91
+Validation-selected threshold: 0.03569470
+validation: rows=304,722, positive site-hours=266, prevalence=0.000873, AP=0.015349394996720946, ROC-AUC=0.9083016502156145, recall=0.0902, precision=0.0542
+known_site_test: rows=304,722, positive site-hours=174, prevalence=0.000571, AP=0.021858940900269155, ROC-AUC=0.9386068315448906, recall=0.0172, precision=0.0789
+unseen_site_test: rows=132,678, positive site-hours=86, prevalence=0.000648, AP=0.008924405580849365, ROC-AUC=0.9153737659292644, recall=0.0000, precision=0.0000
+Caution: same 2025 season, sparse/clustered warnings, and gridded proximity do not establish deployment validity.

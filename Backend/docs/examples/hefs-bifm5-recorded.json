@@ -1,0 +1,557 @@
+{
+  "example_only": true,
+  "scenario": "hefs-bifm5-recorded",
+  "serialized_at": "2026-10-17T21:00:00+00:00",
+  "provenance": "Recorded public NOAA response; no confirmed jobsite exposure; historical example, not a live forecast",
+  "timestamp_note": "BIFM5 time is probe capture time with application TTL; exact BLDA1 retrieval time was not recorded and remains null. Issuance, thresholds and targets are recorded NOAA values.",
+  "excerpt_notes": "First four future threshold rows shown; all recorded map periods retained.",
+  "response": {
+    "site_id": null,
+    "source": "NOAA HEFS (experimental)",
+    "association": {
+      "location_id": "BIFM5",
+      "parameter_id": "SSTG",
+      "exposure_confirmed": false,
+      "evidence": "Recorded provider example; no jobsite association claimed"
+    },
+    "applicability": "context_only",
+    "site_relevance": {
+      "status": "unconfirmed",
+      "site_relevance_verified": false,
+      "reason": "documented_exposure_review_required"
+    },
+    "availability": "partial",
+    "reason": null,
+    "probability": null,
+    "probability_scale": "0-1",
+    "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+    "individual_times": [
+      {
+        "time_semantics": "individual_forecast_time",
+        "target_time": "2026-10-18T00:00:00+00:00",
+        "product": "hydrograph-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/hydrograph-quantiles/",
+        "location_id": "BIFM5",
+        "parameter_id": "SSTG",
+        "issued_at": "2026-10-17T00:00:00+00:00",
+        "units": "FT",
+        "flood_category": "moderate",
+        "threshold": {
+          "value": 18.0,
+          "units": "FT",
+          "source_field": "stage",
+          "raw": {
+            "flow": null,
+            "stage": 18.0,
+            "calculated_flow": null
+          }
+        },
+        "probability": null,
+        "probability_bounds": {
+          "lower": 0.0,
+          "upper": 0.05,
+          "lower_inclusive": true,
+          "upper_inclusive": true,
+          "scale": "0-1",
+          "method": "conservative_exceedance_quantile_bounds_v1"
+        },
+        "availability": "available",
+        "reason": null,
+        "exceedance_quantiles": [
+          0.05,
+          0.1,
+          0.25,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.75,
+          0.9,
+          0.95
+        ],
+        "quantile_values": [
+          3.31,
+          3.31,
+          3.31,
+          3.31,
+          3.31,
+          3.31,
+          3.31,
+          3.31,
+          3.31,
+          3.31,
+          3.31
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": false,
+        "freshness": {
+          "issued_at": "2026-10-17T00:00:00+00:00",
+          "retrieved_at": "2026-10-17T20:48:42.205978+00:00",
+          "expires_at": "2026-10-17T21:03:42.205978+00:00",
+          "stale": false
+        }
+      },
+      {
+        "time_semantics": "individual_forecast_time",
+        "target_time": "2026-10-18T00:00:00+00:00",
+        "product": "hydrograph-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/hydrograph-quantiles/",
+        "location_id": "BIFM5",
+        "parameter_id": "SSTG",
+        "issued_at": "2026-10-17T00:00:00+00:00",
+        "units": "FT",
+        "flood_category": "minor",
+        "threshold": {
+          "value": 16.0,
+          "units": "FT",
+          "source_field": "stage",
+          "raw": {
+            "flow": null,
+            "stage": 16.0,
+            "calculated_flow": 14883.6
+          }
+        },
+        "probability": null,
+        "probability_bounds": {
+          "lower": 0.0,
+          "upper": 0.05,
+          "lower_inclusive": true,
+          "upper_inclusive": true,
+          "scale": "0-1",
+          "method": "conservative_exceedance_quantile_bounds_v1"
+        },
+        "availability": "available",
+        "reason": null,
+        "exceedance_quantiles": [
+          0.05,
+          0.1,
+          0.25,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.75,
+          0.9,
+          0.95
+        ],
+        "quantile_values": [
+          3.31,
+          3.31,
+          3.31,
+          3.31,
+          3.31,
+          3.31,
+          3.31,
+          3.31,
+          3.31,
+          3.31,
+          3.31
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": false,
+        "freshness": {
+          "issued_at": "2026-10-17T00:00:00+00:00",
+          "retrieved_at": "2026-10-17T20:48:42.205978+00:00",
+          "expires_at": "2026-10-17T21:03:42.205978+00:00",
+          "stale": false
+        }
+      },
+      {
+        "time_semantics": "individual_forecast_time",
+        "target_time": "2026-10-18T06:00:00+00:00",
+        "product": "hydrograph-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/hydrograph-quantiles/",
+        "location_id": "BIFM5",
+        "parameter_id": "SSTG",
+        "issued_at": "2026-10-17T00:00:00+00:00",
+        "units": "FT",
+        "flood_category": "moderate",
+        "threshold": {
+          "value": 18.0,
+          "units": "FT",
+          "source_field": "stage",
+          "raw": {
+            "flow": null,
+            "stage": 18.0,
+            "calculated_flow": null
+          }
+        },
+        "probability": null,
+        "probability_bounds": {
+          "lower": 0.0,
+          "upper": 0.05,
+          "lower_inclusive": true,
+          "upper_inclusive": true,
+          "scale": "0-1",
+          "method": "conservative_exceedance_quantile_bounds_v1"
+        },
+        "availability": "available",
+        "reason": null,
+        "exceedance_quantiles": [
+          0.05,
+          0.1,
+          0.25,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.75,
+          0.9,
+          0.95
+        ],
+        "quantile_values": [
+          3.32,
+          3.32,
+          3.32,
+          3.32,
+          3.32,
+          3.32,
+          3.32,
+          3.32,
+          3.32,
+          3.32,
+          3.32
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": false,
+        "freshness": {
+          "issued_at": "2026-10-17T00:00:00+00:00",
+          "retrieved_at": "2026-10-17T20:48:42.205978+00:00",
+          "expires_at": "2026-10-17T21:03:42.205978+00:00",
+          "stale": false
+        }
+      },
+      {
+        "time_semantics": "individual_forecast_time",
+        "target_time": "2026-10-18T06:00:00+00:00",
+        "product": "hydrograph-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/hydrograph-quantiles/",
+        "location_id": "BIFM5",
+        "parameter_id": "SSTG",
+        "issued_at": "2026-10-17T00:00:00+00:00",
+        "units": "FT",
+        "flood_category": "minor",
+        "threshold": {
+          "value": 16.0,
+          "units": "FT",
+          "source_field": "stage",
+          "raw": {
+            "flow": null,
+            "stage": 16.0,
+            "calculated_flow": 14883.6
+          }
+        },
+        "probability": null,
+        "probability_bounds": {
+          "lower": 0.0,
+          "upper": 0.05,
+          "lower_inclusive": true,
+          "upper_inclusive": true,
+          "scale": "0-1",
+          "method": "conservative_exceedance_quantile_bounds_v1"
+        },
+        "availability": "available",
+        "reason": null,
+        "exceedance_quantiles": [
+          0.05,
+          0.1,
+          0.25,
+          0.3,
+          0.4,
+          0.5,
+          0.6,
+          0.7,
+          0.75,
+          0.9,
+          0.95
+        ],
+        "quantile_values": [
+          3.32,
+          3.32,
+          3.32,
+          3.32,
+          3.32,
+          3.32,
+          3.32,
+          3.32,
+          3.32,
+          3.32,
+          3.32
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": false,
+        "freshness": {
+          "issued_at": "2026-10-17T00:00:00+00:00",
+          "retrieved_at": "2026-10-17T20:48:42.205978+00:00",
+          "expires_at": "2026-10-17T21:03:42.205978+00:00",
+          "stale": false
+        }
+      }
+    ],
+    "period_maxima": [
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-17T00:00:00+00:00",
+        "period_end": "2026-10-22T00:00:00+00:00",
+        "forecast_length_days": 5,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BIFM5",
+        "parameter_id": "SSTG",
+        "issued_at": "2026-10-17T00:00:00+00:00",
+        "units": "FT",
+        "flood_category": "moderate",
+        "threshold": {
+          "value": 18.0,
+          "units": "FT",
+          "source_field": "stage",
+          "raw": {
+            "flow": null,
+            "stage": 18.0,
+            "calculated_flow": null
+          }
+        },
+        "probability": null,
+        "probability_bounds": {
+          "lower": 0.0,
+          "upper": 0.1,
+          "lower_inclusive": true,
+          "upper_inclusive": true,
+          "scale": "0-1",
+          "method": "conservative_exceedance_quantile_bounds_v1"
+        },
+        "availability": "available",
+        "reason": null,
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          3.33,
+          3.33,
+          3.33,
+          3.33,
+          3.33,
+          3.33,
+          3.33
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": false,
+        "freshness": {
+          "issued_at": "2026-10-17T00:00:00+00:00",
+          "retrieved_at": "2026-10-17T20:48:42.205978+00:00",
+          "expires_at": "2026-10-17T21:03:42.205978+00:00",
+          "stale": false
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-17T00:00:00+00:00",
+        "period_end": "2026-10-22T00:00:00+00:00",
+        "forecast_length_days": 5,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BIFM5",
+        "parameter_id": "SSTG",
+        "issued_at": "2026-10-17T00:00:00+00:00",
+        "units": "FT",
+        "flood_category": "minor",
+        "threshold": {
+          "value": 16.0,
+          "units": "FT",
+          "source_field": "stage",
+          "raw": {
+            "flow": null,
+            "stage": 16.0,
+            "calculated_flow": 14883.6
+          }
+        },
+        "probability": null,
+        "probability_bounds": {
+          "lower": 0.0,
+          "upper": 0.1,
+          "lower_inclusive": true,
+          "upper_inclusive": true,
+          "scale": "0-1",
+          "method": "conservative_exceedance_quantile_bounds_v1"
+        },
+        "availability": "available",
+        "reason": null,
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          3.33,
+          3.33,
+          3.33,
+          3.33,
+          3.33,
+          3.33,
+          3.33
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": false,
+        "freshness": {
+          "issued_at": "2026-10-17T00:00:00+00:00",
+          "retrieved_at": "2026-10-17T20:48:42.205978+00:00",
+          "expires_at": "2026-10-17T21:03:42.205978+00:00",
+          "stale": false
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-17T00:00:00+00:00",
+        "period_end": "2026-10-27T00:00:00+00:00",
+        "forecast_length_days": 10,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BIFM5",
+        "parameter_id": "SSTG",
+        "issued_at": "2026-10-17T00:00:00+00:00",
+        "units": "FT",
+        "flood_category": "moderate",
+        "threshold": {
+          "value": 18.0,
+          "units": "FT",
+          "source_field": "stage",
+          "raw": {
+            "flow": null,
+            "stage": 18.0,
+            "calculated_flow": null
+          }
+        },
+        "probability": null,
+        "probability_bounds": {
+          "lower": 0.0,
+          "upper": 0.1,
+          "lower_inclusive": true,
+          "upper_inclusive": true,
+          "scale": "0-1",
+          "method": "conservative_exceedance_quantile_bounds_v1"
+        },
+        "availability": "available",
+        "reason": null,
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          3.33,
+          3.33,
+          3.33,
+          3.33,
+          3.33,
+          3.33,
+          3.33
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": false,
+        "freshness": {
+          "issued_at": "2026-10-17T00:00:00+00:00",
+          "retrieved_at": "2026-10-17T20:48:42.205978+00:00",
+          "expires_at": "2026-10-17T21:03:42.205978+00:00",
+          "stale": false
+        }
+      },
+      {
+        "time_semantics": "maximum_over_period",
+        "period_start": "2026-10-17T00:00:00+00:00",
+        "period_end": "2026-10-27T00:00:00+00:00",
+        "forecast_length_days": 10,
+        "product": "map-quantiles",
+        "source": "https://api.water.noaa.gov/hefs/v1/map-quantiles/",
+        "location_id": "BIFM5",
+        "parameter_id": "SSTG",
+        "issued_at": "2026-10-17T00:00:00+00:00",
+        "units": "FT",
+        "flood_category": "minor",
+        "threshold": {
+          "value": 16.0,
+          "units": "FT",
+          "source_field": "stage",
+          "raw": {
+            "flow": null,
+            "stage": 16.0,
+            "calculated_flow": 14883.6
+          }
+        },
+        "probability": null,
+        "probability_bounds": {
+          "lower": 0.0,
+          "upper": 0.1,
+          "lower_inclusive": true,
+          "upper_inclusive": true,
+          "scale": "0-1",
+          "method": "conservative_exceedance_quantile_bounds_v1"
+        },
+        "availability": "available",
+        "reason": null,
+        "exceedance_quantiles": [
+          0.1,
+          0.25,
+          0.3,
+          0.5,
+          0.7,
+          0.75,
+          0.9
+        ],
+        "quantile_values": [
+          3.33,
+          3.33,
+          3.33,
+          3.33,
+          3.33,
+          3.33,
+          3.33
+        ],
+        "interpretation": "River-threshold exceedance at the forecast location, not the probability that the jobsite floods",
+        "stale": false,
+        "freshness": {
+          "issued_at": "2026-10-17T00:00:00+00:00",
+          "retrieved_at": "2026-10-17T20:48:42.205978+00:00",
+          "expires_at": "2026-10-17T21:03:42.205978+00:00",
+          "stale": false
+        }
+      }
+    ],
+    "sources": {
+      "map-quantiles": {
+        "status": "available",
+        "http_status": 200,
+        "retrieved_at": "2026-10-17T20:48:42.205978+00:00",
+        "expires_at": "2026-10-17T21:03:42.205978+00:00",
+        "stale": false,
+        "age_seconds": 677.794022
+      },
+      "hydrograph-quantiles": {
+        "status": "available",
+        "http_status": 200,
+        "retrieved_at": "2026-10-17T20:48:42.205978+00:00",
+        "expires_at": "2026-10-17T21:03:42.205978+00:00",
+        "stale": false,
+        "age_seconds": 677.794022
+      }
+    },
+    "stale": false,
+    "serialized_at": "2026-10-17T21:00:00+00:00"
+  }
+}

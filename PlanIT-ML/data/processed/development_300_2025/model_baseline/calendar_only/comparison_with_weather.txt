@@ -1,0 +1,26 @@
+PlanIT | 2025 calendar-only versus full-weather baseline
+RESEARCH ONLY; scores apply to site-hours, not distinct storms.
+Calendar uses hour/month only; full model also uses station/weather inputs.
+Both use the same chronological partitions and the same 35%-style train-only sampling (when settings match).
+Each model selects its OWN threshold using validation only.
+
+VALIDATION:
+  Average precision: calendar=0.001454, weather=0.011511, weather-calendar=+0.010056
+  ROC-AUC: calendar=0.643685, weather=0.911852, weather-calendar=+0.268167
+  Brier score (lower better): calendar=0.000913, weather=0.000907, weather-calendar=-0.000006
+  Precision at validation-chosen threshold: calendar=0.002111, weather=0.024659
+  Recall at validation-chosen threshold: calendar=0.047739, weather=0.118090
+  Positive flags per 1,000 site-hours: calendar=20.576132, weather=4.357567
+
+TEST:
+  Average precision: calendar=0.000466, weather=0.016702, weather-calendar=+0.016237
+  ROC-AUC: calendar=0.328127, weather=0.931858, weather-calendar=+0.603731
+  Brier score (lower better): calendar=0.000597, weather=0.000589, weather-calendar=-0.000008
+  Precision at validation-chosen threshold: calendar=0.000000, weather=0.029354
+  Recall at validation-chosen threshold: calendar=0.000000, weather=0.057692
+  Positive flags per 1,000 site-hours: calendar=0.000000, weather=1.168267
+
+Interpret AP first, especially on test; high ROC-AUC does not guarantee useful rare-event alerts.
+Ablation estimates incremental signal, not proof of model causality or out-of-site generalization.
+Validation threshold comparisons may operate at different alert workloads.
+Use event-level diagnostic for both models before making alert-workload claims.

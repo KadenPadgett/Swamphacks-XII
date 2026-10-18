@@ -1,0 +1,57 @@
+{
+  "example_only": true,
+  "scenario": "expired-model",
+  "serialized_at": "2026-08-12T22:00:00+00:00",
+  "provenance": "Synthetic test-only model output; never submitted to application sites.",
+  "response": {
+    "assessment_type": "trained_ml",
+    "availability": "stale",
+    "reason": "TEST_OUTPUT_ONLY",
+    "model_id": null,
+    "model_version": "TEST_ONLY_NOT_A_TRAINED_MODEL",
+    "score_range": [
+      0,
+      10
+    ],
+    "current_score": null,
+    "current": {
+      "time": "2026-08-12T21:54:00+00:00",
+      "score": null,
+      "construction_hazards": [
+        "TEST heat"
+      ],
+      "original_score": 7.0,
+      "availability": "stale",
+      "stale": true,
+      "valid_until": "2026-08-12T21:59:00+00:00",
+      "stale_reason": "prediction_target_expired_or_invalid"
+    },
+    "hourly_scores": [],
+    "highest_upcoming": null,
+    "stale": true,
+    "current_availability": "stale",
+    "serialized_at": "2026-08-12T22:00:00+00:00",
+    "retained_predictions": {
+      "assessment_type": "trained_ml",
+      "availability": "partial",
+      "reason": "TEST_OUTPUT_ONLY",
+      "model_id": null,
+      "model_version": "TEST_ONLY_NOT_A_TRAINED_MODEL",
+      "score_range": [
+        0,
+        10
+      ],
+      "current_score": 7.0,
+      "current": {
+        "time": "2026-08-12T21:54:00+00:00",
+        "score": 7.0,
+        "construction_hazards": [
+          "TEST heat"
+        ]
+      },
+      "hourly_scores": [],
+      "highest_upcoming": null
+    },
+    "input_generated_at": "2026-08-12T22:00:00+00:00"
+  }
+}
