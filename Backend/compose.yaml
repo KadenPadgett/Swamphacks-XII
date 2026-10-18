@@ -13,7 +13,7 @@ services:
       PLANIT_LIGHTNING_API_KEY: ${PLANIT_LIGHTNING_API_KEY:-}
       PLANIT_ML_URL: ${PLANIT_ML_URL:-}
       PLANIT_ML_TOKEN: ${PLANIT_ML_TOKEN:-}
-      PLANIT_METAR_ML_MODEL: geographic
+      PLANIT_METAR_ML_MODEL: final
       PLANIT_METAR_ML_ARTIFACT: /app/models/metar_2022_2024_final_hgb.joblib
     volumes:
       - planit-data:/data

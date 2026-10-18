@@ -20,29 +20,39 @@ SOURCE_MODEL_ROOT = Path(__file__).resolve().parent.parent / 'risk_assessment'
 FINAL_ARTIFACT = 'metar_2022_2024_final_hgb.joblib'
 FINAL_ARTIFACT_SHA256 = 'cee0b9912ea7a706cee3154d26e2fecee4428800a20d2a687a194296c33e57a2'
 ARTIFACTS = {
-    # Keep geographic as the compatibility name used by existing Render and
-    # Compose settings, but point it at the final 2022-2024 handoff artifact.
-    'geographic': (FINAL_ARTIFACT, FINAL_ARTIFACT_SHA256),
     'final': (FINAL_ARTIFACT, FINAL_ARTIFACT_SHA256),
 }
 
 
 def model_choice():
-    return os.environ.get('PLANIT_METAR_ML_MODEL', 'geographic').strip().lower()
+    configured = os.environ.get('PLANIT_METAR_ML_MODEL', 'final').strip().lower()
+    # Older deployments used "geographic" for the same final artifact. Keep
+    # that setting harmless, but never treat it as a separate model variant.
+    return 'final' if configured == 'geographic' else configured
 
 
 def artifact_path(choice=None):
     choice = choice or model_choice()
+    if choice == 'geographic':
+        choice = 'final'
     if choice not in ARTIFACTS:
         raise ValueError('Unknown frozen METAR model selection')
     configured = os.environ.get('PLANIT_METAR_ML_ARTIFACT')
-    if configured:
-        return Path(configured)
+    configured_path = Path(configured) if configured else None
+    if configured_path and configured_path.is_file():
+        return configured_path
     filename = ARTIFACTS[choice][0]
     deployed = MODEL_ROOT / filename
     if deployed.is_file():
         return deployed
-    return SOURCE_MODEL_ROOT / filename
+    source = SOURCE_MODEL_ROOT / filename
+    if source.is_file():
+        return source
+    # Render may retain an older override such as geographic_hgb.joblib. Keep
+    # returning that configured path when nothing is bundled so the caller
+    # reports a useful missing-artifact error, but never let a stale override
+    # hide a valid final artifact shipped with the application.
+    return configured_path or source
 
 
 @lru_cache(maxsize=4)
