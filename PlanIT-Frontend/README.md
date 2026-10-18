@@ -25,6 +25,8 @@ For a hosted backend, set `VITE_API_BASE_URL` to its public origin (for example 
 
 For local development, start the Python backend on **port 8000** using its existing deployment instructions. Leave **Backend URL** blank in connection settings. The Vite development proxy forwards `/api` to `http://127.0.0.1:8000`. You can also enter another full `http://` or `https://` URL manually.
 
+For the current Render backend, set `VITE_API_BASE_URL=https://swamphacks-xii.onrender.com` in the frontend hosting provider's build environment. Local development continues to use the Vite proxy when no URL is configured.
+
 If your backend has `PLANIT_WRITE_TOKEN` configured, enter that value in the optional **Write token** field. The token stays in this tab's memory and is sent with write requests. It is not saved in local storage. Provider keys such as Xweather or Weather Company credentials stay in the backend's `.env`; this frontend does not need those keys.
 
 Once connected, the app displays sites and conditions from API responses. Live site/report changes are saved by your backend. Reopening the page connects again when `VITE_API_BASE_URL` is configured.

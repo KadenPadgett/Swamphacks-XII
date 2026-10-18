@@ -3,6 +3,7 @@ import React, {
   useEffect,
   useRef,
   useCallback,
+  useId,
   lazy,
   Suspense,
 } from "react";
@@ -65,6 +66,45 @@ function emptyDetail(site) {
     freshness: { stale: true },
     ml_predictions: { current_score: null, availability: "unavailable" },
   };
+}
+function SiteSearchSelect({ rows, selected, onChange }) {
+  const listId = useId();
+  const selectedSite = rows.find((row) => row.site_id === selected)?.site;
+  const [value, setValue] = useState(selectedSite?.name || "");
+
+  useEffect(() => {
+    setValue(selectedSite?.name || "");
+  }, [selected, selectedSite?.name]);
+
+  function chooseSite(nextValue) {
+    const normalized = nextValue.trim().toLowerCase();
+    const match = rows.find(
+      (row) => row.site.name.trim().toLowerCase() === normalized,
+    );
+    if (match) onChange(match.site_id);
+  }
+
+  return (
+    <div className="site-search-select">
+      <input
+        aria-label="Selected jobsite"
+        list={listId}
+        value={value}
+        placeholder="Search sites…"
+        autoComplete="off"
+        onChange={(event) => {
+          setValue(event.target.value);
+          chooseSite(event.target.value);
+        }}
+        onBlur={() => setValue(selectedSite?.name || "")}
+      />
+      <datalist id={listId}>
+        {rows.map((row) => (
+          <option key={row.site_id} value={row.site.name} />
+        ))}
+      </datalist>
+    </div>
+  );
 }
 export default function App() {
   const [demo, setDemo] = useState(seedDemo),
@@ -623,17 +663,11 @@ export default function App() {
     setModal(m);
   }
   const siteSelector = (
-    <select
-      aria-label="Selected jobsite"
-      value={selected || ""}
-      onChange={(e) => setSelected(Number(e.target.value))}
-    >
-      {rows.map((r) => (
-        <option key={r.site_id} value={r.site_id}>
-          {r.site.name}
-        </option>
-      ))}
-    </select>
+    <SiteSearchSelect
+      rows={rows}
+      selected={selected}
+      onChange={(id) => setSelected(Number(id))}
+    />
   );
   const map = (
     <Suspense
